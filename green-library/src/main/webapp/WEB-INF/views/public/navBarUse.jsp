@@ -12,7 +12,7 @@
 
 <div class="navBar">
 	<div class="navTitle">바로 가기</div>
-		<ul class="useList">
+		<ul class="navList">
 			<li>이용 시간 안내</li>
 			<li>자료 이용 안내</li>
 			<li>희망도서 신청</li>

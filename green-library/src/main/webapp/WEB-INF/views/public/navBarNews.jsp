@@ -12,7 +12,7 @@
 
 <div class="navBar">
 	<div class="navTitle">바로 가기</div>
-		<ul class="useList">
+		<ul class="navList">
 			<li>공지사항</li>
 			<li>자주 묻는 질문</li>
 			<li>도서관 일정</li>

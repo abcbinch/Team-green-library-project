@@ -10,9 +10,9 @@
 </head>
 <body>
 
-<div class="navBar">
+<div class="mypagebox">
 	<div class="navTitle">바로 가기</div>
-		<ul class="useList">
+		<ul class="mypage">
 			<li>내 프로필</li>
 			<li>대출 연장</li>
 			<li>약관 재동의</li>

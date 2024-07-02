@@ -1,6 +1,6 @@
 
 
-let navRouteli = document.querySelectorAll('.useList li');
+let navRouteli = document.querySelectorAll('.navList li');
 navRouteli = Array.from(navRouteli);
 
 let imHere = window.location.href.split("/");
