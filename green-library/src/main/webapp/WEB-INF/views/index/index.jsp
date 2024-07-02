@@ -178,7 +178,7 @@
 	</script>
 				<c:choose>
 					<c:when test="${annoList > 6}">
-						<c:forEach var="num" begin="${annoList-6}" end="${annoList-1}">
+						<c:forEach var="num" begin="0" end="5">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
