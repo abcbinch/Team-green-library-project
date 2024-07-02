@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Inquiry")
+@RequestMapping("/admin/Inquiry")
 public class InquiryController {
 
     private InquiryService inquiryService;

@@ -131,7 +131,7 @@
         const selectValue = document.getElementById('resultSelect').value;
 
         $.ajax({
-            url: '/Announcement/search',
+            url: '/admin/Announcement/search',
             type: 'GET',
             data: { "searchType": searchType, "searchKeyword": inputText, "pageSize": selectValue },
             contentType: 'application/json; charset=utf-8',
@@ -193,7 +193,7 @@
 
         if (confirm('선택한 공지를 삭제하시겠습니까?')) {
             $.ajax({
-                url: '/Announcement/deleteAnnounce',
+                url: '/admin/Announcement/deleteAnnounce',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(announceIds),
@@ -224,7 +224,7 @@
 //     수정
     function updateAnnounce(announceId) {
         $.ajax({
-            url: '/Announcement/updateBtnClick/' + announceId,
+            url: '/admin/Announcement/updateBtnClick/' + announceId,
             type: 'POST',
             beforeSend: function (xhr) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

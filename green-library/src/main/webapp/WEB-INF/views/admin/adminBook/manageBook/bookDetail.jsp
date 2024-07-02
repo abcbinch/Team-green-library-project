@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/admin/css/public/adminFooter.css">
     <link rel="stylesheet" type="text/css" href="/admin/css/public/style.css">
     <link rel="stylesheet" type="text/css" href="/admin/css/bookInfo.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -25,56 +26,151 @@
     </section>
     <section class="viewContainer">
         <div class="btnWrap">
-            <input class="correction" type="button" value="수정">
-            <input class="deleteBtn" type="button" value="삭제">
+            <input class="modify" type="button" value="수정" onclick="modifyBook(${book.bookId})">
+            <input class="deleteBtn" type="button" value="삭제" onclick="deleteBook(${book.bookId})">
         </div>
         <table class="announcementInfo">
             <tr>
                 <th>번호</th>
-                <td>1</td>
+                <td>${book.bookId}</td>
                 <th>십진분류</th>
-                <td>1</td>
+                <td>${book.genreFullname}</td>
             </tr>
             <tr>
                 <th>제목</th>
-                <td>1</td>
+                <td>${book.title}</td>
                 <th>저자</th>
-                <td>2</td>
+                <td>${book.author.authorName}</td>
             </tr>
             <tr>
                 <th>출판사</th>
-                <td>1</td>
+                <td>${book.publisher.publisherName}</td>
                 <th>발간일자</th>
-                <td>1</td>
+                <td>${book.publicationDate}</td>
             </tr>
             <tr>
                 <th>ISBN</th>
-                <td>1</td>
+                <td>${book.isbn}</td>
                 <th>위치</th>
-                <td>1</td>
+                <td>${book.location}</td>
             </tr>
             <tr>
                 <th>이미지</th>
-                <td>1</td>
+                <td>${book.img}</td>
                 <th>내용</th>
-                <td>1</td>
+                <td>${book.summary}</td>
             </tr>
         </table>
         <div class="boardNav">
             <div class="prevNav">
-                <span class="tit">이전글</span><span class="con">이전글</span>
+                <span class="tit">이전글</span><a class="con" id="prevCon" href="#"></a>
             </div>
             <div class="nextNav">
-                <span class="tit">다음글</span><span class="con">다음글이 없습니다.</span>
+                <span class="tit">다음글</span><a class="con" id="nextCon" href="#"></a>
             </div>
         </div>
         <div class="board-btn">
-            <a href="#" class="listBtn">목록</a>
+            <a href="/Book" class="listBtn">목록</a>
         </div>
     </section>
 </main>
 <jsp:include page="../../public/adminFooter.jsp"></jsp:include>
+<script>
+    $(document).ready(function () {
+        const bookId = ${book.bookId};
+        prevPage(bookId);
+        nextPage(bookId);
+    });
 
+    function prevPage(bookId) {
+        $.ajax({
+            url: '/admin/Book/prevBook',
+            type: 'GET',
+            data: { bookId: bookId },
+            beforeSend: function (xhr) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (data) {
+                if (data && data.title && data.bookId) {
+                    $("#prevCon").text(data.title);
+                    $("#prevCon").attr("href", "/Book/DetailBook?bookId=" + data.bookId);
+                } else {
+                    $("#prevCon").text("이전글이 없습니다.");
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#prevCon").text("이전글이 없습니다.");
+            }
+        });
+    }
+
+    function nextPage(bookId) {
+        $.ajax({
+            url: '/admin/Book/nextBook',
+            type: 'GET',
+            data: { bookId: bookId },
+            beforeSend: function (xhr) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (data) {
+                if (data && data.title && data.bookId) {
+                    $("#nextCon").text(data.title);
+                    $("#nextCon").attr("href", "/Book/DetailBook?bookId=" + data.bookId);
+                } else {
+                    $("#nextCon").text("다음글이 없습니다.");
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#nextCon").text("다음글이 없습니다.");
+            }
+        });
+    }
+
+    function modifyBook(bookId) {
+        $.ajax({
+            url: '/admin/Book/modifyBtnClick/' + bookId,  // 수정된 부분
+            type: 'POST',
+            beforeSend: function (xhr) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (response) {
+                window.location.href = '/Book/updateBook?bookId=' + encodeURIComponent(bookId);
+                searchBtnEvt();
+            },
+            error: function (xhr, status, error) {
+                alert('접속에 실패했습니다. 다시 시도해주세요.');
+            }
+        });
+    }
+
+
+    // 책 삭제
+    function deleteBook(bookId) {
+        if (confirm('선택한 책을 영구 삭제하시겠습니까?')) {
+            $.ajax({
+                url: '/admin/Book/deleteBook',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(bookId),
+                beforeSend: function (xhr) {
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+                },
+                success: function (response) {
+                    alert("선택한 책이 삭제 되었습니다. ");
+                    window.location.href='/Book';
+                },
+                error: function (xhr, status, error) {
+                    alert("책들 삭제 중 오류가 발생했습니다: ");
+                }
+            });
+        }
+    }
+
+</script>
 </body>
 
 </html>

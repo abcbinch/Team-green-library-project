@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@RequestMapping("/Announcement")
+@RequestMapping("/admin/Announcement")
 @Controller
 public class AnnounceController {
 
@@ -75,7 +75,7 @@ public class AnnounceController {
     //    수정
     // POST 요청 처리
     @PostMapping("/updateBtnClick/{id}")
-    @ResponseBody // JSON 형태의 응답
+    @ResponseBody
     public String updateBtnClick(@PathVariable int id) {
         return "success";
     }

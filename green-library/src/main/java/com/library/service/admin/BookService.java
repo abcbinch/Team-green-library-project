@@ -33,14 +33,15 @@ public interface BookService {
     void updateBook(BookDTO book);
 
     // 책 삭제
+    void deleteMultiBook(List<Long> bookIds);
     void deleteBook(int id);
-
     // 특정 도서 상세 조회
+
     BookDTO getBookById(int id);
-
     // 이전 도서 제목 조회
-    BookDTO previousBook(int id);
 
+    BookDTO previousBook(int id);
     // 다음 도서 제목 조회
+
     BookDTO nextBook(int id);
 }

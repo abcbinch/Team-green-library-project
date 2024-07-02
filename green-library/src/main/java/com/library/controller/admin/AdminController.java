@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller("AdminController")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     @Qualifier("AdminService")
     private AdminService adminService;
 
-    @GetMapping("/admin")
+    @GetMapping()
     public String home() {
         return "admin/adminLogin/adminLogin";
     }

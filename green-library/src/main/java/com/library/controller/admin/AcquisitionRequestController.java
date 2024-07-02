@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/BuyBook")
+@RequestMapping("/admin/BuyBook")
 public class AcquisitionRequestController {
 
     private final AcquisitionRequestService acquisitionRequestService;
@@ -46,7 +46,7 @@ public class AcquisitionRequestController {
     }
 
 
-    @GetMapping()
+    @GetMapping("")
     public String buy(Model model) {
         List<WishlistDTO> wishList = acquisitionRequestService.allAcquisitionManage();
         model.addAttribute("wishList", wishList);

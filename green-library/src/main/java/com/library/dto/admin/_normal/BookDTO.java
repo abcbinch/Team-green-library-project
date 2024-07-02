@@ -25,4 +25,5 @@ public class BookDTO {
     private PublisherDTO publisher;
     private GenreDTO genre;
     private String genreFullname;
+
 }
