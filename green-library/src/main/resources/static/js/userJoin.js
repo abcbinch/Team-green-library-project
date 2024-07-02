@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mailspace = document.getElementById('email2');
     const eselect = document.getElementById('emailSel');
     const form = document.getElementById("form");
-    const birthRegexp = /(19|20)[0-9]{2}\-[0-9]{1,2}\-[0-9]{1,2}/;
+    const birthRegexp = /^(19\d{2}|20[0-2][0-3])(\-?)(0[1-9]|1[0-2])(\-?)(0[1-9]|[12]\d|3[01])$/;
     const idRegexp = /[a-z0-9]{5,}/;
     const pswdRegexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#^*_])[A-Za-z\d!@#^*_]{8,20}$/;
     let isUserIdChecked = false;
@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let brief = document.getElementsByClassName("brief");
         let fullPhone = document.getElementById("fullphone");
         fullPhone.value = brief[0].value + "-" + brief[1].value + "-" + brief[2].value;
+        
+        let str = birthdate.value;
+        if(str.includes("-")){
+			birthdate.value = str.replace("-","").trim();
+		}
     }
 
     function joinCheck() {

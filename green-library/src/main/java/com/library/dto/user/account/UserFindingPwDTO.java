@@ -26,6 +26,6 @@ public class UserFindingPwDTO {
 	private String email;
 	
 	@NotBlank(message = "생년월일을 입력하지 않았습니다.")
-	@Pattern(regexp = "^(19\\d{2}|20[0-2][0-3])-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$", message = "생년월일은 'yyyy-MM-dd' 형식이며, 2024년 이전이어야 합니다.")
+	@Pattern(regexp = "^(19\\d{2}|20[0-2][0-3])(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])$", message = "생년월일은 'yyyyMMdd' 형식이며, 2024년 이전이어야 합니다.")
 	private String birth;
 }

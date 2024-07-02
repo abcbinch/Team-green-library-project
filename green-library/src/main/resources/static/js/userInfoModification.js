@@ -65,6 +65,11 @@ function concatInput() {
 	let fullPhone = document.getElementById("fullPhone");
 
 	fullPhone.value = brief[0].value + brief[1].value + brief[2].value;
+	
+	let str = birthdate.value;
+        if(str.includes("-")){
+			birthdate.value = str.replace("-","").trim();
+		}
 }
 function goBack() {
     if (confirm("회원정보 수정을 취소하시겠습니까?")) {

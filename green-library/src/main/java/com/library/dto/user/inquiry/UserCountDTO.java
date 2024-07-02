@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class UserCountDTO {
 
-	int rent_count;
-	int reserve_count;
+	private int rent_count;
+	private int reserve_count;
 }
