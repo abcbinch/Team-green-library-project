@@ -3,7 +3,7 @@
 .navBar{
 	position: fixed;
 	top: 300px;
-	left: 60px;
+	left: 0px;
 	width: 200px;
 	height: 268px;
 	background: #1d7647;
@@ -29,28 +29,6 @@
 .navList{
 	width: 200px;
 	height: 201px;
-	padding: 0px;
-	margin: 0px;
-	font-size: 15pt;
-	font-weight: bold;
-	background: aliceblue;
-	list-style-type: none;
-}
-.mypagebox{
-	height: 402px;
-	
-	position: fixed;
-	top: 300px;
-	left: 60px;
-	width: 200px;
-	background: #1d7647;
-	
-	border: 2px solid #a0cab0;
-}
-.mypage{
-	height: 335px;
-	
-	width: 200px;
 	padding: 0px;
 	margin: 0px;
 	font-size: 15pt;
