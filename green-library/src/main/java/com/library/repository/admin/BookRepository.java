@@ -35,6 +35,7 @@ public interface BookRepository {
     int updateBook(BookDTO book);
 
     // 책 삭제
+    int deleteMultiBook(List<Long> bookId);
     int deleteBook(int bookId);
 
     // 특정 도서 상세 조회

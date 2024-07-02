@@ -145,7 +145,7 @@
         const completeKind = $('input[name="completeKinds"]:checked').val();
 
         $.ajax({
-            url: '/BuyBook/search',
+            url: '/admin/BuyBook/search',
             type: 'GET',
             data: {
                 "searchType": searchType,
@@ -208,7 +208,7 @@
 
         if (confirm('선택한 사항을 승인하시겠습니까?')) {
             $.ajax({
-                url: '/BuyBook/acceptBooks',
+                url: '/admin/BuyBook/acceptBooks',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(bookIds),
@@ -243,7 +243,7 @@
 
         if (confirm('선택한 사항을 거부하시겠습니까?')) {
             $.ajax({
-                url: '/BuyBook/refuseBooks',
+                url: '/admin/BuyBook/refuseBooks',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(bookIds),
@@ -265,7 +265,7 @@
     //     info 수정
     function modifyBook(wishlistId) {
         $.ajax({
-            url: '/BuyBook/updateWishInfo/' + wishlistId,
+            url: '/admin/BuyBook/updateWishInfo/' + wishlistId,
             type: 'POST',
             beforeSend: function (xhr) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

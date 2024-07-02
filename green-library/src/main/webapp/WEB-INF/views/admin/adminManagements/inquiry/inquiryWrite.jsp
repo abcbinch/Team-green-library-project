@@ -90,7 +90,7 @@
 
         if (confirm('등록하시겠습니까?')) {
             $.ajax({
-                url: '/Inquiry/UploadInquiry',
+                url: '/admin/Inquiry/UploadInquiry',
                 type: 'POST',
                 data: { inquiryId: inquiryId, responseContents: responseContents },
                 beforeSend: function (xhr) {
