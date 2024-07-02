@@ -55,6 +55,7 @@
 	top: 420px;
 	width: 50px;
 	height: 50px;
+	border-radius: 50px;
 	background: #1d7647;
 	opacity: 0.5;
 	cursor: pointer;

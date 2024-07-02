@@ -22,7 +22,7 @@
 		</ul>
 	</div>
 	<div class="putinBtn">
-	<img src="circleArrowGreen.png">
+	<img src="/images/circleArrowGreenLeft.png">
 	</div>
 	
 	<script src="/js/navBarUse.js" type="text/javascript"></script>
