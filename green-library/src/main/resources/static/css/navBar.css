@@ -4,35 +4,59 @@
 	position: fixed;
 	top: 300px;
 	left: 60px;
-	width: 240px;
-	height: 500px;
+	width: 200px;
+	height: 268px;
+	background: #1d7647;
 	
-	border: 2px solid red;
+	border: 2px solid #a0cab0;
 }
 .navTitle{
 	font-size: 15pt;
-	padding: 10px;
+	font-weight: bold;
+	padding: 20px;
+	color: #d8e9d9;
 }
-.navBar a{
-	color: black;
-	text-decoration: none;
+.navList{
+	width: 200px;
+	height: 201px;
+	padding: 0px;
+	margin: 0px;
+	font-size: 15pt;
+	font-weight: bold;
+	background: aliceblue;
+	list-style-type: none;
 }
-.navBar ul{
+.mypagebox{
+	height: 402px;
+	
+	position: fixed;
+	top: 300px;
+	left: 60px;
+	width: 200px;
+	background: #1d7647;
+	
+	border: 2px solid #a0cab0;
+}
+.mypage{
+	height: 335px;
+	
 	width: 200px;
 	padding: 0px;
 	margin: 0px;
 	font-size: 15pt;
-	background: lemonchiffon;
+	font-weight: bold;
+	background: aliceblue;
 	list-style-type: none;
 }
-.navBar ul li{
+.navBar ul li,
+.mypagebox ul li{
 	padding: 20px;
-}
-.navBar ul li:hover{
-	background: orange;
 	cursor: pointer;
 }
 
 .curPlace{
-	background: green;
+	background: #64b883;
+	color: white;
 }
+
+
