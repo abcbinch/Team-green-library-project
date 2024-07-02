@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const idRegexp = /[a-z0-9]{5,}/;
     const pswdRegexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#^*_])[A-Za-z\d!@#^*_]{8,20}$/;
     let isUserIdChecked = false;
+    let brief = document.getElementsByClassName("brief");
 
     function mailText() {
         let va = eselect.value;
@@ -26,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let fullEmail = document.getElementById("fullEmail");
         fullEmail.value = emailF + "@" + emailB;
 
-        let brief = document.getElementsByClassName("brief");
         let fullPhone = document.getElementById("fullphone");
         fullPhone.value = brief[0].value + "-" + brief[1].value + "-" + brief[2].value;
         
@@ -83,11 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
             passCheck.focus();
             return false;
         }
-        if (!email.value) {
+        if (!email.value || !mailspace.value) {
             alert("이메일을 입력해주세요.");
             email.focus();
             return false;
         }
+        if (!brief[0].value || !brief[1].value || !brief[2].value){
+			alert("전화번호를 입력해주세요.");
+			brief[0].focus();
+			return false;
+		}
         return true;
     }
 

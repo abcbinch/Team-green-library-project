@@ -21,8 +21,12 @@
 			<li>신착 도서</li>
 		</ul>
 	</div>
+	<div class="putinBtn">
+	<img src="/images/circleArrowGreenLeft.png">
+	</div>
 	
 	<script src="/js/navBarSearch.js" type="text/javascript"></script>
+	<script src="/js/navBar.js" type="text/javascript"></script>
 
 </body>
 </html>
