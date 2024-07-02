@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/css/public/nav.css">
 <link rel="stylesheet" type="text/css" href="/css/userInquiryCreate.css">
 
-<script src="/js/userCreateInquiry.js"></script>
+<script src="/js/userModifyInquiry.js"></script>
 
 </head>
 
@@ -44,11 +44,11 @@
 			</tr>
 			<tr>
 				<th><p class="great_p">*&nbsp;</p> 제목</th>
-				<td><input type="text" style="height:20px;width:95%;" name="inquiry_title"></td>
+				<td><input type="text" style="height:20px;width:95%;" name="inquiry_title" value="${inquiryDetail.inquiryTitle}"></td>
 			</tr>
 			<tr>
 				<th><p class="great_p">*&nbsp;</p> 내용</th>
-				<td><textarea rows="20" style="width:95%; resize:none;" name="contents"></textarea></td> 
+				<td><textarea rows="20" style="width:95%; resize:none;" name="contents">${inquiryDetail.inquiryContents }</textarea></td> 
 			</tr>
 		</table>
 	</div>
