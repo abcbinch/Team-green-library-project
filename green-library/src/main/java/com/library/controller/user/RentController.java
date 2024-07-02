@@ -189,7 +189,12 @@ public class RentController {
 	@GetMapping("/modifyInquiry")
 
     public String modifyInquiry(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "inquiryId", defaultValue = "error") String id, Model model) {
-    	model.addAttribute("userId", userId);
+		if(id.equals("error"))
+    		return "redirect:/user/myWritten";
+		
+		
+		model.addAttribute("");
+		model.addAttribute("userId", userId);
     	return "user/userInquiryModify";
     }
     
