@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Service("AdminBookService")
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     @Qualifier("AdminBookRepository")
     @Autowired
@@ -35,46 +35,53 @@ public class BookServiceImpl implements BookService{
     public List<BookDTO> findBookByTitle(String title) {
         return bookRepository.findBookByTitle(title);
     }
+
     // 저자로 조회
     public List<BookDTO> findBookByAuthor(String author) {
         return bookRepository.findBookByAuthor(author);
     }
+
     // 십진분류로 조회
     public List<BookDTO> findBookByGenre(String genre) {
         return bookRepository.findBookByGenre(genre);
     }
 
     //   책 반납
-    public BookDTO returnUpdateBook(int bookId) {
-        bookRepository.updateBookAvailability(bookId, true);
-        return bookRepository.getBookById(bookId); // 반납된 책의 정보 반환
+    public void returnUpdateBook(int bookId) {
+        bookRepository.updateBookAvailability(bookId);
     }
 
     public void returnMultiBooks(List<Long> bookIds) {
-        bookRepository.updateMultipleBooksAvailability(bookIds, true);
+        bookRepository.updateMultipleBooksAvailability(bookIds);
     }
+
     // 책 등록
     public void createBook(BookDTO book) {
         bookRepository.createBook(book);
     }
+
     // 책 수정
     public void updateBook(BookDTO book) {
         bookRepository.updateBook(book);
     }
+
     // 책 삭제
     public void deleteBook(int id) {
         bookRepository.deleteBook(id);
     }
+
     // 특정 도서 상세 조회
-    public BookDTO getBookById(int id){
+    public BookDTO getBookById(int id) {
         return bookRepository.getBookById(id);
     }
+
     // 이전 도서 제목 조회
-    public String previousBook(int id){
+    public BookDTO previousBook(int id) {
         return bookRepository.previousBook(id);
     }
+
     // 다음 도서 제목 조회
-    public String nextBook(int id){
+    public BookDTO nextBook(int id) {
         return bookRepository.nextBook(id);
     }
 }

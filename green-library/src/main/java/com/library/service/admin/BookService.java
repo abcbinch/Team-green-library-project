@@ -7,29 +7,40 @@ import java.util.List;
 public interface BookService {
 
     // 모든 책 조회
-    public List<BookDTO> allHavingBookManage();
+    List<BookDTO> allHavingBookManage();
 
     //    제목 + 저자 + 출판사
     List<BookDTO> findBookByTotal(String searchKeyword);
+
     // 제목으로 조회
-    public List<BookDTO> findBookByTitle(String title);
+    List<BookDTO> findBookByTitle(String title);
+
     // 저자로 조회
-    public List<BookDTO> findBookByAuthor(String author);
+    List<BookDTO> findBookByAuthor(String author);
+
     // 십진분류로 조회
-    public List<BookDTO> findBookByGenre(String genre);
-//책 반납
-    BookDTO returnUpdateBook(int bookId);
+    List<BookDTO> findBookByGenre(String genre);
+
+    //책 반납
+    void returnUpdateBook(int bookId);
+
     void returnMultiBooks(List<Long> bookIds);
+
     // 책 등록
-    public void createBook(BookDTO book);
-     // 책 수정
-    public void updateBook(BookDTO book);
-     // 책 삭제
-    public void deleteBook(int id);
+    void createBook(BookDTO book);
+
+    // 책 수정
+    void updateBook(BookDTO book);
+
+    // 책 삭제
+    void deleteBook(int id);
+
     // 특정 도서 상세 조회
-    public BookDTO getBookById(int id);
-     // 이전 도서 제목 조회
-    public String previousBook(int id);
+    BookDTO getBookById(int id);
+
+    // 이전 도서 제목 조회
+    BookDTO previousBook(int id);
+
     // 다음 도서 제목 조회
-    public String nextBook(int id);
+    BookDTO nextBook(int id);
 }

@@ -1,9 +1,11 @@
 package com.library.repository.admin;
 
 import com.library.dto.admin._normal.BookDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public interface BookRepository {
 
     // 모든 책 목록 조회
@@ -22,9 +24,9 @@ public interface BookRepository {
     List<BookDTO> findBookByGenre(String genreFullName);
 
     // 책 반납
-    int updateBookAvailability(int bookId, boolean isAvailable);
+    int updateBookAvailability(int bookId);
 
-    int updateMultipleBooksAvailability(List<Long> bookIds, boolean isAvailable);
+    int updateMultipleBooksAvailability(List<Long> bookIds);
 
     // 책 등록
     int createBook(BookDTO book);
@@ -39,8 +41,8 @@ public interface BookRepository {
     BookDTO getBookById(int bookId);
 
     // 이전 도서 제목 조회
-    String previousBook(int bookId);
+    BookDTO previousBook(int bookId);
 
     // 다음 도서 제목 조회
-    String nextBook(int bookId);
+    BookDTO nextBook(int bookId);
 }

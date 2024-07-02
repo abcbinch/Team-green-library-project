@@ -2,6 +2,7 @@ package com.library.service.admin;
 
 import com.library.dto.admin._normal.WishlistDTO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AcquisitionRequestService {
@@ -22,8 +23,14 @@ public interface AcquisitionRequestService {
     List<WishlistDTO> findAcquisitionByPublish(String genre);
 
     //    구매승인
-    WishlistDTO acceptsAcquisition(int requestId);
+    WishlistDTO acceptsAcquisition(List<String> requestId);
 
     //    구매거절
-    WishlistDTO deleteAcquisition(int requestId);
+    WishlistDTO deleteAcquisition(List<String> requestId);
+
+    List<WishlistDTO> filterByCompleteKind(List<WishlistDTO> wishBooks, String completeKind);
+
+    WishlistDTO getWishById(int wishlistId);
+
+    void updateWishBook(int wishlistId, String isbn, String title, String author, String publisher, Date publicationDate, String content);
 }
