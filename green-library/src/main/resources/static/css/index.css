@@ -256,6 +256,8 @@ select:focus{
 /* 	width: 1260px; */
 	width: 600px;
 	height: 250px;
+	
+	border: 2px solid red;
 }
 .infoBoard2 table td:hover{
 	cursor: pointer;
