@@ -19,7 +19,7 @@ public class My_InquiryRepository {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<My_InquiryDto> myInquiryList(String userId) {
-		String sql = "SELECT inquiry_id, user_id, inquiry_date, inquiry_title, responserTF "
+		String sql = "SELECT inquiry_id, user_id, inquiry_date, inquiry_title, responseTF "
 		           + "FROM inquiries "
 		           + "WHERE user_id = ?";
 		return jdbcTemplate.query(sql, new RowMapper<My_InquiryDto>() {
@@ -30,7 +30,7 @@ public class My_InquiryRepository {
 				inquiryList.setUserId(rs.getString("user_id"));
 				inquiryList.setInquiryDate(rs.getDate("inquiry_date"));
 				inquiryList.setInquiryTitle(rs.getString("inquiry_title")); 
-				inquiryList.setResponserTF(rs.getString("responserTF"));
+				inquiryList.setResponserTF(rs.getString("responseTF"));
 				
 				if (inquiryList.getResponserTF() != null) {
                     if (inquiryList.getResponserTF().equals("1")) {

@@ -164,6 +164,7 @@ input[type=button]:not(.cancel),
 	justify-content: center;
 	align-items: center;
 	background: rgba(0, 0, 0, 0.5);
+	z-index:60;
 }
 #modalContainer1 {
 	width: 100%;
@@ -175,6 +176,7 @@ input[type=button]:not(.cancel),
 	justify-content: center;
 	align-items: center;
 	background: rgba(0, 0, 0, 0.5);
+	z-index:60;
 }
 
 #modalContent {
