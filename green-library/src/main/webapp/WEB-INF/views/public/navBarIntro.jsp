@@ -21,8 +21,12 @@
 			<li>부대시설 소개</li>
 		</ul>
 	</div>
+	<div class="putinBtn">
+	<img src="/images/circleArrowGreenLeft.png">
+	</div>
 	
 	<script src="/js/navBarIntro.js" type="text/javascript"></script>
+	<script src="/js/navBar.js" type="text/javascript"></script>
 
 </body>
 </html>
