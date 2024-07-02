@@ -111,14 +111,10 @@ public class InquiryServiceImpl implements InquiryService{
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void cancelReserve(String id) {
-		try {
 			int rowsAffected = inquiryRepository.cancelReserve(id);
             if (rowsAffected == 0) {
 	            throw new DatabaseException("Failed to cancel reservation with id: " + id);
 	        }
-        } catch (DataAccessException e) {
-            throw new DatabaseException("Database error occurred while cancelling reservation with id: " + id, e);
-        }
 	}
 	
 	// 관심도서 추가

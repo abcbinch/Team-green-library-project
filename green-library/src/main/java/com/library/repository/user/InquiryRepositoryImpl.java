@@ -182,25 +182,22 @@ public class InquiryRepositoryImpl implements InquiryRepository {
 	
     @Override
     public int cancelReserve(String reservationId) {
-        // 1. 예약 취소
+    	String selectBookIdSql = "SELECT book_id FROM reservations WHERE reservation_id = ?";
+        int bookId = jdbcTemplate.queryForObject(selectBookIdSql, Integer.class, reservationId);
+        
         String deleteSql = "DELETE FROM reservations WHERE reservation_id = ?";
         int result = jdbcTemplate.update(deleteSql, reservationId);
 
         if (result > 0) {
-            // 2. book_id 가져오기
-            String selectBookIdSql = "SELECT book_id FROM reservations WHERE reservation_id = ?";
-            int bookId = jdbcTemplate.queryForObject(selectBookIdSql, Integer.class, reservationId);
 
-            // 3. 동일한 책에 대해 다른 예약이 있는지 확인
-            String checkReservationSql = "SELECT COUNT(*) FROM reservations WHERE book_id = ?";
+        	String checkReservationSql = "SELECT COUNT(*) FROM reservations WHERE book_id = ?";
             int reservationCount = jdbcTemplate.queryForObject(checkReservationSql, Integer.class, bookId);
-            // 4. 해당 책이 대출 중인지 확인
+
             String checkRentSql = "SELECT COUNT(*) FROM rents WHERE book_id = ? AND returned = '0'";
             int rentCount = jdbcTemplate.queryForObject(checkRentSql, Integer.class, bookId);
 
-            // 5. 다른 예약이 없고 대출 중이 아니라면 availability 값을 0으로 업데이트
             if (reservationCount == 0 && rentCount == 0) {
-                String updateAvailabilitySql = "UPDATE books SET availability = '0' WHERE book_id = ?";
+                String updateAvailabilitySql = "UPDATE books SET availability = '1' WHERE book_id = ?";
                 jdbcTemplate.update(updateAvailabilitySql, bookId);
             }
         }
