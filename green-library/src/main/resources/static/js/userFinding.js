@@ -75,6 +75,11 @@ function concatInput(){
 	let input = document.getElementsByClassName("short");
 	let email = document.getElementById("email");
 	email.value = input[0].value + "@" + input[1].value;
+	
+	let str = birthdate.value;
+        if(str.includes("-")){
+			birthdate.value = str.replace("-","").trim();
+		}
 }
 function check(){
 	if (!username.value) {

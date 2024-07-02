@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let brief = document.getElementsByClassName("brief");
         let fullPhone = document.getElementById("fullphone");
         fullPhone.value = brief[0].value + "-" + brief[1].value + "-" + brief[2].value;
+        
+        let str = birthdate.value;
+        if(str.includes("-")){
+			birthdate.value = str.replace("-","").trim();
+		}
     }
 
     function joinCheck() {
