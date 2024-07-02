@@ -180,18 +180,18 @@
 					<c:when test="${annoList > 6}">
 						<c:forEach var="num" begin="${annoList-5}" end="${annoList}">
 						<table>
-							<tr>
+							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
 				        	</tr>
-				        	</table>
+				        </table>
 						</c:forEach>
 					</c:when>
 					<c:when test="${annoList <= 6}">
 						<c:forEach var="num" begin="0" end="${annoList-1}">
 						<table>
-							<tr>
+							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
