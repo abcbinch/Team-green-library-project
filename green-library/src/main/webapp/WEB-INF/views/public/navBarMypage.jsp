@@ -10,18 +10,23 @@
 </head>
 <body>
 
-<div class="mypagebox">
-	<div class="navTitle">바로 가기</div>
-		<ul class="mypage">
+<div class="navBar">
+	<div class="navTitle">바로 가기
+	<a href="/">
+	<img src="/images/navBarHome.png"></a>
+	</div>
+		<ul class="navList">
 			<li>내 프로필</li>
-			<li>대출 연장</li>
-			<li>약관 재동의</li>
 			<li>내가 쓴 글</li>
 			<li>문의하기</li>
 		</ul>
 	</div>
+	<div class="putinBtn">
+	<img src="/images/circleArrowGreenLeft.png">
+	</div>
 	
 	<script src="/js/navBarMypage.js" type="text/javascript"></script>
+	<script src="/js/navBar.js" type="text/javascript"></script>
 
 </body>
 </html>

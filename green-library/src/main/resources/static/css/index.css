@@ -245,7 +245,8 @@ select:focus{
     margin-right: 30px;
     left: 0;
     
-    border: 2px solid skyblue;
+   	border: 2px solid #ecd9bC;
+	border-radius: 5px;
 }
 .infoBoard2 img{
 	width: 50px;
@@ -255,6 +256,8 @@ select:focus{
 /* 	width: 1260px; */
 	width: 600px;
 	height: 250px;
+	
+	border: 2px solid red;
 }
 .infoBoard2 table td:hover{
 	cursor: pointer;
@@ -298,7 +301,8 @@ select:focus{
 	width: 600px;
 	height: 480px;
 	margin-left: 30px;
-	border: 2px solid skyblue;
+	border: 2px solid #ecd9bC;
+	border-radius: 5px;
 }
 
 

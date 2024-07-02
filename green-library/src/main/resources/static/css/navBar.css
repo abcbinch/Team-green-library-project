@@ -3,7 +3,7 @@
 .navBar{
 	position: fixed;
 	top: 300px;
-	left: 60px;
+	left: 0px;
 	width: 200px;
 	height: 268px;
 	background: #1d7647;
@@ -11,36 +11,24 @@
 	border: 2px solid #a0cab0;
 }
 .navTitle{
+	display: flex;
+	justify-content: space-between;
+	width: 136px;
 	font-size: 15pt;
 	font-weight: bold;
 	padding: 20px;
 	color: #d8e9d9;
 }
+.navTitle img{
+	position: absolute;
+	width: 50px;
+	height:50px;
+	left: 140px;
+	top: 8px;
+}
 .navList{
 	width: 200px;
 	height: 201px;
-	padding: 0px;
-	margin: 0px;
-	font-size: 15pt;
-	font-weight: bold;
-	background: aliceblue;
-	list-style-type: none;
-}
-.mypagebox{
-	height: 402px;
-	
-	position: fixed;
-	top: 300px;
-	left: 60px;
-	width: 200px;
-	background: #1d7647;
-	
-	border: 2px solid #a0cab0;
-}
-.mypage{
-	height: 335px;
-	
-	width: 200px;
 	padding: 0px;
 	margin: 0px;
 	font-size: 15pt;
@@ -59,4 +47,29 @@
 	color: white;
 }
 
+.putinBtn{
+	position: fixed;
+/* 	top: 0px; */
+/* 	left: 0px; */
+	left: 210px;
+	top: 420px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background: #1d7647;
+	opacity: 0.5;
+	cursor: pointer;
+}
+.putinBtn img{
+	width: 50px;
+	height: 50px;
+}
 
+.putinLeft{
+	left: -210px;
+	transition: left 300ms ease-in-out;
+}
+.btnInLeft{
+	left: 0px;
+	transition: left 300ms ease-in-out;
+}

@@ -125,7 +125,7 @@ h1{
 }
 .notice_table .title_table{
 	width: 800px;
-	text-align :center;
+	text-align :left;
 }
 .notice_table .date_table{
 	width: 200px;

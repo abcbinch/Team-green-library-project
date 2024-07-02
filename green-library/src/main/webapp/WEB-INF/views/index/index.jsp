@@ -56,10 +56,10 @@
         </a>
         </div>
         <div id="quick2" class="quickPage">
-       	<a href="/user/bookLoanExtension">
+       	<a href="/user/userInfo">
        	<img class="visible2" src="/images/bookExtensionGreen.png">
        	<img class="hidden2" src="/images/bookExtensionChg.png">
-            대출 연장
+            마이페이지
         </a>
         </div>
         <div id="quick3" class="quickPage">
@@ -172,23 +172,26 @@
 <!-- 게시글이 5개 이상일 때 6개씩 뜨게 하려고 조건문 넣었어요. -->
 
 				<c:set var="annoList" value="${fn:length(announce)}"/>
-
+	<script>
+	let a = "${annoList}";
+	console.log(a);
+	</script>
 				<c:choose>
-					<c:when test="annoList>=9}">
-						<c:forEach var="num" begin="${annoList}" end="${annoList-5}">
+					<c:when test="${annoList > 6}">
+						<c:forEach var="num" begin="0" end="5">
 						<table>
-							<tr>
+							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
 				        	</tr>
-				        	</table>
+				        </table>
 						</c:forEach>
 					</c:when>
-					<c:when test="${annoList<6}">
-						<c:forEach var="num" begin="0" end="8">
+					<c:when test="${annoList <= 6}">
+						<c:forEach var="num" begin="0" end="${annoList-1}">
 						<table>
-							<tr>
+							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
@@ -198,7 +201,6 @@
 					</c:when>
 				</c:choose>
 	        
-<!-- 	    </div> -->
 	</div>
     <div id="calendar" class="infoBoard3">
     
