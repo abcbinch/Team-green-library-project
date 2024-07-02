@@ -90,13 +90,17 @@ button:focus {
 
 .totalContainer .outputBoard .results select {
     margin-left: 40px;
-    margin-right: 100px;
+    margin-right: 625px;
     height: 30px;
     width: 100px;
 }
 
+.totalContainer .outputBoard .results .radioWrap {
+    margin-right: 50px;
+}
+
 .totalContainer .outputBoard .results .btnWrap {
-    width: 100%;
+    /*width: 100%;*/
     display: flex;
     justify-content: right;
     gap: 20px;

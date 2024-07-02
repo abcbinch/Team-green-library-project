@@ -127,9 +127,12 @@ public class RentController {
 	}
 	
 	@PostMapping("/deleteWish")
-	public String deleteWish(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "wishlistId") int wishlistId) {
+	public String deleteWish(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "wishlistId") int wishlistId, 
+			RedirectAttributes redirectAttributes) {
 		
 		wishBookService.deleteWishBook(wishlistId, userId);		
+		
+		redirectAttributes.addFlashAttribute("message", "희망도서 신청 정보가 삭제되었습니다");
 		
 		return "redirect:/user/myWritten";
 	}

@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/css/**").permitAll()
                 .requestMatchers("/admin/js/**").permitAll()
                 .requestMatchers("/admin/assets/**").permitAll()
+                .requestMatchers("/admin/assets/imgs/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user/**").authenticated()
                 .anyRequest().permitAll()
@@ -93,7 +94,7 @@ public class SecurityConfig {
 
                 if (referer != null && referer.contains("/admin")) {
                     if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                        redirectUrl = request.getContextPath() + "/adminIndex";
+                        redirectUrl = request.getContextPath() + "/admin/adminIndex";
                     } else {
                         redirectUrl = request.getContextPath() + "/admin?error=true";
                     }

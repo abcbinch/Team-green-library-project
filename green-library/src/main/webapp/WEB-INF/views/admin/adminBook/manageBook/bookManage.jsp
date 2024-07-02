@@ -144,7 +144,7 @@
         const total = document.getElementById('total');
 
         $.ajax({
-            url: '/Book/search',
+            url: '/admin/Book/search',
             type: 'GET',
             data: { "searchType": searchType, "searchKeyword": inputText, "pageSize": selectValue },
             success: function (response) {
@@ -183,7 +183,7 @@
     // 조회
     function showBook(bookId) {
         $.ajax({
-            url: '/Book/details/' + bookId,  // 수정된 부분
+            url: '/admin/Book/details/' + bookId,  // 수정된 부분
             type: 'POST',
             beforeSend: function (xhr) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -202,7 +202,7 @@
     // 수정
     function modifyBook(bookId) {
         $.ajax({
-            url: '/Book/modify/' + bookId,  // 수정된 부분
+            url: '/admin/Book/modifyBtnClick/' + bookId,  // 수정된 부분
             type: 'POST',
             beforeSend: function (xhr) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -235,7 +235,7 @@
 
         if (confirm('선택한 책을 영구 삭제하시겠습니까?')) {
             $.ajax({
-                url: '/Book/deleteBook',
+                url: '/admin/Book/deleteBooks',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(bookIds),
@@ -272,7 +272,7 @@
 
         if (confirm('선택한 책을 반납 처리 하시겠습니까?')) {
             $.ajax({
-                url: '/Book/returnMultiBook',
+                url: '/admin/Book/returnMultiBook',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(bookIds),
@@ -294,7 +294,7 @@
     function returnBook(bookId) {
         if (confirm('선택한 책을 반납 처리 하시겠습니까?')) {
             $.ajax({
-                url: '/Book/returnBook',
+                url: '/admin/Book/returnBook',
                 type: 'POST',
                 data: { "bookId": bookId },
                 beforeSend: function(xhr) {

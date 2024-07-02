@@ -4,7 +4,6 @@ import com.library.dto.admin._normal.AuthorDTO;
 import com.library.dto.admin._normal.BookDTO;
 import com.library.dto.admin._normal.GenreDTO;
 import com.library.dto.admin._normal.PublisherDTO;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -278,17 +277,38 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public int createBook(BookDTO book) {
-        Long authorId = getOrCreateAuthor(book.getAuthor().getAuthorName());
-        Long publisherId = getOrCreatePublisher(book.getPublisher().getPublisherName());
+        // 저자 정보 체크
+        AuthorDTO authorDTO = book.getAuthor();
+        if (authorDTO == null) {
+            throw new IllegalArgumentException("저자 정보가 없습니다.");
+        }
+        Long authorId = getOrCreateAuthor(authorDTO.getAuthorName());
 
+        // 출판사 정보 체크
+        PublisherDTO publisherDTO = book.getPublisher();
+        if (publisherDTO == null) {
+            throw new IllegalArgumentException("출판사 정보가 없습니다.");
+        }
+        Long publisherId = getOrCreatePublisher(publisherDTO.getPublisherName());
+
+        // 장르 정보 체크
+        GenreDTO genreDTO = book.getGenre();
+        if (genreDTO == null) {
+            throw new IllegalArgumentException("장르 정보가 없습니다.");
+        }
+        String genreId = genreDTO.getGenreId();
+
+        // 책 정보 삽입 SQL
         String sql = "INSERT INTO BOOKS (BOOK_ID, AUTHOR_ID, PUBLISHER_ID, GENRE_ID, GENRE_FULLNAME, " +
                 "TITLE, IMG, ISBN, LOCATION, SUMMARY, PUBLICATION_DATE) " +
                 "VALUES (BOOK_IDX.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenre().getGenreId(),
+        // SQL 실행 및 결과 반환
+        return jdbcTemplate.update(sql, authorId, publisherId, genreId,
                 book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
                 book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()));
     }
+
 
     @Override
     public int updateBook(BookDTO book) {
@@ -304,8 +324,22 @@ public class BookRepositoryImpl implements BookRepository {
                 book.getBookId());
     }
 
+//    도서 삭제
     @Override
-    public int deleteBook(int bookId) {
+    public int deleteMultiBook(List<Long> bookIds) {
+        StringBuilder sql = new StringBuilder("DELETE FROM BOOKS WHERE BOOK_ID IN (");
+        for (int i = 0; i < bookIds.size(); i++) {
+            sql.append(bookIds.get(i));
+            if (i < bookIds.size() - 1) {
+                sql.append(",");
+            }
+        }
+        sql.append(")");
+        return jdbcTemplate.update(sql.toString());
+    }
+
+    @Override
+    public int deleteBook(int bookId){
         String sql = "DELETE FROM BOOKS WHERE BOOK_ID = ?";
         return jdbcTemplate.update(sql, bookId);
     }

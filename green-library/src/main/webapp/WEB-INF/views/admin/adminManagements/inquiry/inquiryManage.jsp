@@ -152,7 +152,7 @@
         }
 
         $.ajax({
-            url: '/Inquiry/search',
+            url: '/admin/Inquiry/search',
             type: 'GET',
             data: {
                 "searchType": searchType,
@@ -219,7 +219,7 @@
 
         if (confirm('선택한 사항을 영구 삭제하시겠습니까?')) {
             $.ajax({
-                url: '/Inquiry/deleteInquiry',
+                url: '/admin/Inquiry/deleteInquiry',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(inquiryIds),
@@ -240,7 +240,7 @@
     // 생성 함수
     function createResponse(inquiryId) {
         $.ajax({
-            url: '/Inquiry/createBtnClick/' + inquiryId,
+            url: '/admin/Inquiry/createBtnClick/' + inquiryId,
             type: 'POST',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
@@ -257,7 +257,7 @@
     // 조회 함수
     function viewDetail(inquiryId) {
         $.ajax({
-            url: '/Inquiry/viewBtnClick/' + inquiryId,
+            url: '/admin/Inquiry/viewBtnClick/' + inquiryId,
             type: 'POST',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);

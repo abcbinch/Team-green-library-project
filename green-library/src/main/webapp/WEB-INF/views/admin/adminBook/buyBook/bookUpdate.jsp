@@ -83,7 +83,7 @@
 
     function fetchWishDetails(wishlistId) {
         $.ajax({
-            url: '/BuyBook/updateWishInfo/' + wishlistId,
+            url: '/admin/BuyBook/updateWishInfo/' + wishlistId,
             type: 'GET',
             success: function (response) {
                 if (response) {
@@ -143,7 +143,7 @@
             }
 
             $.ajax({
-                url: '/BuyBook/uploadWishInfo',
+                url: '/admin/BuyBook/uploadWishInfo',
                 type: 'POST',
                 data: formData,
                 processData: false,

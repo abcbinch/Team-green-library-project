@@ -75,7 +75,7 @@
 
     function fetchAnnounceDetails(announceId) {
         $.ajax({
-            url: '/Announcement/getAnnounceById/' + announceId,
+            url: '/admin/Announcement/getAnnounceById/' + announceId,
             type: 'GET',
             success: function (response) {
                 if (response) {
@@ -120,7 +120,7 @@
             }
 
             $.ajax({
-                url: '/Announcement/uploadAnnounce',
+                url: '/admin/Announcement/uploadAnnounce',
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -161,7 +161,7 @@
             }
 
             $.ajax({
-                url: '/Announcement/updateAnnounce',
+                url: '/admin/Announcement/updateAnnounce',
                 type: 'POST',
                 data: formData,
                 processData: false,

@@ -66,9 +66,14 @@ public class BookServiceImpl implements BookService {
     }
 
     // 책 삭제
-    public void deleteBook(int id) {
-        bookRepository.deleteBook(id);
+    public void deleteMultiBook(List<Long> bookIds) {
+        bookRepository.deleteMultiBook(bookIds);
     }
+
+    public void deleteBook(int bookId) {
+        bookRepository.deleteBook(bookId);
+    }
+
 
     // 특정 도서 상세 조회
     public BookDTO getBookById(int id) {

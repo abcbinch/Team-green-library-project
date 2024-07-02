@@ -56,10 +56,10 @@
         </a>
         </div>
         <div id="quick2" class="quickPage">
-       	<a href="/user/bookLoanExtension">
+       	<a href="/user/userInfo">
        	<img class="visible2" src="/images/bookExtensionGreen.png">
        	<img class="hidden2" src="/images/bookExtensionChg.png">
-            대출 연장
+            마이페이지
         </a>
         </div>
         <div id="quick3" class="quickPage">
@@ -178,7 +178,7 @@
 	</script>
 				<c:choose>
 					<c:when test="${annoList > 6}">
-						<c:forEach var="num" begin="${annoList-5}" end="${annoList}">
+						<c:forEach var="num" begin="0" end="5">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
