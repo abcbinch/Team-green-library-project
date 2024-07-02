@@ -91,7 +91,7 @@ CREATE TABLE inquiries
     inquiry_date  DATE,
     inquiry_title VARCHAR2(50),
     contents      VARCHAR2(500),
-    responserTF    CHAR(1) DEFAULT '0' CHECK (responseTF IN ('0', '1')),
+    responseTF    CHAR(1) DEFAULT '0' CHECK (responseTF IN ('0', '1')),
     user_id       VARCHAR2(20),
     CONSTRAINT fk_inquiries_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 );
