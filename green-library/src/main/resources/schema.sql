@@ -64,13 +64,15 @@ CREATE TABLE admin_grants
 CREATE TABLE admins
 (
     admin_id    VARCHAR2(20) PRIMARY KEY,
-    admin_name  VARCHAR2(10), -- Changed from VARCHAR2(5) to VARCHAR2(10) as per your ALTER TABLE statement
-    admin_pass  VARCHAR2(20),
+    admin_name  VARCHAR2(20),
+    admin_pass  VARCHAR2(80),
     admin_email VARCHAR2(40),
     grant_rank  NUMBER(1),
-    CONSTRAINT fk_admins_grant_rank FOREIGN KEY (grant_rank) REFERENCES admin_grants (grant_rank)
+    CONSTRAINT fk_admins_rank FOREIGN KEY (grant_rank) REFERENCES admin_grants (grant_rank)
 );
 
+ALTER TABLE admins MODIFY admin_name VARCHAR2(20);
+COMMIT ;
 -- 공지사항
 CREATE TABLE announcements
 (
@@ -81,7 +83,7 @@ CREATE TABLE announcements
     fileName        VARCHAR2(255),
     contents        VARCHAR2(500),
     view_count      NUMBER(10) DEFAULT 0,
-    CONSTRAINT fk_announcements_writer_id FOREIGN KEY (writer_id) REFERENCES admins (admin_id) ON DELETE CASCADE
+    CONSTRAINT fk_announce_writer_id FOREIGN KEY (writer_id) REFERENCES admins (admin_id) ON DELETE CASCADE
 );
 
 -- 문의사항
@@ -93,7 +95,7 @@ CREATE TABLE inquiries
     contents      VARCHAR2(500),
     responseTF    CHAR(1) DEFAULT '0' CHECK (responseTF IN ('0', '1')),
     user_id       VARCHAR2(20),
-    CONSTRAINT fk_inquiries_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
+    CONSTRAINT fk_inquiry_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 );
 
 -- 문의사항 답변
@@ -104,8 +106,8 @@ CREATE TABLE inquiry_responses
     response_date    DATE,
     response_content VARCHAR2(500),
     admin_id         VARCHAR2(20),
-    CONSTRAINT fk_inquiry_responses_inquiry_id FOREIGN KEY (inquiry_id) REFERENCES inquiries (inquiry_id) ON DELETE CASCADE,
-    CONSTRAINT fk_inquiry_responses_admin_id FOREIGN KEY (admin_id) REFERENCES admins (admin_id) ON DELETE CASCADE
+    CONSTRAINT fk_response_inquiry_id FOREIGN KEY (inquiry_id) REFERENCES inquiries (inquiry_id) ON DELETE CASCADE,
+    CONSTRAINT fk_response_admin_id FOREIGN KEY (admin_id) REFERENCES admins (admin_id) ON DELETE CASCADE
 );
 
 -- 정지
@@ -153,6 +155,7 @@ CREATE TABLE wishlists
     wish_price       NUMBER(10) DEFAULT 10000,
     wish_isbn        VARCHAR2(20),
     wish_date        DATE,
+    wish_content    VARCHAR2(5000),
     complete         CHAR(1)    DEFAULT 'W' CHECK (complete IN ('Y', 'W', 'N')), -- W : wait, Y : accept, N : decline
     user_id          VARCHAR2(20),
     CONSTRAINT fk_wishlists_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
