@@ -11,7 +11,10 @@
 <body>
 
 <div class="navBar">
-	<div class="navTitle">바로 가기</div>
+	<div class="navTitle">바로 가기
+	<a href="/">
+	<img src="/images/navBarHome.png"></a>
+	</div>
 		<ul class="navList">
 			<li>통합 자료 검색</li>
 			<li>인기 도서</li>

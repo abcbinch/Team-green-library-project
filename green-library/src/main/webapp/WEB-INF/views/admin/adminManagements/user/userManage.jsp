@@ -293,8 +293,6 @@
             userIds.push(userId);
         });
 
-        console.log('Collected userIds:', userIds);
-
         if (userIds.length === 0) {
             alert('삭제할 사용자를 선택해주세요.');
             return;
@@ -311,7 +309,6 @@
                     xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
                 },
                 success: function (response) {
-                    console.log('Response:', response);
                     alert('선택한 사용자가 성공적으로 삭제되었습니다.');
                     searchBtnEvt();
                 },

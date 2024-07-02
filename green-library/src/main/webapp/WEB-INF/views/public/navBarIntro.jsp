@@ -11,7 +11,10 @@
 <body>
 
 <div class="navBar">
-	<div class="navTitle">바로 가기</div>
+	<div class="navTitle">바로 가기
+	<a href="/">
+	<img src="/images/navBarHome.png"></a>
+	</div>
 		<ul class="navList">
 			<li>도서관 비전</li>
 			<li>오시는 길</li>

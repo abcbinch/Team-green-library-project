@@ -101,6 +101,10 @@
 
 .viewContainer .boardNav .con {
     padding-left: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 5px;
 }
 
 /* 목록 버튼 */
@@ -119,5 +123,6 @@
 }
 
 .viewContainer .board-btn a {
-    color: #2c3e50;
+    width: 100%;
+    text-align: center;
 }

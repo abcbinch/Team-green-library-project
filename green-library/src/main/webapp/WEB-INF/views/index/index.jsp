@@ -198,7 +198,6 @@
 					</c:when>
 				</c:choose>
 	        
-<!-- 	    </div> -->
 	</div>
     <div id="calendar" class="infoBoard3">
     

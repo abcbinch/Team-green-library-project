@@ -1,8 +1,11 @@
 package com.library.repository.admin;
 
+import com.library.dto.admin._normal.AuthorDTO;
 import com.library.dto.admin._normal.BookDTO;
+import com.library.dto.admin._normal.GenreDTO;
+import com.library.dto.admin._normal.PublisherDTO;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -13,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository("AdminBookRepository")
@@ -24,85 +28,97 @@ public class BookRepositoryImpl implements BookRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // Result set 에서 대여 가능 여부를 설정
     private void setAvailability(ResultSet rs, BookDTO book) throws SQLException {
         String availabilityStr = rs.getString("AVAILABILITY");
-        Character availability = null; // 기본값 설정
+        Character availability = 0;
 
         if (availabilityStr != null && !availabilityStr.isEmpty()) {
-            availability = availabilityStr.charAt(0); // 첫 번째 문자 char 변환
+            availability = availabilityStr.charAt(0);
         }
 
         book.setAvailability(availability);
     }
 
-    //    작가 Id 찾거나 추가하기
-    private long getOrCreateAuthor(String authorName) {
+    private Optional<Long> findAuthorIdByName(String authorName) {
         String getAuthorSql = "SELECT AUTHOR_ID FROM AUTHORS WHERE AUTHOR_NAME = ?";
-        Long authorId = jdbcTemplate.queryForObject(getAuthorSql, Long.class, authorName);
-
-        if (authorId != null) {
-            return authorId;
-        }
-
-        String insertAuthorSql = "INSERT INTO AUTHORS VALUES (AUTHOR_IDX.nextval, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-
-        jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(insertAuthorSql, new String[]{"author_id"});
-            ps.setString(1, authorName);
-            return ps;
-        }, keyHolder);
-
-        Number generatedId = keyHolder.getKey();
-        if (generatedId != null) {
-            return generatedId.longValue();
-        } else {
-            throw new IllegalStateException("Generated author ID is null");
+        try {
+            Long authorId = jdbcTemplate.queryForObject(getAuthorSql, Long.class, authorName);
+            return Optional.ofNullable(authorId);
+        } catch (Exception e) {
+            return Optional.empty();
         }
     }
 
-    // 출판사 Id 찾거나 추가하기
-    private long getOrCreatePublisher(String publisherName) {
+    private Long getOrCreateAuthor(String authorName) {
+        return findAuthorIdByName(authorName).orElseGet(() -> {
+            String insertAuthorSql = "INSERT INTO AUTHORS (AUTHOR_ID, AUTHOR_NAME) VALUES (AUTHOR_IDX.nextval, ?)";
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(insertAuthorSql, new String[]{"AUTHOR_ID"});
+                ps.setString(1, authorName);
+                return ps;
+            }, keyHolder);
+
+            Number generatedId = keyHolder.getKey();
+            if (generatedId != null) {
+                return generatedId.longValue();
+            } else {
+                throw new IllegalStateException("Generated author ID is null");
+            }
+        });
+    }
+
+    private Optional<Long> findPublisherIdByName(String publisherName) {
         String getPublisherSql = "SELECT PUBLISHER_ID FROM PUBLISHERS WHERE PUBLISHER_NAME = ?";
-        Long publisherId = jdbcTemplate.queryForObject(getPublisherSql, Long.class, publisherName);
-
-        if (publisherId != null) {
-            return publisherId;
-        }
-
-        String insertPublisherSql = "INSERT INTO publishers VALUES (PUBLISHER_IDX.NEXTVAL, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-
-        jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(insertPublisherSql, new String[]{"publisher_id"});
-            ps.setString(1, publisherName);
-            return ps;
-        }, keyHolder);
-
-        Number generatedId = keyHolder.getKey();
-        if (generatedId != null) {
-            return generatedId.longValue();
-        } else {
-            throw new IllegalStateException("Generated publisher ID is null");
+        try {
+            Long publisherId = jdbcTemplate.queryForObject(getPublisherSql, Long.class, publisherName);
+            return Optional.ofNullable(publisherId);
+        } catch (Exception e) {
+            return Optional.empty();
         }
     }
 
+    private Long getOrCreatePublisher(String publisherName) {
+        return findPublisherIdByName(publisherName).orElseGet(() -> {
+            String insertPublisherSql = "INSERT INTO PUBLISHERS (PUBLISHER_ID, PUBLISHER_NAME) VALUES (PUBLISHER_IDX.NEXTVAL, ?)";
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(insertPublisherSql, new String[]{"PUBLISHER_ID"});
+                ps.setString(1, publisherName);
+                return ps;
+            }, keyHolder);
 
-    // 모든 책 목록 조회
+            Number generatedId = keyHolder.getKey();
+            if (generatedId != null) {
+                return generatedId.longValue();
+            } else {
+                throw new IllegalStateException("Generated publisher ID is null");
+            }
+        });
+    }
+
+    @Override
     public List<BookDTO> allHavingBookManage() {
-        String sql = "SELECT BOOK_ID, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, GENRE_FULLNAME, AVAILABILITY, " +
-                "(SELECT COUNT(*) FROM BOOKS) AS total_count FROM BOOKS " +
-                "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " + "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " + "ORDER BY BOOK_ID ASC";
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, PUBLISHERS.PUBLISHER_NAME, " +
+                "BOOKS.PUBLICATION_DATE, BOOKS.GENRE_FULLNAME, BOOKS.AVAILABILITY, " +
+                "(SELECT COUNT(*) FROM BOOKS) AS total_count " +
+                "FROM BOOKS " +
+                "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
+                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
+                "ORDER BY BOOKS.BOOK_ID ASC";
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
             setAvailability(rs, book);
             return book;
         });
@@ -110,10 +126,15 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public List<BookDTO> findBookByTotal(String total) {
-        String sql = "SELECT BOOK_ID, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, GENRE_FULLNAME, AVAILABILITY, " +
-                "(SELECT COUNT(*) FROM BOOKS) AS total_count FROM BOOKS " +
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, PUBLISHERS.PUBLISHER_NAME, " +
+                "BOOKS.PUBLICATION_DATE, BOOKS.GENRE_FULLNAME, BOOKS.AVAILABILITY, " +
+                "(SELECT COUNT(*) FROM BOOKS) AS total_count " +
+                "FROM BOOKS " +
                 "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
-                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " + "WHERE BOOKS.TITLE LIKE ? OR AUTHORS.AUTHOR_NAME LIKE ?" + "ORDER BY 1 ASC";
+                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
+                "WHERE BOOKS.TITLE LIKE ? OR AUTHORS.AUTHOR_NAME LIKE ? " +
+                "ORDER BY 1 ASC";
+
         String queryParam = "%" + total + "%";
         return jdbcTemplate.query(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -122,23 +143,32 @@ public class BookRepositoryImpl implements BookRepository {
             return ps;
         }, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
             setAvailability(rs, book);
             return book;
         });
     }
 
-    // 제목으로 책 검색
+    @Override
     public List<BookDTO> findBookByTitle(String title) {
-        String sql = "SELECT BOOK_ID, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, GENRE_FULLNAME, AVAILABILITY, " +
-                "(SELECT COUNT(*) FROM BOOKS) AS total_count FROM BOOKS " +
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, PUBLISHERS.PUBLISHER_NAME, " +
+                "BOOKS.PUBLICATION_DATE, BOOKS.GENRE_FULLNAME, BOOKS.AVAILABILITY, " +
+                "(SELECT COUNT(*) FROM BOOKS) AS total_count " +
+                "FROM BOOKS " +
                 "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
-                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " + "WHERE TITLE LIKE ?" + "ORDER BY 1 ASC";
+                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
+                "WHERE BOOKS.TITLE LIKE ? " +
+                "ORDER BY 1 ASC";
+
         String queryParam = "%" + title + "%";
         return jdbcTemplate.query(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -146,144 +176,191 @@ public class BookRepositoryImpl implements BookRepository {
             return ps;
         }, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
             setAvailability(rs, book);
             return book;
         });
     }
 
-    // 저자로 책 검색
+    @Override
     public List<BookDTO> findBookByAuthor(String authorName) {
-        String sql = "SELECT BOOK_ID, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, GENRE_FULLNAME, AVAILABILITY, " +
-                "(SELECT COUNT(*) FROM BOOKS) AS total_count FROM BOOKS " +
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, PUBLISHERS.PUBLISHER_NAME, " +
+                "BOOKS.PUBLICATION_DATE, BOOKS.GENRE_FULLNAME, BOOKS.AVAILABILITY, " +
+                "(SELECT COUNT(*) FROM BOOKS) AS total_count " +
+                "FROM BOOKS " +
                 "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
-                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " + "WHERE AUTHOR_NAME LIKE ?" + "ORDER BY 1 ASC";
+                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
+                "WHERE AUTHORS.AUTHOR_NAME LIKE ? " +
+                "ORDER BY 1 ASC";
+
         String queryParam = "%" + authorName + "%";
-
         return jdbcTemplate.query(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, queryParam);
             return ps;
         }, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
             setAvailability(rs, book);
             return book;
         });
     }
 
-    // 십진분류로 책 검색
+    @Override
     public List<BookDTO> findBookByGenre(String genreFullName) {
-        String sql = "SELECT BOOK_ID, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, GENRE_FULLNAME, AVAILABILITY, " +
-                "(SELECT COUNT(*) FROM BOOKS) AS total_count FROM BOOKS " +
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, PUBLISHERS.PUBLISHER_NAME, " +
+                "BOOKS.PUBLICATION_DATE, BOOKS.GENRE_FULLNAME, BOOKS.AVAILABILITY, " +
+                "(SELECT COUNT(*) FROM BOOKS) AS total_count " +
+                "FROM BOOKS " +
                 "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
-                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " + "WHERE GENRE_FULLNAME LIKE ?" + "ORDER BY 1 ASC";
-        String queryParam = "%" + genreFullName + "%";
+                "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
+                "WHERE BOOKS.GENRE_FULLNAME LIKE ? " +
+                "ORDER BY 1 ASC";
 
+        String queryParam = "%" + genreFullName + "%";
         return jdbcTemplate.query(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, queryParam);
             return ps;
         }, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
             setAvailability(rs, book);
             return book;
         });
     }
 
-    //    책 반납
     @Override
-    public int updateBookAvailability(int bookId, boolean isAvailable) {
-        String sql = "UPDATE BOOKS SET AVAILABILITY = ? WHERE BOOK_ID = ?";
-        return jdbcTemplate.update(sql, isAvailable ? 1 : 0, bookId);
+    public int updateBookAvailability(int bookId) {
+        String sql = "UPDATE BOOKS SET AVAILABILITY = 0 WHERE BOOK_ID = ?";
+        return jdbcTemplate.update(sql, bookId);
     }
 
     @Override
-    public int updateMultipleBooksAvailability(List<Long> bookIds, boolean isAvailable) {
-        String sql = "UPDATE BOOKS SET AVAILABILITY = ? WHERE BOOK_ID IN (:bookIds)";
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("bookIds", bookIds);
-        return jdbcTemplate.update(sql, params);
+    public int updateMultipleBooksAvailability(List<Long> bookIds) {
+        StringBuilder sql = new StringBuilder("UPDATE BOOKS SET AVAILABILITY = 0 WHERE BOOK_ID IN (");
+        for (int i = 0; i < bookIds.size(); i++) {
+            sql.append(bookIds.get(i));
+            if (i < bookIds.size() - 1) {
+                sql.append(",");
+            }
+        }
+        sql.append(")");
+        return jdbcTemplate.update(sql.toString());
     }
 
-    // 책 등록
+    @Override
     public int createBook(BookDTO book) {
-        long authorId = getOrCreateAuthor(book.getAuthorName());
-        long publisherId = getOrCreatePublisher(book.getPublisherName());
-        String sql = "INSERT INTO BOOKS (BOOK_ID, AUTHOR_ID, PUBLISHER_ID, GENRE_ID, GENRE_FULLNAME, TITLE, IMG, ISBN, LOCATION, SUMMARY, PUBLICATION_DATE) " + "VALUES (BOOK_IDX.NEXTVAL, AUTHOR_ID, PUBLISHER_ID, ?, ?, ?, ?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenreId(), book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(), book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()));
+        Long authorId = getOrCreateAuthor(book.getAuthor().getAuthorName());
+        Long publisherId = getOrCreatePublisher(book.getPublisher().getPublisherName());
+
+        String sql = "INSERT INTO BOOKS (BOOK_ID, AUTHOR_ID, PUBLISHER_ID, GENRE_ID, GENRE_FULLNAME, " +
+                "TITLE, IMG, ISBN, LOCATION, SUMMARY, PUBLICATION_DATE) " +
+                "VALUES (BOOK_IDX.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenre().getGenreId(),
+                book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
+                book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()));
     }
 
-    // 책 수정
+    @Override
     public int updateBook(BookDTO book) {
-        Long authorId = getOrCreateAuthor(book.getAuthorName());
-        Long publisherId = getOrCreatePublisher(book.getPublisherName());
+        Long authorId = getOrCreateAuthor(book.getAuthor().getAuthorName());
+        Long publisherId = getOrCreatePublisher(book.getPublisher().getPublisherName());
 
-        String sql = "UPDATE BOOKS SET AUTHOR_ID = ?, PUBLISHER_ID = ?, GENRE_ID = ?, GENRE_FULLNAME = ?, TITLE = ?, IMG = ?, ISBN = ?, LOCATION = ?, SUMMARY = ?, PUBLICATION_DATE = ? " + "WHERE BOOK_ID = ?";
-        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenreId(), book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(), book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()), book.getBookId());
+        String sql = "UPDATE BOOKS SET AUTHOR_ID = ?, PUBLISHER_ID = ?, GENRE_ID = ?, GENRE_FULLNAME = ?, " +
+                "TITLE = ?, IMG = ?, ISBN = ?, LOCATION = ?, SUMMARY = ?, PUBLICATION_DATE = ? " +
+                "WHERE BOOK_ID = ?";
+        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenre().getGenreId(),
+                book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
+                book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()),
+                book.getBookId());
     }
 
-    // 책 삭제
+    @Override
     public int deleteBook(int bookId) {
         String sql = "DELETE FROM BOOKS WHERE BOOK_ID = ?";
         return jdbcTemplate.update(sql, bookId);
     }
 
-    // 특정 도서 상세 조회
+    @Override
     public BookDTO getBookById(int bookId) {
-        String sql = "SELECT BOOK_ID, GENRE_FULLNAME, TITLE, AUTHOR_NAME, PUBLISHER_NAME, PUBLICATION_DATE, ISBN, LOCATION, IMG, SUMMARY " +
+        String sql = "SELECT BOOKS.BOOK_ID, BOOKS.GENRE_FULLNAME, BOOKS.TITLE, AUTHORS.AUTHOR_NAME, " +
+                "PUBLISHERS.PUBLISHER_NAME, BOOKS.PUBLICATION_DATE, BOOKS.ISBN, BOOKS.LOCATION, " +
+                "BOOKS.IMG, BOOKS.SUMMARY " +
                 "FROM BOOKS " +
                 "JOIN AUTHORS ON BOOKS.AUTHOR_ID = AUTHORS.AUTHOR_ID " +
                 "JOIN PUBLISHERS ON BOOKS.PUBLISHER_ID = PUBLISHERS.PUBLISHER_ID " +
-                "WHERE BOOK_ID = ?";
+                "WHERE BOOKS.BOOK_ID = ?";
 
-        return jdbcTemplate.query(con -> {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, bookId);
-            return ps;
-        }, rs -> {
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
             BookDTO book = new BookDTO();
-            book.setBookId(rs.getInt("book_id"));
-            book.setGenreFullname(rs.getString("genre_fullname"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthorName(rs.getString("author_name"));
-            book.setPublisherName(rs.getString("publisher_name"));
-            book.setPublicationDate(rs.getDate("publication_date"));
-            book.setIsbn(rs.getString("isbn"));
-            book.setLocation(rs.getString("location"));
-            book.setImg(rs.getString("img"));
-            book.setSummary(rs.getString("summary"));
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setGenreFullname(rs.getString("GENRE_FULLNAME"));
+            book.setTitle(rs.getString("TITLE"));
+            AuthorDTO author = new AuthorDTO();
+            author.setAuthorName(rs.getString("AUTHOR_NAME"));
+            book.setAuthor(author);
+            PublisherDTO publisher = new PublisherDTO();
+            publisher.setPublisherName(rs.getString("PUBLISHER_NAME"));
+            book.setPublisher(publisher);
+            book.setPublicationDate(rs.getDate("PUBLICATION_DATE"));
+            book.setIsbn(rs.getString("ISBN"));
+            book.setLocation(rs.getString("LOCATION"));
+            book.setImg(rs.getString("IMG"));
+            book.setSummary(rs.getString("SUMMARY"));
             return book;
-        });
+        }, bookId);
     }
 
-    // 이전 도서 제목 조회
-    public String previousBook(int bookId) {
-        String sql = "SELECT TITLE FROM (SELECT TITLE, ROWNUM AS rnum FROM BOOKS WHERE BOOK_ID < ? ORDER BY BOOK_ID DESC) WHERE rnum = 1";
-        return jdbcTemplate.queryForObject(sql, String.class, bookId);
+    @Override
+    public BookDTO previousBook(int bookId) {
+        String sql = "SELECT BOOK_ID, TITLE FROM (SELECT BOOK_ID, TITLE, " +
+                "ROW_NUMBER() OVER (ORDER BY BOOK_ID DESC) AS rnum FROM BOOKS WHERE BOOK_ID < ?) WHERE rnum = 1";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+            BookDTO book = new BookDTO();
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            return book;
+        }, bookId);
     }
 
-
-    // 다음 도서 제목 조회
-    public String nextBook(int bookId) {
-        String sql = "SELECT TITLE FROM (SELECT TITLE, ROWNUM AS rnum FROM BOOKS WHERE BOOK_ID > ? ORDER BY BOOK_ID) WHERE rnum = 1";
-        return jdbcTemplate.queryForObject(sql, String.class, bookId);
+    @Override
+    public BookDTO nextBook(int bookId) {
+        String sql = "SELECT BOOK_ID, TITLE FROM (SELECT BOOK_ID, TITLE, " +
+                "ROW_NUMBER() OVER (ORDER BY BOOK_ID ASC) AS rnum FROM BOOKS WHERE BOOK_ID > ?) WHERE rnum = 1";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+            BookDTO book = new BookDTO();
+            book.setBookId(rs.getInt("BOOK_ID"));
+            book.setTitle(rs.getString("TITLE"));
+            return book;
+        }, bookId);
     }
-
 }
