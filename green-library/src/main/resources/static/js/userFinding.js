@@ -4,6 +4,9 @@ let userid;
 const email = document.getElementById('email');
 const form = document.getElementById("form");
 
+const birthRegexp = /^(19\d{2}|20[0-2][0-3])[-]?(0[1-9]|1[0-2])[-]?(0[1-9]|[12]\d|3[01])$/;
+const idRegexp = /[a-z0-9]{5,}/;
+
 form.addEventListener('submit', function(e) {
     concatInput();
     if (!check()) {
@@ -77,9 +80,10 @@ function concatInput(){
 	email.value = input[0].value + "@" + input[1].value;
 	
 	let str = birthdate.value;
-        if(str.includes("-")){
-			birthdate.value = str.replace("-","").trim();
-		}
+	if (!str.includes("-")) {
+        let formattedStr = str.slice(0, 4) + "-" + str.slice(4, 6) + "-" + str.slice(6, 8);
+        birthdate.value = formattedStr;
+	}
 }
 function check(){
 	if (!username.value) {
