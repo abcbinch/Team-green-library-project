@@ -144,9 +144,6 @@
         const total = document.getElementById('total');
         const completeKind = $('input[name="completeKinds"]:checked').val();
 
-        console.log(completeKind);
-
-
         $.ajax({
             url: '/BuyBook/search',
             type: 'GET',
@@ -176,7 +173,11 @@
                         responseText += "<td>" + response[i].wishPublication + "</td>";
                         responseText += "<td>" + response[i].wishPrice + "</td>";
                         responseText += "<td><input type='checkbox' disabled " + ((response[i].complete == 'W') ? "" : "checked") + "></td>";
-                        responseText += "<td><input type='button' class='correction' onclick='modifyBook(" + response[i].bookId + ")'>";
+                        if (response[i].complete == 'W') {
+                            responseText += "<td><input type='button' class='correction' onclick='modifyBook(" + response[i].wishlistId + ")'></td>";
+                        } else {
+                            responseText += "<td></td>";
+                        }
                         responseText += "</tr>";
                     }
                     buyListTBody.html(responseText);
@@ -261,6 +262,23 @@
         }
     }
 
+    //     info 수정
+    function modifyBook(wishlistId) {
+        $.ajax({
+            url: '/BuyBook/updateWishInfo/' + wishlistId,
+            type: 'POST',
+            beforeSend: function (xhr) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (response) {
+                window.location.href = '/BuyBook/updateWishInfo?wishlistId=' + encodeURIComponent(wishlistId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('접속에 실패했습니다. 다시 시도해주세요.');
+            }
+        });
+    }
 </script>
 </body>
 

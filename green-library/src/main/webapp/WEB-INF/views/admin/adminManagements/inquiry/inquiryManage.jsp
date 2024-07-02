@@ -212,7 +212,6 @@
             inquiryIds.push(inquiryId);
         });
 
-        console.log(inquiryIds);
         if (inquiryIds.length === 0) {
             alert('삭제할 목록을 선택해주세요.');
             return;

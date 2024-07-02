@@ -84,7 +84,6 @@
         let responseContents = document.getElementById('responseContents').value;
 
         if (!responseContents || responseContents.trim() === '') {
-            console.log(responseContents)
             alert('내용을 입력해 주세요.');
             return; // 내용이 비어 있으면 함수 종료
         }

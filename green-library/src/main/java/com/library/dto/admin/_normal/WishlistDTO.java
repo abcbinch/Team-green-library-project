@@ -23,7 +23,8 @@ public class WishlistDTO {
     private int wishPrice;
     private String wishIsbn;
     private Date wishDate;
-    private Character complete;
+    private char complete;
+    private String contents;
     @NotNull
     private String userId;
     private String genreFullname;

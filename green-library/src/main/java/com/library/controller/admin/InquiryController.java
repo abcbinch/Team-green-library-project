@@ -104,24 +104,24 @@ public class InquiryController {
         return "admin/adminManagements/inquiry/inquiryDetail";
     }
 
-        @GetMapping("/prevInquiry")
-        public ResponseEntity<InquiryDTO> getPreviousInquiry(@RequestParam("inquiryId") int inquiryId) {
-            try {
-                InquiryDTO prevInquiry = inquiryService.previousInquiry(inquiryId);
-                return new ResponseEntity<>(prevInquiry, HttpStatus.OK);
+    @GetMapping("/prevInquiry")
+    public ResponseEntity<InquiryDTO> getPreviousInquiry(@RequestParam("inquiryId") int inquiryId) {
+        try {
+            InquiryDTO prevInquiry = inquiryService.previousInquiry(inquiryId);
+            return new ResponseEntity<>(prevInquiry, HttpStatus.OK);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
-        }
+    }
 
-        @GetMapping("/nextInquiry")
-        public ResponseEntity<InquiryDTO> getNextInquiry(@RequestParam("inquiryId") int inquiryId) {
+    @GetMapping("/nextInquiry")
+    public ResponseEntity<InquiryDTO> getNextInquiry(@RequestParam("inquiryId") int inquiryId) {
         try {
             InquiryDTO nextInquiry = inquiryService.nextInquiry(inquiryId);
             return new ResponseEntity<>(nextInquiry, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
-        }
     }
+}

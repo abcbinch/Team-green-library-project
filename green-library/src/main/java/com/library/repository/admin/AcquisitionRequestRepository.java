@@ -14,4 +14,8 @@ public interface AcquisitionRequestRepository {
     List<WishlistDTO> findAcquisitionByPublish(String publish);
     void acceptsAcquisition(List<String> requestId);
     void deleteAcquisition(List<String> requestId);
+
+    WishlistDTO getWishById(int wishlistId);
+
+    void updateBook(WishlistDTO wishBook);
 }

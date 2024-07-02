@@ -309,7 +309,6 @@
                     xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
                 },
                 success: function (response) {
-                    console.log('Response:', response);
                     alert('선택한 사용자가 성공적으로 삭제되었습니다.');
                     searchBtnEvt();
                 },

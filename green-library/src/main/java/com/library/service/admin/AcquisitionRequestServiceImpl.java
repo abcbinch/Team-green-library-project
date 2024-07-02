@@ -5,6 +5,8 @@ import com.library.repository.admin.AcquisitionRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,5 +56,52 @@ public class AcquisitionRequestServiceImpl implements AcquisitionRequestService 
     public WishlistDTO deleteAcquisition(List<String> requestId) {
         acquisitionRequestRepository.deleteAcquisition(requestId);
         return null;
+    }
+
+    @Override
+    public List<WishlistDTO> filterByCompleteKind(List<WishlistDTO> wishBooks, String completeKind) {
+        List<WishlistDTO> filteredList = new ArrayList<>();
+        for (WishlistDTO book : wishBooks) {
+            switch (completeKind.toLowerCase()) {
+                case "wait":
+                    if (book.getComplete()=='W') {
+                        filteredList.add(book);
+                    }
+                    break;
+                case "accept":
+                    if (book.getComplete()=='Y') {
+                        filteredList.add(book);
+                    }
+                    break;
+                case "refuse":
+                    if (book.getComplete()=='N') {
+                        filteredList.add(book);
+                    }
+                    break;
+            }
+        }
+        return filteredList;
+    }
+
+    @Override
+    public WishlistDTO getWishById(int wishlistId) {
+        return acquisitionRequestRepository.getWishById(wishlistId);
+    }
+
+    @Override
+    public void updateWishBook(int wishlistId, String isbn, String title, String author, String publisher, Date publicationDate, String content) {
+        WishlistDTO wishBook = acquisitionRequestRepository.getWishById(wishlistId);
+        if (wishBook != null) {
+            wishBook.setWishIsbn(isbn);
+            wishBook.setWishTitle(title);
+            wishBook.setWishAuthor(author);
+            wishBook.setWishPublisher(publisher);
+            wishBook.setWishPublication(publicationDate);
+            wishBook.setContents(content);
+            acquisitionRequestRepository.updateBook(wishBook);
+        } else {
+            throw new RuntimeException("위시리스트를 찾을 수 없습니다: " + wishlistId);
+        }
+
     }
 }
