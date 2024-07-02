@@ -172,10 +172,13 @@
 <!-- 게시글이 5개 이상일 때 6개씩 뜨게 하려고 조건문 넣었어요. -->
 
 				<c:set var="annoList" value="${fn:length(announce)}"/>
-
+	<script>
+	let a = "${annoList}";
+	console.log(a);
+	</script>
 				<c:choose>
-					<c:when test="annoList>=9}">
-						<c:forEach var="num" begin="${annoList}" end="${annoList-5}">
+					<c:when test="${annoList > 6}">
+						<c:forEach var="num" begin="${annoList-5}" end="${annoList}">
 						<table>
 							<tr>
 					        	<td>${announce[num].writerId}</td>
@@ -185,8 +188,8 @@
 				        	</table>
 						</c:forEach>
 					</c:when>
-					<c:when test="${annoList<6}">
-						<c:forEach var="num" begin="0" end="8">
+					<c:when test="${annoList <= 6}">
+						<c:forEach var="num" begin="0" end="${annoList-1}">
 						<table>
 							<tr>
 					        	<td>${announce[num].writerId}</td>
