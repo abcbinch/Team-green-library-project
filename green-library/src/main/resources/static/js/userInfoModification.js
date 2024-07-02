@@ -65,4 +65,15 @@ function concatInput() {
 	let fullPhone = document.getElementById("fullPhone");
 
 	fullPhone.value = brief[0].value + brief[1].value + brief[2].value;
+	
+	let str = birthdate.value;
+	if (!str.includes("-")) {
+        let formattedStr = str.slice(0, 4) + "-" + str.slice(4, 6) + "-" + str.slice(6, 8);
+        birthdate.value = formattedStr;
+	}
+}
+function goBack() {
+    if (confirm("회원정보 수정을 취소하시겠습니까?")) {
+        window.history.back();
+    }
 }

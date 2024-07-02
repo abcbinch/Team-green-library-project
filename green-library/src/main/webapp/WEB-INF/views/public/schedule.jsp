@@ -11,8 +11,8 @@
 <link rel="stylesheet" type="text/css" href="/css/schedule.css">
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
-<script src="/fullcalendar-6.1.14/fullcalendar-6.1.14/dist/index.global.js"></script>
-<script src="js/fullcalendar.js"></script>
+<script src="/js/fullcalendar-6.1.14/fullcalendar-6.1.14/dist/index.global.js"></script>
+<script src="/js/fullcalendar.js"></script>
 
 </head>
 
@@ -25,6 +25,8 @@
         <div class="pageTitle">도서관 일정</div> <div class="pageRoute">홈 > 도서관 소식 > 도서관 일정</div>
     </div>
 </div>
+
+<jsp:include page="../public/navBarNews.jsp"/>
 
 
 <main>

@@ -1,17 +1,61 @@
 
+
+.icon_container{
+	display:flex;
+	justify-content: center;
+}
+.icon_box{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 250px;
+	height: 300px;
+	margin: 70px 70px 0 70px;
+	font-size: 15pt;
+	font-weight: bold;
+	text-align: center;
+	background: aliceblue;
+	
+	border: 5px solid #a0cab0;
+	border-radius: 10px;
+}
+.icon_box img{
+	width: 120px;
+	height: 120px;
+	margin-bottom: 50px;
+}
+
+.title_container{
+	display: flex;
+	width: 1260px;
+	align-items: center;
+	margin: 0 auto;
+	margin-top:20px;	
+	
+	font-size:24pt;
+}
+h1{
+	margin-top: 50px;
+	font-size: 20pt;
+	font-weight: bold;
+}
+.hr1{
+	width: 1260px;
+	border: 2px solid #a0cab0;
+}
 .useTable{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 800px;
-    margin-top: 150px;
-    margin-bottom: 300px;
+    margin-top: 100px;
 }
 table{
     width: 1000px;
     height: 500px;
-    margin: 100px;
+/*     margin: 100px; */
     border-collapse: collapse;
 }
 tr, td{
@@ -37,13 +81,17 @@ td:not(.useTableItem){
     font-weight: bold;
     background-color: #d8e9d9;
 }
-ul>li{
+.useTable ul>li{
 	margin: 10px 0 10px 0;
 /*     margin-top:10px; */
 /*     margin-bottom: 10px; */
     list-style-type: square;
     line-height: normal;
 }
-ul>li::marker{
+.useTable ul>li::marker{
     color: tan;
 }
+
+
+
+

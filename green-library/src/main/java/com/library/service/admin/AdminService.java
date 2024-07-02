@@ -8,10 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import com.library.dto.admin._normal.AdminDTO;
+
 public interface AdminService {
-    // 관리자 로그인 확인
-    public AdminDTO loginAdmin(String adminId, String adminPass);
-    // 모든 관리자 목록 조회
-    public List<AdminDTO> allAdminManage();
-    public AdminDTO findAdminById(String adminId);
+
+	// 모든 관리자 목록 조회
+    List<AdminDTO> allAdminManage();
+
+    AdminDTO findAdminById(String adminId);
+
 }

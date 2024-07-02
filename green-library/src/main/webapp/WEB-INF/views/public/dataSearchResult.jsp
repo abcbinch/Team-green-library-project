@@ -30,6 +30,14 @@
     </div>
 </div>
 
+<div class="title_container">
+	<h1>검색 결과</h1>
+</div>
+	<hr class="hr1">
+	
+
+<jsp:include page="../public/navBarSearch.jsp"/>
+
 <main>
 
 <div class="zero_container">
@@ -58,7 +66,7 @@
 <div class="first_container">
 	<div class="text_box">
 		<div class="text_box1">
-			&nbsp;'${inputCategory}:${inputText}'으로 검색한 결과 : ${items.size()}개 
+			&nbsp;[ ${inputCategory} : <b style="margin:auto 10px; color:dodgerblue;">'${inputText}'</b> ] 으로 검색한 결과 : <b style="margin:auto 10px; color:dodgerblue;">${items.size()}개</b> 
 		</div>
 		<div class="text_box2">
 			 <form id="itemsPerPageForm" action="/dataSearchResult" method="GET">
@@ -105,7 +113,10 @@
                     <div class="book_table">
                         <table>
                             <tr>
-                                <th>&nbsp;도서명<img src="/images/searchBtn.png"></th>
+                                <th>&nbsp;도서명
+                                <a href="bookDetail?bookId=${item.bookId}">
+                                <img src="/images/searchBtnGreen.png">
+                                </a></th>
                                 <td>${item.title}</td>
                                 <th>재고현황</th>
                                 <td>${item.availability}</td>

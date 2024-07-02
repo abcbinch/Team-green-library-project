@@ -37,6 +37,13 @@
     </div>
 </div>
 
+<div class="title_container">
+	<h1>공지사항</h1>
+</div>
+	<hr class="hr1">
+	
+	<jsp:include page="../public/navBarNews.jsp"/>
+
 <main>
 
 <div class="first_container">

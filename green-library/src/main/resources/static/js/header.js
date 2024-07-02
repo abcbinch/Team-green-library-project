@@ -6,12 +6,13 @@
     let subMenu = document.querySelector('.subMenu');
     let input = document.getElementsByTagName("input");
 
-	let menuHeight = 300;
+	let menuHeight = 190;
 	
 	function accordian(){
     for(let i=0;i<5;i++){
 
-        subMenuTop[i].onclick = () => {
+        subMenuTop[i].onclick = (e) => {
+			e.preventDefault();
             if(!subMenu.classList.contains("menuopen")){
                 subMenu.style.height =  menuHeight + "px";
 				subMenu.classList.add("menuopen");
@@ -65,29 +66,28 @@ addLoadEvent(accordian);
 
 let pageHead = document.querySelector('header');
 let headerBar = document.querySelector('.headerBottom');
-let whereScroll = document.documentElement.scrollTop;
+
 
 
 function headerHang(){
-	if(whereScroll>=200){
+	
+	let whereScroll = document.documentElement.scrollTop;
+	
+	
+			
+	if(whereScroll>200){
 		headerBar.classList.add("fixUp");
-	}else if(whereScroll<200){
+		subMenu.classList.add("fixUp");
+		subMenu.classList.add("tops");
+	}else{
 		headerBar.classList.remove("fixUp");
+		subMenu.classList.remove("fixUp");
+		subMenu.classList.remove("tops");
 	}
 }
-//function headerHang(){
-//	if(whereScroll>=200){
-//			headerBar.style.position = "fixed";
-//			subMenu.style.position = "fixed"
-//			headerBar.style.top = 0 + "px";
-//			subMenu.style.top = 56 + "px";
-//		}else{
-//			headerBar.style.position = "static";
-//			subMenu.style.position = "static";
-//		}
-//}
-//
-addLoadEvent(headerHang);
+
+window.addEventListener("scroll", headerHang);
+
 	
 	    
 
