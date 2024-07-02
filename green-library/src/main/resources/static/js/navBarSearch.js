@@ -11,7 +11,8 @@ navRouteli[1].onclick = () => window.location.href = "/popularBook";
 navRouteli[2].onclick = () => window.location.href = "/initiativeBook";
 
 if(imHere[3]=="dataSearch"||
-imHere[3].includes("dataSearchResult")
+imHere[3].includes("dataSearchResult")||
+imHere[3].includes("bookDetail")
 ){
 	navRouteli[0].classList.add("curPlace");
 }

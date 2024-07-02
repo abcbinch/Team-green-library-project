@@ -25,7 +25,6 @@
 	<hr class="hr1">
 	
 	
-	<jsp:include page="../public/navBarMypage.jsp"/>
 	
 	<div class="container">
 		<main>
