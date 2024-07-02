@@ -39,12 +39,17 @@ header{
     cursor: pointer;
     background-color: #64b883;
 }
+.headerTop div{
+	font-size: 15pt;
+	font-weight: bold;
+}
 .loginLink, 
 .joinLink{
     position: relative;
     min-width: 70px;
-    top: 40px;
+    top: 60px;
     float: right;
+    font-size: 15pt;
     font-weight: bold;
     cursor: pointer;
 }
@@ -147,7 +152,8 @@ top: 0px;
     cursor: pointer;    transition: 300ms ease-in-out;
 }
 .menuBar>li:hover a{
-	color: brown;
+/* 	color: #1d7647; */
+	color: #176039;
 }
 .subMenuTop, .menuBar{
     font-size: 0pt;

@@ -11,7 +11,10 @@
 <body>
 
 <div class="mypagebox">
-	<div class="navTitle">바로 가기</div>
+	<div class="navTitle">바로 가기
+	<a href="/">
+	<img src="/images/navBarHome.png"></a>
+	</div>
 		<ul class="mypage">
 			<li>내 프로필</li>
 			<li>대출 연장</li>
