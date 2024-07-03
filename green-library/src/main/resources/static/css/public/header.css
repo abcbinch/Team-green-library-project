@@ -6,8 +6,12 @@ header{
 	display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+/*     min-width: 100%; */
+	min-width: 1260px;
     z-index: 50;
+}
+.welcomeUser{
+	min-width: 220px;
 }
 .logout{
 	width: 30px;
