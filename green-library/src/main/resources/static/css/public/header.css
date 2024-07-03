@@ -54,11 +54,9 @@ header{
     cursor: pointer;
 }
 .headerBottom{
-/* 	position: fixed; */
-top: 0px;
+	top: 0px;
     display: flex;
     justify-content: center;
-/*     background-color:#155734; */
 	background-color: #1d7647;
     width:100%;
     min-height: 57px;
