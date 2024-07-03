@@ -181,7 +181,7 @@
 						<c:forEach var="num" begin="0" end="5">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
-					        	<td>${announce[num].writerId}</td>
+					        	<td><div class="adminColor">${announce[num].writerId}</div></td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
 				        	</tr>

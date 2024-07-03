@@ -1,10 +1,6 @@
-const usetime = document.getElementById('quick1');
-const booklong = document.getElementById('quick2');
-const hopebook = document.getElementById('quick3');
-const help = document.getElementById('quick4');
-const schedule = document.getElementById('quick5');
-const notiQuick = document.querySelector('.gotoNotify');
 
+
+//슬라이드 함수
 const newbooks = document.querySelector('.newbook');
 const popbooks = document.querySelector('.popbook');
 
@@ -15,8 +11,8 @@ const backBtn = document.querySelector('.backBtn');
 const goBtn = document.querySelector('.goBtn');
 const backBtn2 = document.querySelector('.backBtn2');
 const goBtn2 = document.querySelector('.goBtn2');
-//버튼들도 클래스가 옮겨가게 해보자. 
 
+//탭 함수
 const tab = document.querySelectorAll('.bookTab li');
 const swipe = document.querySelector('.bookSwipe');
 const swipe2 = document.querySelector('.bookSwipe2');
@@ -30,54 +26,98 @@ const bookQuick = document.querySelector('.tabCon2 img');
 
 
 //슬라이드 함수
-function slide(){
+
+let curIdx = 0;
+
+goBtn.onclick = () => {
+	//왜 조건이 같은데 앞 버튼은 그냥 쭉 가고, 뒤 버튼은 끊었다 갈까.
 	
-	let curIdx = 0;
-	let newWid = 1260;
-
-
-		if(curIdx===0){
-			goBtn.onclick = () => {
-				newbooks.style.left = -newWid + 'px';
-				newbooks.style.transition = '200ms ease-in-out';
-               
-                curIdx+=1;
-                
-			}
-			backBtn.onclick = () => {
-				newbooks.style.left = 0 + 'px';
-			}
-		}
+	if(curIdx==0){
+		console.log(curIdx);
+		curIdx++;
+		newbooks.style.left = -1260 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		
+		//여기까지 하고 멈추게 해야 함. 어떻게?
+		console.log(curIdx);
 	}
-function slide2(){
+	if(curIdx==1){
+		console.log(curIdx);
+		curIdx++;
+		newbooks.style.left = -2520 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		
+		console.log(curIdx);
+	}
+}
+backBtn.onclick = () => {
 	
-	let curIdx = 0;
-	let newWid = 1260;
-
-
-		if(curIdx===0){
-			goBtn2.onclick = () => {
-				popbooks.style.left = -newWid + 'px';
-				popbooks.style.transition = '200ms ease-in-out';
-               
-                curIdx+=1;
-                
-			}
-			backBtn2.onclick = () => {
-				popbooks.style.left = 0 + 'px';
-			}
-		}
+	
+	if(curIdx==1){
+		console.log(curIdx);
+		newbooks.style.left = 0 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+		console.log(curIdx);
 	}
+	if(curIdx==2){
+		console.log(curIdx);
+		newbooks.style.left = -1260 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+		console.log(curIdx);
+	}
+}
 
 
-addLoadEvent(slide);
-addLoadEvent(slide2);
+//맨 처음 슬라이드 함수
+//function slide(){
+//	
+//	let curIdx = 0;
+//	let newWid = 1260;
+//
+//
+//		if(curIdx===0){
+//			goBtn.onclick = () => {
+//				newbooks.style.left = -newWid + 'px';
+//				newbooks.style.transition = '200ms ease-in-out';
+//               
+//                curIdx+=1;
+//                
+//			}
+//			backBtn.onclick = () => {
+//				newbooks.style.left = 0 + 'px';
+//			}
+//		}
+//	}
+//function slide2(){
+//	
+//	let curIdx = 0;
+//	let newWid = 1260;
+//
+//
+//		if(curIdx===0){
+//			goBtn2.onclick = () => {
+//				popbooks.style.left = -newWid + 'px';
+//				popbooks.style.transition = '200ms ease-in-out';
+//               
+//                curIdx+=1;
+//                
+//			}
+//			backBtn2.onclick = () => {
+//				popbooks.style.left = 0 + 'px';
+//			}
+//		}
+//	}
+//
+//
+//addLoadEvent(slide);
+//addLoadEvent(slide2);
+
+
 
 
 // 여기서부터는 탭 함수
-
-
-
 function booktab(){
 
 	if(tab[0].classList.contains("here")){
