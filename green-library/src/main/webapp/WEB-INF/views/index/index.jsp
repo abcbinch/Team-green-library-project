@@ -177,8 +177,8 @@
 	console.log(a);
 	</script>
 				<c:choose>
-					<c:when test="${annoList > 6}">
-						<c:forEach var="num" begin="0" end="5">
+					<c:when test="${annoList > 7}">
+						<c:forEach var="num" begin="0" end="6">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td><div class="adminColor">${announce[num].writerId}</div></td>
@@ -188,7 +188,7 @@
 				        </table>
 						</c:forEach>
 					</c:when>
-					<c:when test="${annoList <= 6}">
+					<c:when test="${annoList <= 7}">
 						<c:forEach var="num" begin="0" end="${annoList-1}">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
