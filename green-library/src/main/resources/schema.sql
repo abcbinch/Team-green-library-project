@@ -2,14 +2,13 @@
 CREATE TABLE authors
 (
     author_id   NUMBER(10) PRIMARY KEY,
-    author_name VARCHAR2(20)
+    author_name VARCHAR2(100)
 );
-
 -- 출판사
 CREATE TABLE publishers
 (
     publisher_id   NUMBER(10) PRIMARY KEY,
-    publisher_name VARCHAR2(20)
+    publisher_name VARCHAR2(100)
 );
 
 -- 장르
@@ -45,11 +44,11 @@ CREATE TABLE books
     isbn             VARCHAR2(20),
     location         VARCHAR2(50),
     availability     CHAR(1)    DEFAULT '1' CHECK (availability IN ('0', '1')), --0 : 대여가능, 1 : 대여불가능
-    summary          VARCHAR2(500),
+    summary          VARCHAR2(4000),
     publication_date DATE,
     borrow_count     NUMBER(10) DEFAULT 0,
-    CONSTRAINT fk_books_author_id FOREIGN KEY (author_id) REFERENCES authors (author_id) ON DELETE CASCADE,
-    CONSTRAINT fk_books_publisher_id FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id) ON DELETE CASCADE,
+    CONSTRAINT fk_books_author_id FOREIGN KEY (author_id) REFERENCES authors (author_id),
+    CONSTRAINT fk_books_publisher_id FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id),
     CONSTRAINT fk_books_genre_id FOREIGN KEY (genre_id) REFERENCES genres (genre_id)
 );
 
@@ -57,7 +56,7 @@ CREATE TABLE books
 CREATE TABLE admin_grants
 (
     grant_rank NUMBER(1) PRIMARY KEY,
-    grant_name VARCHAR2(10)
+    grant_name VARCHAR2(20)
 );
 
 -- 관리자
@@ -71,8 +70,6 @@ CREATE TABLE admins
     CONSTRAINT fk_admins_rank FOREIGN KEY (grant_rank) REFERENCES admin_grants (grant_rank)
 );
 
-ALTER TABLE admins MODIFY admin_name VARCHAR2(20);
-COMMIT ;
 -- 공지사항
 CREATE TABLE announcements
 (
@@ -81,7 +78,7 @@ CREATE TABLE announcements
     writer_id       VARCHAR2(20),
     write_date      DATE,
     fileName        VARCHAR2(255),
-    contents        VARCHAR2(500),
+    contents        VARCHAR2(4000),
     view_count      NUMBER(10) DEFAULT 0,
     CONSTRAINT fk_announce_writer_id FOREIGN KEY (writer_id) REFERENCES admins (admin_id) ON DELETE CASCADE
 );
@@ -92,7 +89,7 @@ CREATE TABLE inquiries
     inquiry_id    NUMBER(10) PRIMARY KEY,
     inquiry_date  DATE,
     inquiry_title VARCHAR2(50),
-    contents      VARCHAR2(500),
+    contents      VARCHAR2(4000),
     responseTF    CHAR(1) DEFAULT '0' CHECK (responseTF IN ('0', '1')),
     user_id       VARCHAR2(20),
     CONSTRAINT fk_inquiry_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
@@ -104,7 +101,7 @@ CREATE TABLE inquiry_responses
     response_id      NUMBER(10) PRIMARY KEY,
     inquiry_id       NUMBER(10),
     response_date    DATE,
-    response_content VARCHAR2(500),
+    response_content VARCHAR2(4000),
     admin_id         VARCHAR2(20),
     CONSTRAINT fk_response_inquiry_id FOREIGN KEY (inquiry_id) REFERENCES inquiries (inquiry_id) ON DELETE CASCADE,
     CONSTRAINT fk_response_admin_id FOREIGN KEY (admin_id) REFERENCES admins (admin_id) ON DELETE CASCADE
@@ -126,7 +123,7 @@ CREATE TABLE rents
 (
     rent_num     NUMBER(10) PRIMARY KEY,
     rent_history DATE,
-    return_date  DATE, --sysdate + 14
+    return_date  DATE, -- SYSDATE + 14
     book_id      NUMBER(10),
     user_id      VARCHAR2(20),
     returned     CHAR(1) DEFAULT '0' CHECK (returned IN ('0', '1')),
@@ -155,7 +152,7 @@ CREATE TABLE wishlists
     wish_price       NUMBER(10) DEFAULT 10000,
     wish_isbn        VARCHAR2(20),
     wish_date        DATE,
-    wish_content    VARCHAR2(5000),
+    wish_content     VARCHAR2(4000),
     complete         CHAR(1)    DEFAULT 'W' CHECK (complete IN ('Y', 'W', 'N')), -- W : wait, Y : accept, N : decline
     user_id          VARCHAR2(20),
     CONSTRAINT fk_wishlists_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
@@ -180,6 +177,17 @@ CREATE TABLE interested_books
     book_id     NUMBER(10),
     CONSTRAINT fk_interested_books_user_id FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
     CONSTRAINT fk_interested_books_book_id FOREIGN KEY (book_id) REFERENCES books (book_id) ON DELETE CASCADE
+);
+
+-- 대기 목록
+CREATE TABLE waitlists
+(
+    waitlist_id   INTEGER PRIMARY KEY,
+    book_id       INTEGER,
+    user_id       VARCHAR2(20),
+    waitlist_date DATE,
+    CONSTRAINT fk_waitlists_book_id FOREIGN KEY (book_id) REFERENCES books (book_id),
+    CONSTRAINT fk_waitlists_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 -- 이메일 인증 테이블

@@ -40,4 +40,6 @@ public interface AnnouncementRepository {
     // 다음 공지 제목 조회
 
     String nextAnnounce(int announceId);
+
+    int count();
 }

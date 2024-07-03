@@ -1,11 +1,9 @@
 package com.library.repository.admin;
 
 import com.library.dto.admin._normal.WishlistDTO;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 public interface AcquisitionRequestRepository {
     List<WishlistDTO> allAcquisitionManage();
     List<WishlistDTO> findAcquisitionByTotal(String total);

@@ -86,6 +86,7 @@
             url: '/admin/BuyBook/updateWishInfo/' + wishlistId,
             type: 'GET',
             success: function (response) {
+                console.log(response)
                 if (response) {
                     $('#wishId').text(response.wishlistId);
                     $('#isbn').val(response.wishIsbn);
@@ -93,7 +94,7 @@
                     $('#author').val(response.wishAuthor);
                     $('#publisher').val(response.wishPublisher);
                     $('#publicationDate').val(response.wishPublication);
-                    $('#content').val(response.content);
+                    $('#content').val(response.contents);
 
                     // 이미지 URL이 있으면 섬네일 표시
                     if (response.imageUrl) {
@@ -109,7 +110,7 @@
     }
 
     function goToList() {
-        window.location.href = '/BuyBook';
+        window.location.href = '/admin/BuyBook';
     }
 
     function updateWishBook() {
@@ -154,7 +155,7 @@
                 },
                 success: function (data) {
                     alert('수정이 완료되었습니다.');
-                    window.location.href = '/BuyBook';
+                    window.location.href = '/admin/BuyBook';
                 },
                 error: function (xhr, status, error) {
                     console.error("오류 발생: " + error);

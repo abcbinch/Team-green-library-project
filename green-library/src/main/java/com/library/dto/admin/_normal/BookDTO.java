@@ -22,7 +22,9 @@ public class BookDTO {
     private int borrowCount;
 
     private AuthorDTO author;
+    private String authorName;
     private PublisherDTO publisher;
+    private String publisherName;
     private GenreDTO genre;
     private String genreFullname;
 

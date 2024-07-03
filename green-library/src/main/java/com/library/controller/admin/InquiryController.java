@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -66,9 +68,17 @@ public class InquiryController {
     @GetMapping("/WriteInquiry")
     public String writeInquiry(@RequestParam("inquiryId") int inquiryId, Model model) {
         InquiryDTO inquiry = inquiryService.getInquiryById(inquiryId);
+        int count = inquiryService.count();
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String changedDate = formatter.format(now);
+
+        model.addAttribute("now", changedDate);
         model.addAttribute("inquiry", inquiry);
+        model.addAttribute("nextId", count + 1);
         return "admin/adminManagements/inquiry/inquiryWrite";
     }
+
 
 
     // 질의 답변 등록 처리

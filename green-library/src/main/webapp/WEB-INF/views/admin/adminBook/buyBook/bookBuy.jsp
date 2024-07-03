@@ -272,7 +272,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/BuyBook/updateWishInfo?wishlistId=' + encodeURIComponent(wishlistId);
+                window.location.href = '/admin/BuyBook/updateWishInfo?wishlistId=' + encodeURIComponent(wishlistId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('접속에 실패했습니다. 다시 시도해주세요.');

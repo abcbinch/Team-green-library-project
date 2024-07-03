@@ -38,4 +38,6 @@ import java.util.List;
 
     // 다음 도서 제목 조회
      String nextAnnounce(int id);
+
+     int count();
  }

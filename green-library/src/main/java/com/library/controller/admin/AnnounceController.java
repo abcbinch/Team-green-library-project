@@ -3,14 +3,18 @@ package com.library.controller.admin;
 import com.library.dto.admin._normal.AnnouncementDTO;
 import com.library.service.admin.AnnounceService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -55,6 +59,13 @@ public class AnnounceController {
     //    작성
     @GetMapping("/writingAnnounce")
     public String writingAnnouncement(Model model) {
+        int count = announceService.count();
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String changedDate = formatter.format(now);
+
+        model.addAttribute("nextId", count + 1);
+        model.addAttribute("now", changedDate);
         return "admin/adminManagements/announcement/announceWrite";
     }
 
@@ -64,12 +75,13 @@ public class AnnounceController {
                                  @RequestParam("announceContent") String announceContent,
                                  @RequestParam(value = "file", required = false) MultipartFile file,
                                  HttpServletRequest request) {
-        String adminId = request.getParameter("adminId");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String adminId = auth.getName();
         if (file == null || file.isEmpty())
             announceService.createAnnounceWithoutFile(announceTitle, adminId, announceContent);
         else
             announceService.createAnnounce(announceTitle, adminId, announceContent, file);
-        return "redirect:/Announcement";
+        return "redirect:/admin/Announcement";
     }
 
     //    수정
@@ -110,7 +122,7 @@ public class AnnounceController {
         } else {
             announceService.updateAnnounce(announceTitle, adminId, announceContent, file);
         }
-        return "redirect:/Announcement";
+        return "redirect:/admin/Announcement";
     }
 
 

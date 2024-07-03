@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="board-btn">
-            <a href="/Inquiry" class="listBtn">목록</a>
+            <a href="/admin/Inquiry" class="listBtn">목록</a>
         </div>
     </section>
 </main>
@@ -92,7 +92,7 @@
             success: function (data) {
                 if (data && data.inquiryTitle && data.inquiryId) {
                     $("#prevCon").text(data.inquiryTitle);
-                    $("#prevCon").attr("href", "/Inquiry/DetailInquiry?inquiryId=" + data.inquiryId);
+                    $("#prevCon").attr("href", "/admin/Inquiry/DetailInquiry?inquiryId=" + data.inquiryId);
                 } else {
                     $("#prevCon").text("이전글이 없습니다.");
                 }
@@ -115,7 +115,7 @@
             success: function (data) {
                 if (data && data.inquiryTitle && data.inquiryId) {
                     $("#nextCon").text(data.inquiryTitle);
-                    $("#nextCon").attr("href", "/Inquiry/DetailInquiry?inquiryId=" + data.inquiryId);
+                    $("#nextCon").attr("href", "/admin/Inquiry/DetailInquiry?inquiryId=" + data.inquiryId);
                 } else {
                     $("#nextCon").text("다음글이 없습니다.");
                 }
@@ -136,7 +136,7 @@
             },
             success: function (response) {
                 // Ajax 요청 성공 시 생성 페이지로 이동
-                window.location.href = '/Inquiry/WriteInquiry?inquiryId=' + encodeURIComponent(inquiryId);
+                window.location.href = '/admin/Inquiry/WriteInquiry?inquiryId=' + encodeURIComponent(inquiryId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('접속에 실패했습니다. 다시 시도해주세요.');

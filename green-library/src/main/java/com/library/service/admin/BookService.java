@@ -44,4 +44,6 @@ public interface BookService {
     // 다음 도서 제목 조회
 
     BookDTO nextBook(int id);
+
+    int count();
 }

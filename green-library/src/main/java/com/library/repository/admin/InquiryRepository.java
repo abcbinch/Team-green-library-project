@@ -38,4 +38,6 @@ public interface InquiryRepository {
     InquiryDTO getPreviousInquiry(int inquiryId);
 
     InquiryDTO getNextInquiry(int inquiryId);
+
+    int count();
 }

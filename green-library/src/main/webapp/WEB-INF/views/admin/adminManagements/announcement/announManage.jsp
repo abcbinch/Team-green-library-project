@@ -218,7 +218,7 @@
 
     // 생성
     function createAnnounce() {
-        window.location.href = '/Announcement/writingAnnounce';
+        window.location.href = '/admin/Announcement/writingAnnounce';
     }
 
 //     수정
@@ -231,7 +231,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/Announcement/updateAnnounce?announceId=' + encodeURIComponent(announceId);
+                window.location.href = '/admin/Announcement/updateAnnounce?announceId=' + encodeURIComponent(announceId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('접속에 실패했습니다. 다시 시도해주세요.');

@@ -2,6 +2,7 @@ package com.library.controller.admin;
 
 import com.library.dto.admin._normal.WishlistDTO;
 import com.library.service.admin.AcquisitionRequestService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
@@ -10,15 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.UUID;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/BuyBook")
@@ -100,6 +99,7 @@ public class AcquisitionRequestController {
     public String updateBtnClick(@PathVariable int id) {
         return "success";
     }
+
     //페이지 이동 manage -> modify
     @GetMapping("/updateWishInfo")
     public String writeAnnounce(@RequestParam("wishlistId") int wishlistId, Model model) {
@@ -147,10 +147,9 @@ public class AcquisitionRequestController {
                 file.transferTo(dest);
             }
 
-            // 서비스 계층에서 희망 도서 정보 업데이트
             acquisitionRequestService.updateWishBook(wishlistId, isbn, title, author, publisher, publicationDateAsDate, content);
 
-            return "redirect:/BuyBook"; // 수정 완료 후 목록 페이지로 리다이렉트
+            return "redirect:/admin/BuyBook"; // 수정 완료 후 목록 페이지로 리다이렉트
 
         } catch (Exception e) {
             e.printStackTrace();

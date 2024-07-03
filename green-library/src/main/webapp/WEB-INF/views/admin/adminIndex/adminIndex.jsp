@@ -70,7 +70,7 @@
                             <p>문의사항</p>
                         </div>
                     </div>
-                    <div class="box announce" onclick="navigateTo('announcement')">
+                    <div class="box announce" onclick="navigateTo('Announcement')">
                         <div><img src="/admin/assets/imgs/announcement.png" alt="">
                             <p>공지사항</p>
                         </div>

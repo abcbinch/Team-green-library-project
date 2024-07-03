@@ -4,6 +4,7 @@ import com.library.dto.admin._normal.InquiryDTO;
 import com.library.repository.admin.InquiryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -77,12 +78,14 @@ public class InquiryServiceImpl implements InquiryService {
 
     // 답변 생성
     @Override
+    @Transactional
     public void createInquiry(int inquiryId, String responseContent, String adminId) {
         inquiryRepository.createInquiry(inquiryId, responseContent, adminId);
     }
 
     // 답변 삭제
     @Override
+    @Transactional
     public void deleteInquiry(List<String> id){
         inquiryRepository.deleteInquiry(id);
     }
@@ -103,5 +106,10 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public InquiryDTO nextInquiry(int id){
         return inquiryRepository.getNextInquiry(id);
+    }
+
+    @Override
+    public int count() {
+        return inquiryRepository.count();
     }
 }

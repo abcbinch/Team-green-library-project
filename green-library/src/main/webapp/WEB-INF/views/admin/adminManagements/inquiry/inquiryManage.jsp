@@ -246,7 +246,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/Inquiry/WriteInquiry?inquiryId=' + encodeURIComponent(inquiryId);
+                window.location.href = '/admin/Inquiry/WriteInquiry?inquiryId=' + encodeURIComponent(inquiryId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('접속에 실패했습니다. 다시 시도해주세요.');
@@ -264,7 +264,7 @@
             },
             success: function (response) {
                 // Ajax 요청 성공 시 조회 페이지로 이동
-                window.location.href = '/Inquiry/DetailInquiry?inquiryId=' + encodeURIComponent(inquiryId);
+                window.location.href = '/admin/Inquiry/DetailInquiry?inquiryId=' + encodeURIComponent(inquiryId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('접속에 실패했습니다. 다시 시도해주세요.');

@@ -1,16 +1,17 @@
 package com.library.service.admin;
 
-import com.library.dto.admin._normal.RentDTO;
 import com.library.dto.admin._normal.SuspensionDTO;
 import com.library.dto.admin._normal.UserDTO;
 import com.library.dto.admin.userManagement.UserDetailDTO;
 import com.library.repository.admin.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("AdminUserService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Qualifier("AdminUserRepository")

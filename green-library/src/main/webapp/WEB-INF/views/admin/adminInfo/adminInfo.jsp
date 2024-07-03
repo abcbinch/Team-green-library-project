@@ -29,7 +29,7 @@
                 <h3>내 계정</h3>
                 <p>이름 : ${my.adminName}</p>
                 <p>ID : ${my.adminId}</p>
-                <p>PASS : ${my.adminPass}</p>
+                <p>EMAIL : ${my.adminEmail}</p>
                 <p>권한 등급 : ${my.grantRank}</p>
             </div>
             <div class="info connectInfo">

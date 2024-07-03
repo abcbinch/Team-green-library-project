@@ -52,7 +52,7 @@
                 </select>
                 <div class="btnWrap">
                     <input class="deleteBtn" type="button" value="일괄 반납" id="returnBooks" onclick="returnBooks()">
-                    <input class="writeBtn" type="button" value="등록" id="createBook" onclick="location.href='/Book/WriteBook'">
+                    <input class="writeBtn" type="button" value="등록" id="createBook" onclick="location.href='/admin/Book/WriteBook'">
                     <input class="deleteBtn" type="button" value="삭제" id="deleteBook" onclick="deleteBooks()">
                 </div>
             </div>
@@ -190,7 +190,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/Book/DetailBook?bookId=' + encodeURIComponent(bookId);
+                window.location.href = '/admin/Book/DetailBook?bookId=' + encodeURIComponent(bookId);
             },
             error: function (xhr, status, error) {
                 alert("접속에 실패했습니다. 다시 시도해주세요.");
@@ -209,7 +209,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/Book/updateBook?bookId=' + encodeURIComponent(bookId);
+                window.location.href = '/admin/Book/updateBook?bookId=' + encodeURIComponent(bookId);
                 searchBtnEvt();
             },
             error: function (xhr, status, error) {

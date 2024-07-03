@@ -1,17 +1,14 @@
 package com.library.repository.admin;
 
-import com.library.dto.admin._normal.AnnouncementDTO;
 import com.library.dto.admin._normal.WishlistDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Transactional
 @Repository
 public class AcquisitionRequestRepositoryImpl implements AcquisitionRequestRepository {
 
@@ -174,6 +171,7 @@ public class AcquisitionRequestRepositoryImpl implements AcquisitionRequestRepos
             request.setWishPrice(rs.getInt("WISH_PRICE"));
             request.setWishIsbn(rs.getString("WISH_ISBN"));
             request.setWishPrice(rs.getInt("WISH_PRICE"));
+            request.setContents(rs.getString("wish_content"));
             return request;
         }, wishlistId);
     }
@@ -182,6 +180,8 @@ public class AcquisitionRequestRepositoryImpl implements AcquisitionRequestRepos
     public void updateBook(WishlistDTO wishBook) {
         String sql = "UPDATE WISHLISTS SET wish_isbn = ?, wish_title = ?, wish_author = ?, wish_publisher = ?, "+
                 "wish_publication = ?, wish_content = ? WHERE WISHLIST_ID = ?";
-        jdbcTemplate.update(sql);
+        jdbcTemplate.update(sql, wishBook.getWishIsbn(), wishBook.getWishTitle(), wishBook.getWishAuthor(), wishBook.getWishPublisher(),
+                wishBook.getWishPublication(), wishBook.getContents(), wishBook.getWishlistId());
+
     }
 }

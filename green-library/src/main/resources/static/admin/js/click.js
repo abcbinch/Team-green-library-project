@@ -1,3 +1,3 @@
 function navigateTo(url) {
-    window.location.href = 'admin/'+ url;
+    window.location.href = url;
 }
