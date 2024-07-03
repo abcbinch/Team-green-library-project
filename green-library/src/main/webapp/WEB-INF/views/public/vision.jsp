@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>사업 구조</title>
+<title>도서관 비전</title>
 
 <link rel="stylesheet" type="text/css" href="/css/public/nav.css">
 <link rel="stylesheet" type="text/css" href="/css/vision.css">

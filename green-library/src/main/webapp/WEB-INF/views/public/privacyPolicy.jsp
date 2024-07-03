@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>개인정보 처리 방침</title>
 <!--         <link href="/reset/reset.css" rel="stylesheet" type="text/css"> -->
         <link href="/CSS/privacyPolicy.css" rel="stylesheet" type="text/css">
         <link href="/CSS/public/nav.css" rel="stylesheet" type="text/css">
@@ -18,8 +18,8 @@
     <nav>
     <div class="bannerBgr">
         <div class="Banner">
-            <div class="pageTitle">개인정보처리방침</div> 
-            <div class="pageRoute">홈 > 개인정보처리방침</div>
+            <div class="pageTitle">개인정보 처리 방침</div> 
+            <div class="pageRoute">홈 > 개인정보 처리 방침</div>
         </div>
     </div>
     </nav>

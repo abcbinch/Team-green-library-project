@@ -57,7 +57,7 @@
 <div class="second_container">
 	<div class="button_container">
 		<input type="button" value="취소하기" onclick="lets_cancel()">
-		<input type="submit" value="등록하기">
+		<input type="submit" value="수정하기">
 	</div>
 </div>
 	
