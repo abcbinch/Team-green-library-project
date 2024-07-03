@@ -29,6 +29,7 @@ const bookQuick = document.querySelector('.tabCon2 img');
 
 let curIdx = 0;
 
+
 goBtn.onclick = () => {
 	if(curIdx==0){
 		curIdx++;
@@ -39,7 +40,35 @@ goBtn.onclick = () => {
 		newbooks.style.left = -2520 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
 	}
+//	else if(curIdx==2){
+//		setTimeout(() => {
+//			newbooks.style.left = 0 + "px";
+//			newbooks.style.transition = "none";
+//			curIdx-=2;
+//		}, 500);
+//		
+//		setTimeout(() => {
+//			newbooks.style.transition = "left 300ms ease-in-out";
+//		}, 500);
+//		
+//	}
 }
+backBtn.onclick = () => {
+//	if(curIdx==0){
+//		newbooks.style.left = -2520 + "px";
+//		curIdx+=2;
+//	}else
+	 if(curIdx==1){
+		newbooks.style.left = 0 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+	}else if(curIdx==2){
+		newbooks.style.left = -1260 + "px";
+		newbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+	}
+}//신착도서
+
 goBtn2.onclick = () => {
 	if(curIdx==0){
 		curIdx++;
@@ -51,17 +80,7 @@ goBtn2.onclick = () => {
 		popbooks.style.transition = "left 300ms ease-in-out";
 	}
 }
-backBtn.onclick = () => {
-	if(curIdx==1){
-		newbooks.style.left = 0 + "px";
-		newbooks.style.transition = "left 300ms ease-in-out";
-		curIdx--;
-	}else if(curIdx==2){
-		newbooks.style.left = -1260 + "px";
-		newbooks.style.transition = "left 300ms ease-in-out";
-		curIdx--;
-	}
-}
+
 backBtn2.onclick = () => {
 	if(curIdx==1){
 		popbooks.style.left = 0 + "px";
@@ -72,52 +91,10 @@ backBtn2.onclick = () => {
 		popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
 	}
-}
+}//인기 도서
 
 
-//맨 처음 슬라이드 함수
-//function slide(){
-//	
-//	let curIdx = 0;
-//	let newWid = 1260;
-//
-//
-//		if(curIdx===0){
-//			goBtn.onclick = () => {
-//				newbooks.style.left = -newWid + 'px';
-//				newbooks.style.transition = '200ms ease-in-out';
-//               
-//                curIdx+=1;
-//                
-//			}
-//			backBtn.onclick = () => {
-//				newbooks.style.left = 0 + 'px';
-//			}
-//		}
-//	}
-//function slide2(){
-//	
-//	let curIdx = 0;
-//	let newWid = 1260;
-//
-//
-//		if(curIdx===0){
-//			goBtn2.onclick = () => {
-//				popbooks.style.left = -newWid + 'px';
-//				popbooks.style.transition = '200ms ease-in-out';
-//               
-//                curIdx+=1;
-//                
-//			}
-//			backBtn2.onclick = () => {
-//				popbooks.style.left = 0 + 'px';
-//			}
-//		}
-//	}
-//
-//
-//addLoadEvent(slide);
-//addLoadEvent(slide2);
+
 
 
 
