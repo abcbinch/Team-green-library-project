@@ -216,8 +216,8 @@ select:focus{
 	overflow: hidden;
 	background-color: white;
 }
-.backBtn, .goBtn
-/* .backBtn2, .goBtn2 */
+.backBtn, .goBtn,
+.backBtn2, .goBtn2
 {
 	width: 64px;
 	height: 64px;

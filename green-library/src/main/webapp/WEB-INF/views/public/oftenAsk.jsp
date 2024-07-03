@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>자주 묻는 질문</title>
         
         <link href="/css/oftenAsk.css" type="text/css" rel="stylesheet">
         <link href="/css/public/nav.css" type="text/css" rel="stylesheet">

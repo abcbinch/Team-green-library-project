@@ -43,7 +43,8 @@ a:hover {
 	display: flex;
 	flex-direction: column;
 	width: 1260px;
-	margin-top: 40px;
+/* 	margin-top: 40px; */
+	margin-top: 63px;
 }
 .loginCon2{
 	width:550px; 

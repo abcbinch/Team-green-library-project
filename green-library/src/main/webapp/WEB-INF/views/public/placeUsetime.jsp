@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>도서관 이용 시간</title>
     
     <link href="/CSS/placeUsetime.css" type="text/css" rel="stylesheet">
     <link href="/CSS/public/nav.css" type="text/css" rel="stylesheet">

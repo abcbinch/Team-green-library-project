@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Library Main</title>
+    <title>그린도서관</title>
     <link href="/css/index.css" type="text/css" rel="stylesheet">
     <script>
    	let message = "${message}";
@@ -130,7 +130,7 @@
     </div>
 
     <div class="bookSwipe2">
-        <div class="backBtn">
+        <div class="backBtn2">
         <img class="arBtn" src="/images/goback.png"></div>
         <div class="window2">
         <ul class="popbook">
@@ -149,7 +149,7 @@
 			</c:forEach>
         </ul>
         </div>
-        <div class="goBtn">
+        <div class="goBtn2">
         <img class="arBtn" src="/images/go.png"></div>
     </div>
     </div>

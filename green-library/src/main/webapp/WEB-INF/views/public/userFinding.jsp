@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>userFinding</title>
+<title>회원정보 찾기</title>
 <link href="/css/userFinding.css" type="text/css" rel="stylesheet">
 <link href="/css/public/nav.css" type="text/css" rel="stylesheet">
 <script>

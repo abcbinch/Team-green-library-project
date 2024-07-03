@@ -9,8 +9,8 @@ const window2 = document.querySelector('.window2');
 
 const backBtn = document.querySelector('.backBtn');
 const goBtn = document.querySelector('.goBtn');
-//const backBtn2 = document.querySelector('.backBtn2');
-//const goBtn2 = document.querySelector('.goBtn2');
+const backBtn2 = document.querySelector('.backBtn2');
+const goBtn2 = document.querySelector('.goBtn2');
 
 //탭 함수
 const tab = document.querySelectorAll('.bookTab li');
@@ -44,43 +44,43 @@ goBtn.onclick = () => {
 				popbooks.style.transition = "left 300ms ease-in-out";
 	}
 }
-//goBtn2.onclick = () => {
-//	if(curIdx==0){
-//		curIdx++;
-//		popbooks.style.left = -1260 + "px";
-//		popbooks.style.transition = "left 300ms ease-in-out";
-//	}else if(curIdx==1){
-//		curIdx++;
-//		popbooks.style.left = -2520 + "px";
-//		popbooks.style.transition = "left 300ms ease-in-out";
-//	}
-//}
+goBtn2.onclick = () => {
+	if(curIdx==0){
+		curIdx++;
+		popbooks.style.left = -1260 + "px";
+		popbooks.style.transition = "left 300ms ease-in-out";
+	}else if(curIdx==1){
+		curIdx++;
+		popbooks.style.left = -2520 + "px";
+		popbooks.style.transition = "left 300ms ease-in-out";
+	}
+}
 backBtn.onclick = () => {
 	if(curIdx==1){
 		newbooks.style.left = 0 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
 		popbooks.style.left = 0 + "px";
-				popbooks.style.transition = "left 300ms ease-in-out";
+		popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
 	}else if(curIdx==2){
 		newbooks.style.left = -1260 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
 		popbooks.style.left = -1260 + "px";
-				popbooks.style.transition = "left 300ms ease-in-out";
+		popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
 	}
 }
-//backBtn2.onclick = () => {
-//	if(curIdx==1){
-//		popbooks.style.left = 0 + "px";
-//		popbooks.style.transition = "left 300ms ease-in-out";
-//		curIdx--;
-//	}else if(curIdx==2){
-//		popbooks.style.left = -1260 + "px";
-//		popbooks.style.transition = "left 300ms ease-in-out";
-//		curIdx--;
-//	}
-//}
+backBtn2.onclick = () => {
+	if(curIdx==1){
+		popbooks.style.left = 0 + "px";
+		popbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+	}else if(curIdx==2){
+		popbooks.style.left = -1260 + "px";
+		popbooks.style.transition = "left 300ms ease-in-out";
+		curIdx--;
+	}
+}
 
 
 //맨 처음 슬라이드 함수
