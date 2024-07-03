@@ -38,17 +38,44 @@
 
 <main>
 
-
+<!-- 심사결과에 따라 이모티콘이 달라집니다. -->
+<!-- 이모티콘 넣을거면 bookcontainer booktable margin auto로 해야 함 -->
 <div class="bigDiv">
-	<div class="book_container">
+<c:choose>
+		<c:when test="${wishs.complete == '심사대기'}">
 		<div class="book_image">
-			<img src="/images/exex2.png">
+			<img src="/images/wait.png">
 		</div>
+		</c:when>
+		<c:when test="${wishs.complete == '심사탈락'}">
+		<div class="book_image">
+			<img src="/images/unacceptable.png">
+		</div>
+		</c:when>
+		<c:when test="${wishs.complete == '심사통과'}">
+		<div class="book_image">
+			<img src="/images/okay.png">
+		</div>
+		</c:when>
+	</c:choose>
+	<div class="book_container">
+	
 		<div class="book_table">
 			<table>
 				<tr>
 					<th>현재 상태</th>
-					<td>&nbsp;&nbsp;${wishs.complete}</td>
+					<c:choose>
+					<c:when test="${wishs.complete == '심사대기'}">
+					<td>&nbsp;&nbsp;<span style="color: blue;">${wishs.complete}</span></td>
+					</c:when>
+					<c:when test="${wishs.complete == '심사탈락'}">
+					<td>&nbsp;&nbsp;<span style="color:red;">${wishs.complete}</span></td>
+					</c:when>
+					<c:when test="${wishs.complete == '심사통과'}">
+					<td>&nbsp;&nbsp;<span style="color: green;">${wishs.complete}</span></td>
+					</c:when>
+					</c:choose>
+					
 					<th>신청일</th>
 					<td>&nbsp;&nbsp;${wishs.wishDate}</td>
 				</tr>
@@ -73,28 +100,21 @@
 				
 				<!-- 여기 밑에 이제  수정하기 삭제하기 목록으로 (수정은 complete = "W" 일때만 보이게)-->
 				<!-- 수정은 jsp하나 만들어서 hopebookapply 그대로 복붙해서 value에 원래값 넣고, input은 포스트 submit -->
-				<tr>
-					<td colspan="4" align="right" style="border:none;">
-<!-- 						원래 버튼 위치 -->
-<%-- 					<c:if test="${wishs.complete == '심사대기'}"> --%>
-<!-- 						<form action="rewriteWishBook" method="get" class="wishform"> -->
-<%-- 							<input type="hidden" name="userId" value="${userId}"> --%>
-<%-- 							<input type="hidden" name="wishId" value="${wishs.wishId}"> --%>
-<!-- 							<input type = "submit" value="수정하기"> -->
-<!-- 						</form>	 -->
-<%-- 					</c:if> --%>
-<!-- 					<form action="deleteWish" method="post" class="wishform"> -->
-<%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
-<%-- 						<input type="hidden" name="userId" value="${userId}"> --%>
-<%-- 						<input type="hidden" name="wishlistId" value="${wishs.wishId}"> --%>
-<!-- 						<input type = "submit" value="삭제하기"> -->
-<!-- 					</form> -->
-<!-- 					<a href="myWritten"><input type="button" value="목록으로"></a> -->
-					</td>
-				</tr>		
+					
 			</table>	
 		</div>
+		
+		<div class="hopeBookNotice">
+		<ul>
+			<li>심사는 1주에서 2주 사이에 이루어집니다.</li>
+			<li>심사에 통과하지 못하셨다면, '자주 묻는 질문' 페이지에서 
+			도서 기증 제한 서적을 참고한 뒤<br> 다시 신청해주세요.</li>
+			
+		</ul>
+		</div>
+		
 	</div>
+	
 </div>
 
 <div class="butns">

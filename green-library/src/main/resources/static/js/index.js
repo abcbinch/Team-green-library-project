@@ -34,14 +34,10 @@ goBtn.onclick = () => {
 		curIdx++;
 		newbooks.style.left = -1260 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		popbooks.style.left = -1260 + "px";
-				popbooks.style.transition = "left 300ms ease-in-out";
 	}else if(curIdx==1){
 		curIdx++;
 		newbooks.style.left = -2520 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		popbooks.style.left = -2520 + "px";
-				popbooks.style.transition = "left 300ms ease-in-out";
 	}
 }
 goBtn2.onclick = () => {
@@ -59,14 +55,10 @@ backBtn.onclick = () => {
 	if(curIdx==1){
 		newbooks.style.left = 0 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		popbooks.style.left = 0 + "px";
-		popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
 	}else if(curIdx==2){
 		newbooks.style.left = -1260 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		popbooks.style.left = -1260 + "px";
-		popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
 	}
 }
