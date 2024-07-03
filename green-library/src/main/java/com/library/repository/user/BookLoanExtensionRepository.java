@@ -52,7 +52,7 @@ public class BookLoanExtensionRepository {
 	
 	public void makeExtension(int bookId) {
 		String sql = "UPDATE rents "
-				+ "set return_date = return_date + INTERVAL '14' DAY "
+				+ "set return_date = return_date + INTERVAL '7' DAY "
 				+ "where book_id = ?";
 		jdbcTemplate.update(sql, bookId);
 	}
