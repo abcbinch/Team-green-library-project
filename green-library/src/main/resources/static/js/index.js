@@ -9,8 +9,8 @@ const window2 = document.querySelector('.window2');
 
 const backBtn = document.querySelector('.backBtn');
 const goBtn = document.querySelector('.goBtn');
-const backBtn2 = document.querySelector('.backBtn2');
-const goBtn2 = document.querySelector('.goBtn2');
+//const backBtn2 = document.querySelector('.backBtn2');
+//const goBtn2 = document.querySelector('.goBtn2');
 
 //탭 함수
 const tab = document.querySelectorAll('.bookTab li');
@@ -30,44 +30,57 @@ const bookQuick = document.querySelector('.tabCon2 img');
 let curIdx = 0;
 
 goBtn.onclick = () => {
-	//왜 조건이 같은데 앞 버튼은 그냥 쭉 가고, 뒤 버튼은 끊었다 갈까.
-	
 	if(curIdx==0){
-		console.log(curIdx);
 		curIdx++;
 		newbooks.style.left = -1260 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		
-		//여기까지 하고 멈추게 해야 함. 어떻게?
-		console.log(curIdx);
-	}
-	if(curIdx==1){
-		console.log(curIdx);
+		popbooks.style.left = -1260 + "px";
+				popbooks.style.transition = "left 300ms ease-in-out";
+	}else if(curIdx==1){
 		curIdx++;
 		newbooks.style.left = -2520 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
-		
-		console.log(curIdx);
+		popbooks.style.left = -2520 + "px";
+				popbooks.style.transition = "left 300ms ease-in-out";
 	}
 }
+//goBtn2.onclick = () => {
+//	if(curIdx==0){
+//		curIdx++;
+//		popbooks.style.left = -1260 + "px";
+//		popbooks.style.transition = "left 300ms ease-in-out";
+//	}else if(curIdx==1){
+//		curIdx++;
+//		popbooks.style.left = -2520 + "px";
+//		popbooks.style.transition = "left 300ms ease-in-out";
+//	}
+//}
 backBtn.onclick = () => {
-	
-	
 	if(curIdx==1){
-		console.log(curIdx);
 		newbooks.style.left = 0 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
+		popbooks.style.left = 0 + "px";
+				popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
-		console.log(curIdx);
-	}
-	if(curIdx==2){
-		console.log(curIdx);
+	}else if(curIdx==2){
 		newbooks.style.left = -1260 + "px";
 		newbooks.style.transition = "left 300ms ease-in-out";
+		popbooks.style.left = -1260 + "px";
+				popbooks.style.transition = "left 300ms ease-in-out";
 		curIdx--;
-		console.log(curIdx);
 	}
 }
+//backBtn2.onclick = () => {
+//	if(curIdx==1){
+//		popbooks.style.left = 0 + "px";
+//		popbooks.style.transition = "left 300ms ease-in-out";
+//		curIdx--;
+//	}else if(curIdx==2){
+//		popbooks.style.left = -1260 + "px";
+//		popbooks.style.transition = "left 300ms ease-in-out";
+//		curIdx--;
+//	}
+//}
 
 
 //맨 처음 슬라이드 함수
