@@ -2,18 +2,15 @@ package com.library.repository.admin;
 
 import com.library.dto.admin._normal.AnnouncementDTO;
 import com.library.service.admin.AnnounceServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.PreparedStatement;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.multipart.MultipartFile;
-
-@Transactional
 @Repository
 public class AnnouncementRepositoryImpl implements AnnouncementRepository {
 
@@ -217,5 +214,10 @@ public class AnnouncementRepositoryImpl implements AnnouncementRepository {
     public String nextAnnounce(int announceId) {
         String sql = "SELECT ANNOUNCE_TITLE FROM (SELECT ANNOUNCE_TITLE, ROWNUM AS rnum FROM ANNOUNCEMENTS WHERE ANNOUNCEMENT_ID > :announcementId ORDER BY ANNOUNCEMENT_ID) WHERE rnum = 1";
         return jdbcTemplate.queryForObject(sql, String.class, announceId);
+    }
+
+    public int count(){
+        String sql = "SELECT announce_idx.nextval FROM dual";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }

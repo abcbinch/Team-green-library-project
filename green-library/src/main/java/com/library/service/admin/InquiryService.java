@@ -35,4 +35,6 @@ public interface InquiryService {
 
     // 다음 문의사항 제목 조회
     InquiryDTO nextInquiry(int id);
+
+    int count();
 }

@@ -4,6 +4,7 @@ import com.library.dto.admin._normal.AnnouncementDTO;
 import com.library.repository.admin.AnnouncementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -43,11 +44,13 @@ public class AnnounceServiceImpl implements AnnounceService {
     // 공지 생성
 
     @Override
+    @Transactional
     public void createAnnounceWithoutFile(String announceTitle, String adminId,String announceContent){
         announcementRepository.createAnnounceWithoutFile(announceTitle, adminId,announceContent);
     }
 
     @Override
+    @Transactional
     public void createAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file) {
         announcementRepository.createAnnounce(announceTitle, adminId, announceContent, file);
     }
@@ -79,17 +82,20 @@ public class AnnounceServiceImpl implements AnnounceService {
 //    }
     // 공지 수정
 @Override
+@Transactional
 public void updateAnnounceWithoutFile(String announceTitle, String adminId, String announceContent, String aNull) {
 announcementRepository.updateAnnounceWithoutFile(announceTitle, adminId, announceContent, aNull);
 }
 
     @Override
+    @Transactional
     public void updateAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file) {
         announcementRepository.updateAnnounce(announceTitle, adminId, announceContent, file);
     }
 
     // 공지 삭제
     @Override
+    @Transactional
     public void deleteAnnounce(List<String> id) {
         announcementRepository.deleteAnnounce(id);
     }
@@ -110,5 +116,10 @@ announcementRepository.updateAnnounceWithoutFile(announceTitle, adminId, announc
     @Override
     public String nextAnnounce(int id) {
         return announcementRepository.nextAnnounce(id);
+    }
+
+    @Override
+    public int count() {
+        return announcementRepository.count();
     }
 }

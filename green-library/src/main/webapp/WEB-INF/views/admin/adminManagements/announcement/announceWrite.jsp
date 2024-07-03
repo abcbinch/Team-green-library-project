@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -28,7 +29,7 @@
         <table class="announcementInfo">
             <tr>
                 <th>번호</th>
-                <td id="writdIdx"></td>
+                <td id="writdIdx">${nextId}</td>
             </tr>
             <tr>
                 <th>제목 <span>*</span></th>
@@ -36,11 +37,11 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td id="writerId">작성자 ID</td>
+                <td id="writerId"><sec:authentication property="principal.username"/></td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td id="writeDate">작성일</td>
+                <td id="writeDate">${now}</td>
             </tr>
             <tr>
                 <th>내용 <span>*</span></th>
@@ -98,7 +99,7 @@
     }
 
     function goToList() {
-        window.location.href = '/Announcement';
+        window.location.href = '/admin/Announcement';
     }
 
     function uploadAnnounce() {
@@ -131,7 +132,7 @@
                 },
                 success: function (data) {
                     alert('등록이 완료되었습니다.');
-                    window.location.href = '/Announcement';
+                    window.location.href = '/admin/Announcement';
                 },
                 error: function (xhr, status, error) {
                     console.error("오류 발생: " + error);
@@ -144,6 +145,7 @@
     function updateAnnounce(announceId) {
         const announceTitle = document.getElementById('announceTitle').value.trim();
         const announceContent = document.getElementById('announceContent').value.trim();
+        const fileName = document.querySelector('#fileRow a').textContent.trim(); // 기존 파일 이름 추출
 
         if (!announceTitle || !announceContent) {
             alert('제목과 내용을 모두 입력해 주세요.');
@@ -155,9 +157,13 @@
             formData.append('announceTitle', announceTitle);
             formData.append('announceContent', announceContent);
             formData.append('announceId', announceId);
+
             const fileInput = document.getElementById('fileInput').files[0];
             if (fileInput) {
                 formData.append('file', fileInput);
+            } else {
+                // 새 파일이 선택되지 않은 경우 기존 파일 이름 추가
+                formData.append('fileName', fileName);
             }
 
             $.ajax({
@@ -172,7 +178,7 @@
                 },
                 success: function (data) {
                     alert('수정이 완료되었습니다.');
-                    window.location.href = '/Announcement';
+                    window.location.href = '/admin/Announcement';
                 },
                 error: function (xhr, status, error) {
                     console.error("오류 발생: " + error);
@@ -181,6 +187,7 @@
             });
         }
     }
+
 
 </script>
 </body>

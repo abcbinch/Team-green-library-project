@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 @Service("AdminBookService")
 public class BookServiceImpl implements BookService {
 
@@ -47,29 +46,33 @@ public class BookServiceImpl implements BookService {
     }
 
     //   책 반납
+    @Transactional
     public void returnUpdateBook(int bookId) {
         bookRepository.updateBookAvailability(bookId);
     }
-
+    @Transactional
     public void returnMultiBooks(List<Long> bookIds) {
         bookRepository.updateMultipleBooksAvailability(bookIds);
     }
 
     // 책 등록
+    @Transactional
     public void createBook(BookDTO book) {
         bookRepository.createBook(book);
     }
 
     // 책 수정
+    @Transactional
     public void updateBook(BookDTO book) {
         bookRepository.updateBook(book);
     }
 
     // 책 삭제
+    @Transactional
     public void deleteMultiBook(List<Long> bookIds) {
         bookRepository.deleteMultiBook(bookIds);
     }
-
+    @Transactional
     public void deleteBook(int bookId) {
         bookRepository.deleteBook(bookId);
     }
@@ -88,5 +91,10 @@ public class BookServiceImpl implements BookService {
     // 다음 도서 제목 조회
     public BookDTO nextBook(int id) {
         return bookRepository.nextBook(id);
+    }
+
+    @Override
+    public int count() {
+        return bookRepository.count();
     }
 }

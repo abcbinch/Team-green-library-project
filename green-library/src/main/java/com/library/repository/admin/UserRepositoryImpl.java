@@ -4,14 +4,12 @@ import com.library.dto.admin._normal.RentDTO;
 import com.library.dto.admin._normal.SuspensionDTO;
 import com.library.dto.admin._normal.UserDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
 
-@Transactional
 @Repository("AdminUserRepository")
 public class UserRepositoryImpl implements UserRepository {
 
@@ -193,7 +191,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     // 이용 제한 해제
     @Override
-    @Transactional
     public void releaseSuspension(String userId, String suspenId) {
         String sql1 = "UPDATE USERS SET SUSPENDED = '0' WHERE USER_ID = ?";
         jdbcTemplate.update(sql1, userId);

@@ -43,6 +43,8 @@ INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, 
 VALUES('id14', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
 VALUES('id15', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
+VALUES('gigi1234', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
 -- 유저 비밀번호(pass1)해싱한값
 
 
@@ -57,6 +59,8 @@ INSERT INTO genres(genre_id, genre_name) VALUES('600', '예술');
 INSERT INTO genres(genre_id, genre_name) VALUES('700', '언어');
 INSERT INTO genres(genre_id, genre_name) VALUES('800', '문학');
 INSERT INTO genres(genre_id, genre_name) VALUES('900', '역사');
+
+COMMIT;
 
 -- 책
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
@@ -88,17 +92,47 @@ INSERT INTO admin_grants(grant_rank, grant_name) VALUES(2, 'board');
 INSERT INTO admin_grants(grant_rank, grant_name) VALUES(1, '관리');
 
 -- 관리자
-INSERT INTO admins (admin_id, admin_name, admin_pass, grant_rank) VALUES('admin0', 'name', 'admin0', 1);
-INSERT INTO admins (admin_id, admin_name, admin_pass, grant_rank) VALUES('admin1', 'name', 'admin1', 2);
-INSERT INTO admins (admin_id, admin_name, admin_pass, grant_rank) VALUES('system', 'name', 'system', 3);
-INSERT INTO admins (admin_id, admin_name, admin_pass, admin_email, grant_rank) VALUES('admin4', 'name', 'pass', 'admin@admin', 2);
-INSERT INTO admins (admin_id, admin_name, admin_pass, admin_email, grant_rank) VALUES('admin5', 'name', 'system','admin@admin', 1);
+INSERT INTO admins (ADMIN_ID, ADMIN_NAME, ADMIN_PASS, ADMIN_EMAIL, GRANT_RANK) VALUES ('admin0', 'admin0', '$2a$10$Ffi85yx2dk9a/yA37xz7J.DMr77Sh2pliT23nuU4J63rE7bZobXXC', 'admin0@admin0.com', 2);
+INSERT INTO admins (ADMIN_ID, ADMIN_NAME, ADMIN_PASS, ADMIN_EMAIL, GRANT_RANK) VALUES ('admin1', 'admin1', '$2a$10$EtK0DWJkWVYcmQHTzn9E6.0ARH7PeMejTYlIYNHbfnegHLUqDPui.', 'admin@admin1.com', 2);
 
 COMMIT;
--- 이후는 JDBC query 작성 참고용으로 작성된 것들 입니다.
 
-
-
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
+INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
+VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
 INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
 VALUES(announce_idx.NEXTVAL, '첫 공지사항', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
 INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
@@ -106,7 +140,40 @@ VALUES(announce_idx.NEXTVAL, '아마도 이게 20번', 'admin1', SYSDATE, 'asdf.
 INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date, fileName, contents, view_count)
 VALUES(announce_idx.NEXTVAL, '21번 페이징용', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
 
-
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
 VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
@@ -118,19 +185,26 @@ VALUES(inquiry_idx.NEXTVAL, sysdate, '21', '연습연습', 0, 'id1');
 INSERT INTO inquiries(inquiry_id, inquiry_date, inquiry_title, contents, responseTF, user_id)
 VALUES(inquiry_idx.NEXTVAL, sysdate, '22', '응답유무 확인용', 0, 'id2');
 
-commit;
+COMMIT;
 
 INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
 VALUES(response_idx.NEXTVAL, 1, SYSDATE, '불편을 끼쳐 죄송합니다', 'admin1');
 INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
-VALUES(response_idx.NEXTVAL, 2, SYSDATE, '20번이나 불편을 끼쳐 죄송합니다', 'admin1');
+VALUES(response_idx.NEXTVAL, 2, SYSDATE, '불편을 끼쳐 죄송합니다', 'admin1');
 INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
-VALUES(response_idx.NEXTVAL, 3, SYSDATE, '21페이징용', 'admin1');
+VALUES(response_idx.NEXTVAL, 3, SYSDATE, '불편을 끼쳐 죄송합니다', 'admin1');
+INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
+VALUES(response_idx.NEXTVAL, 4, SYSDATE, '불편을 끼쳐 죄송합니다', 'admin1');
+INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
+VALUES(response_idx.NEXTVAL, 20, SYSDATE, '20번이나 불편을 끼쳐 죄송합니다', 'admin1');
+INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
+VALUES(response_idx.NEXTVAL, 21, SYSDATE, '21페이징용', 'admin1');
 
 INSERT INTO suspensions(suspension_id, start_date, end_date, reason, user_id)
 VALUES(suspend_idx.NEXTVAL, '2024-06-11', '2024-06-25', '그냥 테스트로', 'id1');
 
---밑은 아이디 수정해서 쓸 것
+COMMIT;
+
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
 VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 2, 'id1', 0);
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
@@ -146,5 +220,4 @@ VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 7, 'gigi1234', 1);
 INSERT INTO wishlists(wishlist_id, wish_title, wish_author, wish_publisher, wish_publication, wish_price, wish_isbn, wish_date, complete, user_id) 
 VALUES (wishlist_idx.NEXTVAL, '버터111호', '대뾰', '트릭컬', TO_DATE('2020-01-01', 'YYYY-MM-DD'), 20000, '12312412', SYSDATE, 'W', 'gigi1234');
 
-commit;
-ROLLBACK ;
+COMMIT;

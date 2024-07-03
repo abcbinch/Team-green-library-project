@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -49,15 +52,15 @@
         <table class="inquiryInfo">
             <tr>
                 <th>번호</th>
-                <td id="writdIdx"></td>
+                <td id="writdIdx">${nextId}</td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td id="writerId">작성자 ID</td>
+                <td id="writerId"><sec:authentication property="principal.username"/></td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td id="writeDate">작성일</td>
+                <td id="writeDate">${now}</td>
             </tr>
             <tr>
                 <th>내용 <span>*</span></th>
@@ -77,7 +80,7 @@
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     function goToList(){
-        window.location.href='/Inquiry';
+        window.location.href='/admin/Inquiry';
     }
 
     function uploadBtn(inquiryId) {
@@ -98,7 +101,7 @@
                 },
                 success: function (data) {
                     alert('등록이 완료되었습니다.');
-                    window.location.href = '/Inquiry';
+                    window.location.href = '/admin/Inquiry';
                 },
                 error: function (xhr, status, error) {
                     console.error("오류 발생: " + error);

@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="board-btn">
-            <a href="/Book" class="listBtn">목록</a>
+            <a href="/admin/Book" class="listBtn">목록</a>
         </div>
     </section>
 </main>
@@ -94,7 +94,7 @@
             success: function (data) {
                 if (data && data.title && data.bookId) {
                     $("#prevCon").text(data.title);
-                    $("#prevCon").attr("href", "/Book/DetailBook?bookId=" + data.bookId);
+                    $("#prevCon").attr("href", "/admin/Book/DetailBook?bookId=" + data.bookId);
                 } else {
                     $("#prevCon").text("이전글이 없습니다.");
                 }
@@ -117,7 +117,7 @@
             success: function (data) {
                 if (data && data.title && data.bookId) {
                     $("#nextCon").text(data.title);
-                    $("#nextCon").attr("href", "/Book/DetailBook?bookId=" + data.bookId);
+                    $("#nextCon").attr("href", "/admin/Book/DetailBook?bookId=" + data.bookId);
                 } else {
                     $("#nextCon").text("다음글이 없습니다.");
                 }
@@ -137,7 +137,7 @@
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             success: function (response) {
-                window.location.href = '/Book/updateBook?bookId=' + encodeURIComponent(bookId);
+                window.location.href = '/admin/Book/updateBook?bookId=' + encodeURIComponent(bookId);
                 searchBtnEvt();
             },
             error: function (xhr, status, error) {
@@ -161,7 +161,7 @@
                 },
                 success: function (response) {
                     alert("선택한 책이 삭제 되었습니다. ");
-                    window.location.href='/Book';
+                    window.location.href='/admin/Book';
                 },
                 error: function (xhr, status, error) {
                     alert("책들 삭제 중 오류가 발생했습니다: ");

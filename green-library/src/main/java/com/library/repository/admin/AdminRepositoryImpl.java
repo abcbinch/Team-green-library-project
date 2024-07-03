@@ -3,12 +3,10 @@ package com.library.repository.admin;
 import com.library.dto.admin._normal.AdminDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.util.List;
 
-@Transactional
 @Repository
 public class AdminRepositoryImpl implements AdminRepository {
 

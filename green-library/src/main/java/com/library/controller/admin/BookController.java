@@ -1,35 +1,41 @@
 package com.library.controller.admin;
 
-import com.library.dto.admin._normal.AnnouncementDTO;
 import com.library.dto.admin._normal.AuthorDTO;
 import com.library.dto.admin._normal.BookDTO;
 import com.library.dto.admin._normal.PublisherDTO;
+import com.library.propertyeditor.AuthorDTOPropertyEditor;
+import com.library.propertyeditor.PublisherDTOPropertyEditor;
 import com.library.service.admin.BookService;
+import com.library.service.admin.StorageService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Controller("AdminBookController")
 @RequestMapping("/admin/Book")
 public class BookController {
 
     private final BookService bookService;
+    private final StorageService storageService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, StorageService storageService) {
         this.bookService = bookService;
+        this.storageService = storageService;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(AuthorDTO.class, new AuthorDTOPropertyEditor());
+        binder.registerCustomEditor(PublisherDTO.class, new PublisherDTOPropertyEditor());
     }
 
     //    onload
@@ -91,6 +97,9 @@ public class BookController {
     //등록 페이지 이동
     @GetMapping("/WriteBook")
     public String writeBook(Model model) {
+
+        int count = bookService.count();
+        model.addAttribute("nextId", count);
         return "admin/adminBook/manageBook/bookWrite";
     }
 
@@ -100,31 +109,26 @@ public class BookController {
                              @RequestParam(value = "image", required = false) MultipartFile file,
                              HttpServletRequest request) {
         try {
-            saveUploadedFile(file, bookDTO, request);
+            AuthorDTO authorDTO = new AuthorDTO();
+            authorDTO.setAuthorName(bookDTO.getAuthorName());
+            bookDTO.setAuthor(authorDTO);
+
+            PublisherDTO publisherDTO = new PublisherDTO();
+            publisherDTO.setPublisherName(bookDTO.getPublisherName());
+            bookDTO.setPublisher(publisherDTO);
+
+            if (file != null && !file.isEmpty()) {
+                String fileName = storageService.store(file);
+                bookDTO.setImg(fileName);
+            }
 
             bookService.createBook(bookDTO);
 
-            return "redirect:/Book";
+            return "redirect:/admin/Book";
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
-        }
-    }
-
-    private void saveUploadedFile(MultipartFile file, BookDTO bookDTO, HttpServletRequest request) throws IOException {
-        if (file != null && !file.isEmpty()) {
-            String uploadsDir = "/resources/static/documents/";
-            String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
-            if (!new File(realPathToUploads).exists()) {
-                new File(realPathToUploads).mkdir();
-            }
-            String orgName = file.getOriginalFilename();
-            String fileName = UUID.randomUUID() + "-" + orgName;
-            String filePath = realPathToUploads + fileName;
-            File dest = new File(filePath);
-            file.transferTo(dest);
-            bookDTO.setImg(fileName);
         }
     }
 
@@ -152,24 +156,33 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    //    수정 등록
     @PostMapping("/updateBook")
     public ResponseEntity<String> updateBook(@ModelAttribute BookDTO bookDTO,
-                                             @RequestParam("image") MultipartFile file) {
-        // 클라이언트에서 전송된 작가 이름과 출판사 이름을 AuthorDTO와 PublisherDTO 객체로 변환
-        AuthorDTO authorDTO = new AuthorDTO();
-        authorDTO.setAuthorName(String.valueOf(bookDTO.getAuthor()));
-        bookDTO.setAuthor(authorDTO);
+                                             @RequestParam(value = "image", required = false) MultipartFile file,
+                                             HttpServletRequest request) {
+        try {
+            AuthorDTO authorDTO = new AuthorDTO();
+            authorDTO.setAuthorName(bookDTO.getAuthorName());
+            bookDTO.setAuthor(authorDTO);
 
-        PublisherDTO publisherDTO = new PublisherDTO();
-        publisherDTO.setPublisherName(String.valueOf(bookDTO.getPublisher()));
-        bookDTO.setPublisher(publisherDTO);
+            PublisherDTO publisherDTO = new PublisherDTO();
+            publisherDTO.setPublisherName(bookDTO.getPublisherName());
+            bookDTO.setPublisher(publisherDTO);
 
-        // 나머지 필요한 로직을 구현합니다.
+            if (file != null && !file.isEmpty()) {
+                String fileName = storageService.store(file);
+                bookDTO.setImg(fileName);
+            }
 
-        return ResponseEntity.ok("도서 정보가 업데이트되었습니다.");
+            bookService.updateBook(bookDTO);
+
+            return ResponseEntity.ok("도서 정보가 업데이트되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("도서 정보 업데이트 중 오류가 발생했습니다.");
+        }
     }
-
 
     // 조회 페이지
     @PostMapping("/details/{id}")

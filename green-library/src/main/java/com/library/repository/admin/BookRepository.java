@@ -1,11 +1,9 @@
 package com.library.repository.admin;
 
 import com.library.dto.admin._normal.BookDTO;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 public interface BookRepository {
 
     // 모든 책 목록 조회
@@ -46,4 +44,6 @@ public interface BookRepository {
 
     // 다음 도서 제목 조회
     BookDTO nextBook(int bookId);
+
+    int count();
 }

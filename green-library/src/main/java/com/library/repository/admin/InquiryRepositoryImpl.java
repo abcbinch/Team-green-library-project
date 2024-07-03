@@ -246,4 +246,12 @@ public class InquiryRepositoryImpl implements InquiryRepository {
             return inquiryDTO;
         }, inquiryId);
     }
+
+    @Override
+    public int count() {
+        String sql = "SELECT MAX(INQUIRY_ID) FROM inquiries";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+
 }

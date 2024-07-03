@@ -27,10 +27,10 @@
                 <label for="adminPASS">PASS</label>
                 <input type="password" name="pass" id="adminPASS" autocomplete="current-password" required>
             </div>
-            <div class="autoLoginBox">
-                <input type="checkbox" id="autoLogin" name="autoLogin">
-                <label for="autoLogin">자동 로그인</label>
-            </div>
+<%--            <div class="autoLoginBox">--%>
+<%--                <input type="checkbox" id="autoLogin" name="autoLogin">--%>
+<%--                <label for="autoLogin">자동 로그인</label>--%>
+<%--            </div>--%>
             <button type="submit">로그인</button>
             <c:if test="${not empty error}">
                 <p class="error">${error}</p>

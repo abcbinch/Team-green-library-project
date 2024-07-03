@@ -2,13 +2,11 @@ package com.library.repository.admin;
 
 import com.library.dto.admin._normal.AuthorDTO;
 import com.library.dto.admin._normal.BookDTO;
-import com.library.dto.admin._normal.GenreDTO;
 import com.library.dto.admin._normal.PublisherDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository("AdminBookRepository")
 public class BookRepositoryImpl implements BookRepository {
 
@@ -291,35 +288,26 @@ public class BookRepositoryImpl implements BookRepository {
         }
         Long publisherId = getOrCreatePublisher(publisherDTO.getPublisherName());
 
-        // 장르 정보 체크
-        GenreDTO genreDTO = book.getGenre();
-        if (genreDTO == null) {
-            throw new IllegalArgumentException("장르 정보가 없습니다.");
-        }
-        String genreId = genreDTO.getGenreId();
-
-        // 책 정보 삽입 SQL
-        String sql = "INSERT INTO BOOKS (BOOK_ID, AUTHOR_ID, PUBLISHER_ID, GENRE_ID, GENRE_FULLNAME, " +
+        String sql = "INSERT INTO BOOKS (BOOK_ID, AUTHOR_ID, PUBLISHER_ID, GENRE_FULLNAME, " +
                 "TITLE, IMG, ISBN, LOCATION, SUMMARY, PUBLICATION_DATE) " +
-                "VALUES (BOOK_IDX.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (BOOK_IDX.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // SQL 실행 및 결과 반환
-        return jdbcTemplate.update(sql, authorId, publisherId, genreId,
-                book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
+        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
                 book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()));
     }
-
 
     @Override
     public int updateBook(BookDTO book) {
         Long authorId = getOrCreateAuthor(book.getAuthor().getAuthorName());
         Long publisherId = getOrCreatePublisher(book.getPublisher().getPublisherName());
 
-        String sql = "UPDATE BOOKS SET AUTHOR_ID = ?, PUBLISHER_ID = ?, GENRE_ID = ?, GENRE_FULLNAME = ?, " +
+        String sql = "UPDATE BOOKS SET AUTHOR_ID = ?, PUBLISHER_ID = ?, GENRE_FULLNAME = ?, " +
                 "TITLE = ?, IMG = ?, ISBN = ?, LOCATION = ?, SUMMARY = ?, PUBLICATION_DATE = ? " +
                 "WHERE BOOK_ID = ?";
-        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenre().getGenreId(),
-                book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
+        System.out.println(book.getAuthor().getAuthorName());
+        System.out.println(book.getPublisher().getPublisherName());
+
+        return jdbcTemplate.update(sql, authorId, publisherId, book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
                 book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()),
                 book.getBookId());
     }
@@ -396,5 +384,11 @@ public class BookRepositoryImpl implements BookRepository {
             book.setTitle(rs.getString("TITLE"));
             return book;
         }, bookId);
+    }
+
+    @Override
+    public int count() {
+        String sql = "SELECT BOOK_IDX.nextval FROM DUAL";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }

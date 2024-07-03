@@ -28,7 +28,7 @@
         <table class="bookInfo">
             <tr>
                 <th>번호</th>
-                <td id="bookIdx"></td>
+                <td id="bookIdx">${nextId}</td>
                 <th>십진분류<span>*</span></th>
                 <td><input type="text" name="bookGroup" id="bookGroup"></td>
             </tr>
@@ -54,9 +54,11 @@
                 <th>이미지</th>
                 <td id="fileRow">
                     <div class="fileDiv">
-                        <input type="file" name="fileInput" id="fileInput">
+                        <input type="file" name="fileInput" id="fileInput" onchange="readURL(this)">
+                        <img id="preview" class="previewImg"/>
                     </div>
                 </td>
+
                 <th>내용<span>*</span></th>
                 <td><textarea name="bookSummary" id="bookSummary"></textarea></td>
             </tr>
@@ -76,6 +78,17 @@
             fetchBookDetails(bookId);
         }
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            $('#preview').attr('src', '');
+        }
+    }
 
     function fetchBookDetails(bookId) {
         $.ajax({
@@ -91,8 +104,8 @@
                     } else {
                         $('#bookWriter').val('');
                     }
-                    $('#bookPublisher').val(response.publisher);
-                    $('#bookGroup').val(response.genreId); // Assuming genreId is a property of response
+                    $('#bookPublisher').val(response.publisher.publisherName);
+                    $('#bookGroup').val(response.genreFullname);
                     $('#publicationDate').val(response.publicationDate);
                     $('#bookISBN').val(response.isbn);
                     $('#bookLocation').val(response.location);
@@ -112,15 +125,20 @@
 
 
     function goToList() {
-        window.location.href = '/Book';
+        window.location.href = '/admin/Book';
     }
 
+    function isValidDate(dateString) {
+        // YYYY-MM-DD 형식의 정규표현식
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        return datePattern.test(dateString);
+    }
     function createBook() {
         const title = $('#bookTitle').val().trim();
         const group = $('#bookGroup').val().trim();
         const authorName = $('#bookWriter').val().trim();
         const publisherName = $('#bookPublisher').val().trim();
-        const publicationDate = $('#publicationDate').val().trim();
+        const publicationDate = $('#publicationDate').val().trim(); // 문자열로 처리
         const isbn = $('#bookISBN').val().trim();
         const location = $('#bookLocation').val().trim();
         const summary = $('#bookSummary').val().trim();
@@ -134,23 +152,21 @@
             return;
         }
 
-        const bookData = {
-            title: title,
-            genreId: group,
-            authorName: authorName,
-            publisherName: publisherName,
-            publicationDate: publicationDate,
-            isbn: isbn,
-            location: location,
-            summary: summary
-        };
-
         const formData = new FormData();
-        formData.append('bookDTO', new Blob([JSON.stringify(bookData)], {type: 'application/json'}));
+        formData.append('title', title);
+        formData.append('genreFullname', group);
+        formData.append('authorName', authorName); // 저자 이름으로 넣기
+        formData.append('publisherName', publisherName); // 출판사 이름으로 넣기
+        formData.append('publicationDate', publicationDate);
+        formData.append('isbn', isbn);
+        formData.append('location', location);
+        formData.append('summary', summary);
+
         const fileInput = $('#fileInput')[0].files[0];
         if (fileInput) {
             formData.append('image', fileInput);
         }
+
         $.ajax({
             url: '/admin/Book/createBook',
             type: 'POST',
@@ -163,43 +179,40 @@
             },
             success: function (data) {
                 alert('도서 등록이 완료되었습니다.');
-                window.location.href = '/Book';
+                window.location.href = '/admin/Book';
             },
             error: function (xhr, status, error) {
-                console.error("오류 발생: " + xhr + error);
+                console.error("오류 발생: " + error);
                 alert('도서 등록에 실패했습니다. 다시 시도해주세요.');
             }
         });
     }
 
-    function isValidDate(dateString) {
-        // YYYY-MM-DD 형식의 정규표현식
-        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-        return datePattern.test(dateString);
-    }
-
     function updateBook(bookId) {
         const title = $('#bookTitle').val().trim();
         const group = $('#bookGroup').val().trim();
-        const author = $('#bookWriter').val().trim();
-        const publisher = $('#bookPublisher').val().trim();
-        const publicationDate = $('#publicationDate').val().trim();
+        const authorName = $('#bookWriter').val().trim();
+        const publisherName = $('#bookPublisher').val().trim();
+        const publicationDate = $('#publicationDate').val().trim(); // 문자열로 처리
         const isbn = $('#bookISBN').val().trim();
         const location = $('#bookLocation').val().trim();
         const summary = $('#bookSummary').val().trim();
 
-        if (!title || !author || !group || !publisher || !publicationDate || !isbn || !location || !summary) {
+        if (!title || !authorName || !group || !publisherName || !publicationDate || !isbn || !location || !summary) {
             alert('모든 필수 항목을 입력해 주세요.');
+            return;
+        }
+        if (!isValidDate(publicationDate)) {
+            alert('발간일자는 YYYY-MM-DD 형식으로 입력해 주세요.');
             return;
         }
 
         const formData = new FormData();
         formData.append('bookId', bookId);
-
         formData.append('title', title);
-        formData.append('group', group);
-        formData.append('author', author);
-        formData.append('publisher', publisher);
+        formData.append('genreFullname', group);
+        formData.append('authorName', authorName); // 저자 이름으로 넣기
+        formData.append('publisherName', publisherName); // 출판사 이름으로 넣기
         formData.append('publicationDate', publicationDate);
         formData.append('isbn', isbn);
         formData.append('location', location);
@@ -222,7 +235,7 @@
             },
             success: function (data) {
                 alert('도서 정보가 수정되었습니다.');
-                window.location.href = '/Book';
+                window.location.href = '/admin/Book';
             },
             error: function (xhr, status, error) {
                 console.error("오류 발생: " + error);
