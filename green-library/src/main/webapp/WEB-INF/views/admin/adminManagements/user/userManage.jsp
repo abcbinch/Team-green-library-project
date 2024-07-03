@@ -181,7 +181,7 @@
         const selectValue = document.getElementById('resultSelect').value;
 
         $.ajax({
-            url: '/User/search',
+            url: '/admin/User/search',
             type: 'GET',
             data: {"searchType": searchType, "searchKeyword": inputText, "pageSize": selectValue},
             success: function (response) {
@@ -214,7 +214,7 @@
 
     function loadUserInfo(userId) {
         $.ajax({
-            url: '/User/details',
+            url: '/admin/User/details',
             type: 'GET',
             data: {userId: userId},
             success: function (response) {
@@ -300,7 +300,7 @@
 
         if (confirm('선택한 사용자를 영구 삭제하시겠습니까?')) {
             $.ajax({
-                url: '/User/deleteUsers',
+                url: '/admin/User/deleteUsers',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(userIds),
@@ -325,7 +325,7 @@
     function releaseBan(userId, suspenId) {
         if (confirm('정말로 이 이용 제한을 해제하시겠습니까?')) {
             $.ajax({
-                url: '/User/releaseBan',
+                url: '/admin/User/releaseBan',
                 type: 'POST',
                 data: {userId: userId, suspenId: suspenId},
                 beforeSend: function (xhr) {

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,11 @@ import com.library.dto.user.My_InquiryDto;
 import com.library.dto.user.My_WishListDto;
 import com.library.dto.user.WishBookDto;
 import com.library.dto.user.rewriteWishBookDto;
+import com.library.dto.user.inquiry.UserInquiryDetailDTO;
 import com.library.service.assets.BookDetailService;
 import com.library.service.user.BookLoanExtensionService;
 import com.library.service.user.HopeBookApplyService;
+import com.library.service.user.InquiryService;
 import com.library.service.user.My_WrittenService;
 import com.library.service.user.UserCreateInquiryService;
 import com.library.service.user.WishBookService;
@@ -31,6 +34,10 @@ public class RentController {
 
 	@Autowired
 	private My_WrittenService my_WrittenService;
+	
+	@Autowired
+	@Qualifier("UserInquiryService")
+	private InquiryService inquiryService;
 	
 	@GetMapping("/myWritten")
 	public String myWritten(@RequestParam(name = "auth", defaultValue = "abc") String userId , Model model) {
@@ -127,9 +134,12 @@ public class RentController {
 	}
 	
 	@PostMapping("/deleteWish")
-	public String deleteWish(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "wishlistId") int wishlistId) {
+	public String deleteWish(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "wishlistId") int wishlistId, 
+			RedirectAttributes redirectAttributes) {
 		
 		wishBookService.deleteWishBook(wishlistId, userId);		
+		
+		redirectAttributes.addFlashAttribute("message", "희망도서 신청 정보가 삭제되었습니다");
 		
 		return "redirect:/user/myWritten";
 	}
@@ -184,9 +194,13 @@ public class RentController {
     }
 	
 	@GetMapping("/modifyInquiry")
-
     public String modifyInquiry(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "inquiryId", defaultValue = "error") String id, Model model) {
-    	model.addAttribute("userId", userId);
+		if(id.equals("error"))
+    		return "redirect:/user/myWritten";
+		
+		UserInquiryDetailDTO userDTO = inquiryService.getInquiryDetail(userId, id);
+    	model.addAttribute("inquiryDetail", userDTO);
+		model.addAttribute("userId", userId);
     	return "user/userInquiryModify";
     }
     

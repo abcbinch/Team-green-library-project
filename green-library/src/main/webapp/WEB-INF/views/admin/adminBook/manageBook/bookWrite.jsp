@@ -79,21 +79,26 @@
 
     function fetchBookDetails(bookId) {
         $.ajax({
-            url: '/Book/getBookById/' + bookId,
-            type: 'POST',
+            url: '/admin/Book/getBookById/' + bookId,
+            type: 'GET',
             success: function (response) {
                 if (response) {
                     $('#bookIdx').text(response.bookId);
                     $('#bookTitle').val(response.title);
-                    $('#bookWriter').val(response.author);
+
+                    if (response.author && response.author.authorName) {
+                        $('#bookWriter').val(response.author.authorName);
+                    } else {
+                        $('#bookWriter').val('');
+                    }
                     $('#bookPublisher').val(response.publisher);
-                    $('#bookGroup').
+                    $('#bookGroup').val(response.genreId); // Assuming genreId is a property of response
                     $('#publicationDate').val(response.publicationDate);
                     $('#bookISBN').val(response.isbn);
                     $('#bookLocation').val(response.location);
-                    $('#bookSummary').val(response.content);
+                    $('#bookSummary').val(response.summary);
                     if (response.imagePath) {
-                        $('#fileRow').append('<a href="/resources/images/' + response.imagePath + '">' + response.imagePath + '</a>');
+                        $('#fileRow').append('<a href="/resources/static/documents/"' + response.imagePath + '">' + response.imagePath + '</a>');
                     }
                     $('.deleteBtn').val('수정').attr('onclick', 'updateBook(' + response.bookId + ')');
                 }
@@ -104,6 +109,7 @@
             }
         });
     }
+
 
     function goToList() {
         window.location.href = '/Book';
@@ -121,6 +127,10 @@
 
         if (!title || !authorName || !group || !publisherName || !publicationDate || !isbn || !location || !summary) {
             alert('모든 필수 항목을 입력해 주세요.');
+            return;
+        }
+        if (!isValidDate(publicationDate)) {
+            alert('발간일자는 YYYY-MM-DD 형식으로 입력해 주세요.');
             return;
         }
 
@@ -141,9 +151,8 @@
         if (fileInput) {
             formData.append('image', fileInput);
         }
-
         $.ajax({
-            url: '/Book/createBook',
+            url: '/admin/Book/createBook',
             type: 'POST',
             data: formData,
             processData: false,
@@ -163,6 +172,11 @@
         });
     }
 
+    function isValidDate(dateString) {
+        // YYYY-MM-DD 형식의 정규표현식
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        return datePattern.test(dateString);
+    }
 
     function updateBook(bookId) {
         const title = $('#bookTitle').val().trim();
@@ -180,6 +194,8 @@
         }
 
         const formData = new FormData();
+        formData.append('bookId', bookId);
+
         formData.append('title', title);
         formData.append('group', group);
         formData.append('author', author);
@@ -195,7 +211,7 @@
         }
 
         $.ajax({
-            url: '/Book/updateBook',
+            url: '/admin/Book/updateBook',
             type: 'POST',
             data: formData,
             processData: false,

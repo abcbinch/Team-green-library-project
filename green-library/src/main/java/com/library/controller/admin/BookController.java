@@ -1,6 +1,9 @@
 package com.library.controller.admin;
 
+import com.library.dto.admin._normal.AnnouncementDTO;
+import com.library.dto.admin._normal.AuthorDTO;
 import com.library.dto.admin._normal.BookDTO;
+import com.library.dto.admin._normal.PublisherDTO;
 import com.library.service.admin.BookService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller("AdminBookController")
-@RequestMapping("/Book")
+@RequestMapping("/admin/Book")
 public class BookController {
 
     private final BookService bookService;
@@ -56,6 +59,19 @@ public class BookController {
             };
         }
         return ResponseEntity.ok(books);
+    }
+
+    // 책 삭제
+    @PostMapping("/deleteBooks")
+    public ResponseEntity<String> deleteBooks(@RequestBody List<Long> bookIds) {
+        bookService.deleteMultiBook(bookIds);
+        return ResponseEntity.ok("성공적으로 삭제되었습니다.");
+    }
+
+    @PostMapping("/deleteBook")
+    public ResponseEntity<String> deleteBooks(@RequestBody int bookId) {
+        bookService.deleteBook(bookId);
+        return ResponseEntity.ok("성공적으로 삭제되었습니다.");
     }
 
     //    책 반납
@@ -112,34 +128,61 @@ public class BookController {
         }
     }
 
-    //    수정 페이지 이동
-    @GetMapping("/modify")
-    public String modify(@RequestParam(value = "bookId") int bookId, Model model) {
-        BookDTO bookDTOS = bookService.getBookById(bookId);
-        model.addAttribute("bookDTOS", bookDTOS);
+    //    수정 페이지 버튼
+    @PostMapping("/modifyBtnClick/{id}")
+    @ResponseBody
+    public String bookModifyBtnClick(@PathVariable int id) {
+        return "success";
+    }
+
+    //    책 수정(등록) 페이지 이동
+    @GetMapping("/updateBook")
+    public String updateBook(@RequestParam("bookId") int bookId, Model model) {
+        BookDTO updatedBook = bookService.getBookById(bookId);
+        model.addAttribute("book", updatedBook);
         return "admin/adminBook/manageBook/bookWrite";
     }
 
-    //    수정 전 데이터 불러오기
-    @PostMapping("getBookById/{bookId}")
-    @ResponseBody
-    public String getBookById(@PathVariable int bookId) {
-        return "success";
+    @GetMapping("/getBookById/{bookId}")
+    public ResponseEntity<BookDTO> getBookById(@PathVariable int bookId) {
+        BookDTO book = bookService.getBookById(bookId);
+        if (book == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(book);
     }
 
-    //    책 수정(등록)
+    //    수정 등록
     @PostMapping("/updateBook")
-    public String updateBook(BookDTO bookDTO) {
-        bookService.updateBook(bookDTO);
-        return "success";
+    public ResponseEntity<String> updateBook(@ModelAttribute BookDTO bookDTO,
+                                             @RequestParam("image") MultipartFile file) {
+        // 클라이언트에서 전송된 작가 이름과 출판사 이름을 AuthorDTO와 PublisherDTO 객체로 변환
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setAuthorName(String.valueOf(bookDTO.getAuthor()));
+        bookDTO.setAuthor(authorDTO);
+
+        PublisherDTO publisherDTO = new PublisherDTO();
+        publisherDTO.setPublisherName(String.valueOf(bookDTO.getPublisher()));
+        bookDTO.setPublisher(publisherDTO);
+
+        // 나머지 필요한 로직을 구현합니다.
+
+        return ResponseEntity.ok("도서 정보가 업데이트되었습니다.");
     }
 
 
-    //책 상세보기
+    // 조회 페이지
+    @PostMapping("/details/{id}")
+    @ResponseBody
+    public String details(@PathVariable int id) {
+        return "success";
+    }
+
+    //조회 페이지 이동
     @GetMapping("/DetailBook")
-    public String detailBook(@RequestParam(value = "bookId") int bookId, Model model) {
-        BookDTO bookDTOS = bookService.getBookById(bookId);
-        model.addAttribute("bookDTOS", bookDTOS);
+    public String detailBook(@RequestParam("bookId") int bookId, Model model) {
+        BookDTO book = bookService.getBookById(bookId);
+        model.addAttribute("book", book);
         return "admin/adminBook/manageBook/bookDetail";
     }
 

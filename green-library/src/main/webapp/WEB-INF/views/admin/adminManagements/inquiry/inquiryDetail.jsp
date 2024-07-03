@@ -82,7 +82,7 @@
 
     function prevPage(inquiryId) {
         $.ajax({
-            url: '/Inquiry/prevInquiry',
+            url: '/admin/Inquiry/prevInquiry',
             type: 'GET',
             data: { inquiryId: inquiryId },
             beforeSend: function (xhr) {
@@ -105,7 +105,7 @@
 
     function nextPage(inquiryId) {
         $.ajax({
-            url: '/Inquiry/nextInquiry',
+            url: '/admin/Inquiry/nextInquiry',
             type: 'GET',
             data: { inquiryId: inquiryId },
             beforeSend: function (xhr) {
@@ -128,7 +128,7 @@
 
     function createResponse(inquiryId) {
         $.ajax({
-            url: '/Inquiry/createBtnClick/' + inquiryId,
+            url: '/admin/Inquiry/createBtnClick/' + inquiryId,
             type: 'POST',
             beforeSend: function (xhr) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
