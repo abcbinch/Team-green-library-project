@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>도서관 자료 이용 안내</title>
     
     <link href="/css/public/header.css" type="text/css" rel="stylesheet">
 	<link href="/css/public/footer.css" type="text/css" rel="stylesheet">

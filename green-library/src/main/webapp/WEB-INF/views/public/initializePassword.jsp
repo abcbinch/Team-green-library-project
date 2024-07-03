@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>InitializePassword</title>
+<title>비밀번호 초기화</title>
 <style>
 html, body{
 	width:100%;

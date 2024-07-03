@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Library Main</title>
+    <title>그린도서관</title>
     <link href="/css/index.css" type="text/css" rel="stylesheet">
     <script>
    	let message = "${message}";
@@ -108,7 +108,7 @@
     <img class="arBtn" src="/images/goback.png"></div>
         <div class="window">
 	        <ul class="newbook">
-				<c:forEach var="num" begin="0" end="9">
+				<c:forEach var="num" begin="0" end="12">
 					
 					
 		        	<li>
@@ -135,7 +135,7 @@
         <div class="window2">
         <ul class="popbook">
 			
-			<c:forEach var="num" begin="0" end="9">
+			<c:forEach var="num" begin="0" end="12">
 								
 								
 	        	<li>
@@ -181,7 +181,7 @@
 						<c:forEach var="num" begin="0" end="5">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
-					        	<td>${announce[num].writerId}</td>
+					        	<td><div class="adminColor">${announce[num].writerId}</div></td>
 					        	<td>${announce[num].announcementTitle}</td>
 					        	<td>${announce[num].writeDate}</td>
 				        	</tr>

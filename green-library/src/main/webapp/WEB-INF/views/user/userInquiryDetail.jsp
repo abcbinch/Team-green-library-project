@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의 세부 내역</title>
 <link href="/css/public/header.css" type="text/css" rel="stylesheet">
 <link href="/css/public/footer.css" type="text/css" rel="stylesheet">
 <link href="/css/public/nav.css" type="text/css" rel="stylesheet">

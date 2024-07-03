@@ -217,7 +217,8 @@ select:focus{
 	background-color: white;
 }
 .backBtn, .goBtn,
-.backBtn2, .goBtn2{
+.backBtn2, .goBtn2
+{
 	width: 64px;
 	height: 64px;
 	opacity: 0.5;
@@ -245,7 +246,7 @@ select:focus{
     margin-right: 30px;
     left: 0;
     
-   	border: 2px solid #ecd9bC;
+/*    	border: 2px solid #ecd9bC; */
 	border-radius: 5px;
 }
 .infoBoard2 img{
@@ -253,11 +254,8 @@ select:focus{
 	height: 50px;
 }
 .infoBoard2 table{
-/* 	width: 1260px; */
 	width: 600px;
 	height: 250px;
-	
-	border: 2px solid red;
 }
 .infoBoard2 table td:hover{
 	cursor: pointer;
@@ -265,7 +263,6 @@ select:focus{
 .titleQuick{
 	display: flex;
 	justify-content: space-between;
-/* 	width: 1260px; */
 	width: 600px;
 	background: aliceblue;
 	border-radius: 5px 5px 0 0;
@@ -278,6 +275,7 @@ select:focus{
 	display: flex;
 	align-items: center;
 	width: 200px;
+	padding-left: 10px;
     font-size: 14pt;
 	font-weight: bold;
 }
@@ -290,8 +288,13 @@ select:focus{
 .infoBoard2 table:last-child{
 	border-bottom: 1px solid #a0cab0;
 }
-
+.adminColor{
+	padding: 5px 0 5px 0;
+	background: orange;
+	border-radius: 5px;
+}
 .infoBoard2 table td:nth-child(2){
+	padding-left: 10px;
 	width: 400px;
 }
 .infoBoard2 table td:not(:nth-child(2)){
@@ -301,7 +304,7 @@ select:focus{
 	width: 600px;
 	height: 480px;
 	margin-left: 30px;
-	border: 2px solid #ecd9bC;
+/* 	border: 2px solid #ecd9bC; */
 	border-radius: 5px;
 }
 

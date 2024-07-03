@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>facilityInfo</title>
+<title>부대시설 안내</title>
 <link href="/css/public/header.css" type="text/css" rel="stylesheet">
 <link href="/css/public/footer.css" type="text/css" rel="stylesheet">
 <link href="/css/facilityInfo.css" type="text/css" rel="stylesheet">
