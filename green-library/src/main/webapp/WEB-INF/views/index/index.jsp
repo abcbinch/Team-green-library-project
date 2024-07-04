@@ -108,7 +108,7 @@
     <img class="arBtn" src="/images/goback.png"></div>
         <div class="window">
 	        <ul class="newbook">
-				<c:forEach var="num" begin="0" end="12">
+				<c:forEach var="num" begin="0" end="10">
 					
 					
 		        	<li>
@@ -135,7 +135,7 @@
         <div class="window2">
         <ul class="popbook">
 			
-			<c:forEach var="num" begin="0" end="12">
+			<c:forEach var="num" begin="0" end="10">
 								
 								
 	        	<li>
