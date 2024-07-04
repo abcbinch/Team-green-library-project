@@ -35,7 +35,7 @@
 				    </sec:authorize>
 					</div>
 				    <sec:authorize access="!isAuthenticated()">
-				        <div id="login" class="loginLink">로그인 /</div>
+				        <div id="login" class="loginLink">로그인 &nbsp;/ &nbsp; </div>
 		          		<div id="userjoin" class="joinLink">회원가입</div>
 				    </sec:authorize>
 	      </div>
