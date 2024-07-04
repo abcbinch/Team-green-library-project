@@ -79,15 +79,15 @@ public class UserController {
 	public String userInfoModificationPerform(
 			@ModelAttribute("userInfo") @Valid UserInfoModificationDTO userInfoModificationDTO,
 			BindingResult result, @RequestParam(name = "auth", defaultValue = "abc") String userId, RedirectAttributes redirectAttributes) {
-		if (result.hasErrors()) {
-			for (ObjectError error : result.getAllErrors()) {
-				logger.error("Validation error: {}", error.getDefaultMessage());
-			}
-			redirectAttributes.addFlashAttribute("message", "유효하지 않은 입력입니다.");
-			return "redirect:/user/userInfo";
-		}
+		
+		  if (result.hasErrors()) { for (ObjectError error : result.getAllErrors()) {
+		  logger.error("Validation error: {}", error.getDefaultMessage()); }
+		  redirectAttributes.addFlashAttribute("message", "유효하지 않은 입력입니다."); return
+		  "redirect:/user/userInfo"; }
+		 
 
 		userService.update(userInfoModificationDTO, userId);
+		redirectAttributes.addFlashAttribute("message", "회원정보가 성공적으로 수정되었습니다.");
 		return "redirect:/user/userInfo";
 	}
 

@@ -7,15 +7,16 @@ const eselect = document.getElementById('emailSel');
 
 const pswdRegexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#^*_])[A-Za-z\d!@#^*_]{8,20}$/;
 
-form.addEventListener('submit', function(e) {
+/*form.addEventListener('submit', function(e) {
 	console.log(1);
 	concatInput();
 	if (!modifyCheck()) {
 		e.preventDefault();
 	}
-});
+});*/
 
 function modifyCheck() {
+	concatInput();
 	console.log(2);
 	if (!pswd.value) {
 		alert("비밀번호를 입력해주세요.");
@@ -47,7 +48,8 @@ function modifyCheck() {
 		alert("이메일 주소를 선택해주세요.");
 		return false;
 	}console.log(1);
-	alert("회원정보가 수정되었습니다.");
+	
+	/*alert("회원정보가 수정되었습니다.");*/
 	return true;
 }
 
