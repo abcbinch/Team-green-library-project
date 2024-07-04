@@ -173,7 +173,6 @@ public class BookController {
                 String fileName = storageService.store(file);
                 bookDTO.setImg(fileName);
             }
-
             bookService.updateBook(bookDTO);
 
             return ResponseEntity.ok("도서 정보가 업데이트되었습니다.");
