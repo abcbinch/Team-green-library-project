@@ -55,9 +55,9 @@ public class AcquisitionRequestController {
     //    검색
     @GetMapping("/search")
     public ResponseEntity<List<WishlistDTO>> searchBooks(
-            @RequestParam(value = "searchType", required = false) String searchType,
-            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-            @RequestParam(value = "completeKind", required = false) String completeKind) {
+            @RequestParam(value = "searchType", name = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", name = "searchKeyword", required = false) String searchKeyword,
+            @RequestParam(value = "completeKind", name = "completeKind", required = false) String completeKind) {
 
         List<WishlistDTO> wishBooks;
         if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
@@ -96,7 +96,7 @@ public class AcquisitionRequestController {
     // POST 요청 처리
     @PostMapping("/updateWishInfo/{id}")
     @ResponseBody // JSON 형태의 응답
-    public String updateBtnClick(@PathVariable int id) {
+    public String updateBtnClick(@PathVariable("id") int id) {
         return "success";
     }
 
@@ -110,7 +110,7 @@ public class AcquisitionRequestController {
 
     // 수정 페이지
     @GetMapping("/updateWishInfo/{wishlistId}")
-    public ResponseEntity<WishlistDTO> getwishlistById(@PathVariable int wishlistId) {
+    public ResponseEntity<WishlistDTO> getwishlistById(@PathVariable("wishlistId") int wishlistId) {
         WishlistDTO wish = acquisitionRequestService.getWishById(wishlistId);
 
         if (wish == null) {
