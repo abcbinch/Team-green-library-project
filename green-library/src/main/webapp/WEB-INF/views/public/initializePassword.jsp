@@ -70,13 +70,11 @@ h1{
 	<input type="submit" value="확인">
 </form>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
     let form = document.getElementById("form");
     form.addEventListener('submit', function(e) {
         /* e.preventDefault(); */
         if (!Check()) {
         	e.preventDefault();
-            return;
         }
         /* const csrfToken = document.querySelector('input[name="_csrf"]').value;
         const formData = new FormData(form);
@@ -94,8 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             alert("에러가 발생했습니다. 다시 시도해주세요.");
-        });
-    }); */
+        });*/
+    });
 
     const pswd = document.getElementById('pw');
     const passCheck = document.getElementById('pwcheck');
@@ -119,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return true;
     }
-});
 </script>
 </body>
 </html>
