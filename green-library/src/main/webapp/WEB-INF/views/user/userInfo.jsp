@@ -160,16 +160,18 @@
 	</div>
 	<div id="modalContainer" class="hidden">
 		<div id="modalContent">
-			<h3 style="text-align: center;">
-				<b>정말로 계정을 삭제하시겠습니까?</b>
-			</h3>
-			<br>
-			<form action="userDelete" method="post" id="form">
+			<h4 style="text-align: center;">
+				<b>회원탈퇴를 위해 비밀번호를 입력해주세요.</b>
+			</h4>
+			<form action="userDelete" method="post">
 
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 				<div style="display: flex; justify-content: center;">
-					<input class="delete" type="submit" value="계정삭제"> <input
+				<input type="password" name="user_pass" style="width:200px; height:30px; font-size:2em; ">
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<input class="delete" type="submit" value="회원 탈퇴"> <input
 						id="cancel" class="cancel" type="button" value="취소">
 				</div>
 

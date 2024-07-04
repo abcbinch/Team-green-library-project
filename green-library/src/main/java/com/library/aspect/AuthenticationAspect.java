@@ -1,4 +1,4 @@
-package com.library.aspect.user;
+package com.library.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
