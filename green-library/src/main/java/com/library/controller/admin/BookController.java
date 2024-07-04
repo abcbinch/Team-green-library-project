@@ -49,8 +49,8 @@ public class BookController {
     //    검색
     @GetMapping("/search")
     public ResponseEntity<List<BookDTO>> searchBooks(
-            @RequestParam(value = "searchType", required = false) String searchType,
-            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+            @RequestParam(value = "searchType", name = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", name = "searchKeyword", required = false) String searchKeyword) {
 
         List<BookDTO> books;
 
@@ -106,7 +106,7 @@ public class BookController {
     //    책 생성 (등록)
     @PostMapping("/createBook")
     public String createBook(@ModelAttribute BookDTO bookDTO,
-                             @RequestParam(value = "image", required = false) MultipartFile file,
+                             @RequestParam(value = "image", name = "image", required = false) MultipartFile file,
                              HttpServletRequest request) {
         try {
             AuthorDTO authorDTO = new AuthorDTO();
@@ -135,7 +135,7 @@ public class BookController {
     //    수정 페이지 버튼
     @PostMapping("/modifyBtnClick/{id}")
     @ResponseBody
-    public String bookModifyBtnClick(@PathVariable int id) {
+    public String bookModifyBtnClick(@PathVariable("id") int bookId) {
         return "success";
     }
 
@@ -148,7 +148,7 @@ public class BookController {
     }
 
     @GetMapping("/getBookById/{bookId}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable int bookId) {
+    public ResponseEntity<BookDTO> getBookById(@PathVariable("bookId") int bookId) {
         BookDTO book = bookService.getBookById(bookId);
         if (book == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -158,7 +158,7 @@ public class BookController {
 
     @PostMapping("/updateBook")
     public ResponseEntity<String> updateBook(@ModelAttribute BookDTO bookDTO,
-                                             @RequestParam(value = "image", required = false) MultipartFile file,
+                                             @RequestParam(value = "image", name = "image", required = false) MultipartFile file,
                                              HttpServletRequest request) {
         try {
             AuthorDTO authorDTO = new AuthorDTO();
@@ -187,7 +187,7 @@ public class BookController {
     // 조회 페이지
     @PostMapping("/details/{id}")
     @ResponseBody
-    public String details(@PathVariable int id) {
+    public String details(@PathVariable("id") int bookId) {
         return "success";
     }
 
