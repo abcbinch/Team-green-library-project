@@ -4,14 +4,12 @@ import com.library.dto.admin._normal.UserDTO;
 import com.library.dto.admin.userManagement.UserDetailDTO;
 import com.library.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller("AdminUserController")
 @RequestMapping("/admin/User")
@@ -34,8 +32,8 @@ public class UserController {
 
     @GetMapping("/search")
     public ResponseEntity<List<UserDTO>> searchUsers(
-            @RequestParam(value = "searchType", required = false) String searchType,
-            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+            @RequestParam(value = "searchType", name = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", name = "searchKeyword", required = false) String searchKeyword) {
 
         List<UserDTO> users;
 

@@ -40,8 +40,8 @@ public class AnnounceController {
     //    검색
     @GetMapping("/search")
     public ResponseEntity<List<AnnouncementDTO>> searchAnnounce(
-            @RequestParam(value = "searchType", required = false) String searchType,
-            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+            @RequestParam(value = "searchType", name = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword", name = "searchKeyword", required = false) String searchKeyword) {
 
         List<AnnouncementDTO> announce = List.of();
         if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
@@ -73,7 +73,7 @@ public class AnnounceController {
     @PostMapping("/uploadAnnounce")
     public String uploadAnnounce(@RequestParam("announceTitle") String announceTitle,
                                  @RequestParam("announceContent") String announceContent,
-                                 @RequestParam(value = "file", required = false) MultipartFile file,
+                                 @RequestParam(value = "file", name = "file", required = false) MultipartFile file,
                                  HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String adminId = auth.getName();
@@ -88,7 +88,7 @@ public class AnnounceController {
     // POST 요청 처리
     @PostMapping("/updateBtnClick/{id}")
     @ResponseBody
-    public String updateBtnClick(@PathVariable int id) {
+    public String updateBtnClick(@PathVariable("id") int id) {
         return "success";
     }
 
@@ -102,7 +102,7 @@ public class AnnounceController {
 
     // 수정 페이지
     @GetMapping("/getAnnounceById/{announceId}")
-    public ResponseEntity<AnnouncementDTO> getAnnounceById(@PathVariable int announceId) {
+    public ResponseEntity<AnnouncementDTO> getAnnounceById(@PathVariable("id") int announceId) {
         AnnouncementDTO announce = announceService.getAnnounceById(announceId);
         if (announce == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -114,7 +114,7 @@ public class AnnounceController {
     @PostMapping("/updateAnnounce")
     public String uploadComplete(@RequestParam("announceTitle") String announceTitle,
                                  @RequestParam("announceContent") String announceContent,
-                                 @RequestParam(value = "file", required = false) MultipartFile file,
+                                 @RequestParam(value = "file", name = "file", required = false) MultipartFile file,
                                  HttpServletRequest request) {
         String adminId = request.getParameter("adminId");
         if (file == null || file.isEmpty()) {

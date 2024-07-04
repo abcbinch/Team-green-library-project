@@ -256,6 +256,13 @@ main .mainContainer .rightContainer {
     overflow: scroll;
 }
 
+.mainContainer .rightContainer .loanInfo table thead {
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+
+
 .mainContainer .rightContainer .loanInfo table td {
     height: 30px;
     text-align: center;

@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class InquiryController {
         this.inquiryService = inquiryService;
     }
 
-    //    초기 출력
+    // 초기 출력
     @GetMapping()
     public String inquiry(Model model) {
         List<InquiryDTO> inquiry = inquiryService.allInquiryManage(false, false);
@@ -33,13 +35,14 @@ public class InquiryController {
         return "admin/adminManagements/inquiry/inquiryManage";
     }
 
-    //    검색
+    // 검색
     @GetMapping("/search")
+    @ResponseBody
     public ResponseEntity<List<InquiryDTO>> searchInquiries(
-            @RequestParam(value = "searchType", required = false) String searchType,
-            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-            @RequestParam(value = "showAnswered", required = false, defaultValue = "false") boolean showAnswered,
-            @RequestParam(value = "showOnlyAnswered", required = false, defaultValue = "false") boolean showOnlyAnswered) {
+            @RequestParam(value = "searchType",name = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword",name = "searchKeyword", required = false) String searchKeyword,
+            @RequestParam(value = "showAnswered",name = "showAnswered", required = false, defaultValue = "false") boolean showAnswered,
+            @RequestParam(value = "showOnlyAnswered",name = "showOnlyAnswered", required = false, defaultValue = "false") boolean showOnlyAnswered) {
 
         List<InquiryDTO> inquiries;
         if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
@@ -50,8 +53,9 @@ public class InquiryController {
         return ResponseEntity.ok(inquiries);
     }
 
-    //    삭제
+    // 삭제
     @PostMapping("/deleteInquiry")
+    @ResponseBody
     public ResponseEntity<String> deleteInquiry(@RequestBody List<String> inquiryIds) {
         inquiryService.deleteInquiry(inquiryIds);
         return ResponseEntity.ok("삭제 성공");
@@ -59,8 +63,8 @@ public class InquiryController {
 
     // POST 요청 처리
     @PostMapping("/createBtnClick/{id}")
-    @ResponseBody // JSON 형태의 응답을 반환할 경우 사용
-    public String createBtnClick(@PathVariable int id) {
+    @ResponseBody
+    public String createBtnClick(@PathVariable("id") int inquiryid) {
         return "success";
     }
 
@@ -79,8 +83,6 @@ public class InquiryController {
         return "admin/adminManagements/inquiry/inquiryWrite";
     }
 
-
-
     // 질의 답변 등록 처리
     @PostMapping("/UploadInquiry")
     @ResponseBody
@@ -88,9 +90,8 @@ public class InquiryController {
                                 @RequestParam("responseContents") String responseContents,
                                 HttpSession session) {
         try {
-//            String adminId = (String) session.getAttribute("adminId");
-            String adminId = "admin0";
-
+            String adminId = getCurrentAdminId();
+            System.out.println(adminId);
             inquiryService.createInquiry(inquiryId, responseContents, adminId);
             return "등록 성공";
         } catch (Exception e) {
@@ -99,10 +100,19 @@ public class InquiryController {
         }
     }
 
+    private String getCurrentAdminId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        } else {
+            return principal.toString();
+        }
+    }
+
     // POST 요청 처리
     @PostMapping("/viewBtnClick/{id}")
-    @ResponseBody // JSON 형태의 응답을 반환할 경우 사용
-    public String viewBtnClick(@PathVariable int id) {
+    @ResponseBody
+    public String viewBtnClick(@PathVariable("id") int id) {
         return "success";
     }
 
@@ -115,23 +125,24 @@ public class InquiryController {
     }
 
     @GetMapping("/prevInquiry")
+    @ResponseBody
     public ResponseEntity<InquiryDTO> getPreviousInquiry(@RequestParam("inquiryId") int inquiryId) {
         try {
             InquiryDTO prevInquiry = inquiryService.previousInquiry(inquiryId);
             return new ResponseEntity<>(prevInquiry, HttpStatus.OK);
-
         } catch (Exception e) {
-            return null;
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/nextInquiry")
+    @ResponseBody
     public ResponseEntity<InquiryDTO> getNextInquiry(@RequestParam("inquiryId") int inquiryId) {
         try {
             InquiryDTO nextInquiry = inquiryService.nextInquiry(inquiryId);
             return new ResponseEntity<>(nextInquiry, HttpStatus.OK);
         } catch (Exception e) {
-            return null;
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
