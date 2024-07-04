@@ -158,7 +158,6 @@
                         endPrint = len;
                     }
                     for (let i = startPrint; i < endPrint; i++) {
-                        console.log(response)
                         responseText += "<tr>";
                         responseText += "<td><input type='checkbox' name='selectedBooks' value='" + response[i].bookId + "'></td>";
                         responseText += "<td>" + response[i].bookId + "</td>";

@@ -147,14 +147,12 @@ public class AcquisitionRequestRepositoryImpl implements AcquisitionRequestRepos
     @Override
     public void acceptsAcquisition(List<String> requestId) {
         String sql = "UPDATE WISHLISTS SET COMPLETE = 'Y' WHERE WISHLIST_ID IN (" + String.join(",", requestId) + ")";
-        System.out.println(sql);
         jdbcTemplate.update(sql);
     }
 
     @Override
     public void deleteAcquisition(List<String> requestId) {
         String sql = "UPDATE WISHLISTS SET COMPLETE = 'N' WHERE WISHLIST_ID IN (" + String.join(",", requestId) + ")";
-        System.out.println(sql);
         jdbcTemplate.update(sql);
     }
 

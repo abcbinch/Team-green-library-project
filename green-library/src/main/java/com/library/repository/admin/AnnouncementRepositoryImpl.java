@@ -147,20 +147,12 @@ public class AnnouncementRepositoryImpl implements AnnouncementRepository {
     public void updateAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file) {
         String sql = "UPDATE ANNOUNCEMENTS SET ANNOUNCE_TITLE = ?, CONTENTS = ?, FILENAME = ? WHERE ANNOUNCEMENT_ID = ?";
         jdbcTemplate.update(sql, announceTitle, announceContent, file.getOriginalFilename(), adminId);
-        System.out.println(announceTitle);
-        System.out.println(adminId);
-        System.out.println(announceContent);
-        System.out.println(file);
     }
 
     @Override
     public void updateAnnounceWithoutFile(String announceTitle, String adminId, String announceContent, String aNull) {
         String sql = "UPDATE ANNOUNCEMENTS SET ANNOUNCE_TITLE = ?, CONTENTS = ?, FILENAME = ? WHERE ANNOUNCEMENT_ID = ?";
         jdbcTemplate.update(sql, announceTitle, announceContent, aNull, adminId);
-        System.out.println(announceTitle);
-        System.out.println(adminId);
-        System.out.println(announceContent);
-        System.out.println(aNull);
     }
 
     // 공지사항 삭제

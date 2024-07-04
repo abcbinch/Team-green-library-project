@@ -91,7 +91,6 @@ public class UserController {
 		userService.update(userInfoModificationDTO, userId);
 		return "redirect:/user/userInfo"; }
 	 
-
 	@PostMapping("/userDelete")
 	public String userDelete(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "user_pass", defaultValue = "error") String password,
 			RedirectAttributes redirectAttributes, HttpSession session) {

@@ -12,7 +12,7 @@ form.addEventListener('submit', function(e) {
 	if (!modifyCheck()) {
 		e.preventDefault();
 	}
-});
+});*/
 
 function modifyCheck() {
 	if (!pswd.value) {
