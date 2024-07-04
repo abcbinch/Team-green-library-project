@@ -26,7 +26,7 @@
 	<br>
 	<br>
 	<main>
-		<form action="userInfoModification" method="post" id="form">
+		<form action="userInfoModification" method="post" id="form"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="container">
 				<table style="border-collapse: collapse;">
