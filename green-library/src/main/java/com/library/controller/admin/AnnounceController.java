@@ -88,7 +88,7 @@ public class AnnounceController {
     // POST 요청 처리
     @PostMapping("/updateBtnClick/{id}")
     @ResponseBody
-    public String updateBtnClick(@PathVariable("id") int id) {
+    public String updateBtnClick(@PathVariable("id") int announceId) {
         return "success";
     }
 
@@ -102,7 +102,7 @@ public class AnnounceController {
 
     // 수정 페이지
     @GetMapping("/getAnnounceById/{announceId}")
-    public ResponseEntity<AnnouncementDTO> getAnnounceById(@PathVariable("id") int announceId) {
+    public ResponseEntity<AnnouncementDTO> getAnnounceById(@PathVariable("announceId") int announceId) {
         AnnouncementDTO announce = announceService.getAnnounceById(announceId);
         if (announce == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
