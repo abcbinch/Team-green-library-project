@@ -167,7 +167,6 @@ public class MainController {
 	 */
     
     @PostMapping("/initializePassword")
-	/* @ResponseBody */
 	public String initializePassword(@ModelAttribute("user") @Valid initializePasswordDTO userDTO, BindingResult result, Model model) {
     	userService.initializePassword(userDTO);
     	if (result.hasErrors()) {
