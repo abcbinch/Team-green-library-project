@@ -13,16 +13,8 @@ function hideFirstTime(totalPage){
 }
 
 function showPage(pageNumber, totalPage) {
-    console.log("Total pages: " + totalPage);
-    console.log("PageNumber: " + pageNumber);
-    
-    
     var totalGroups = Math.ceil(totalPage / 5);
     var currentGroup = Math.ceil(pageNumber / 5);
-    
-    console.log("totalGroups: " + totalGroups);
-    console.log("currentGroup: " + currentGroup);
-    
     // > >> 버튼 생성 조건
     //여기만 하면 됨
     if (currentGroup == totalGroups) {
@@ -61,8 +53,6 @@ function showPage(pageNumber, totalPage) {
     });
     
     var k = Math.floor((pageNumber - 1) / 5) * 5 + 1;
-	console.log("갸갸갸 : " + k);
-	
     document.getElementById('pageGroup_' + k).classList.remove('hidden');
 	
 	

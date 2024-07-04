@@ -91,7 +91,6 @@ public class InquiryController {
                                 HttpSession session) {
         try {
             String adminId = getCurrentAdminId();
-            System.out.println(adminId);
             inquiryService.createInquiry(inquiryId, responseContents, adminId);
             return "등록 성공";
         } catch (Exception e) {
