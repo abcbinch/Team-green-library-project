@@ -86,7 +86,6 @@
             url: '/admin/BuyBook/updateWishInfo/' + wishlistId,
             type: 'GET',
             success: function (response) {
-                console.log(response)
                 if (response) {
                     $('#wishId').text(response.wishlistId);
                     $('#isbn').val(response.wishIsbn);

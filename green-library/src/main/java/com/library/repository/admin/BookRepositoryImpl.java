@@ -304,8 +304,6 @@ public class BookRepositoryImpl implements BookRepository {
         String sql = "UPDATE BOOKS SET AUTHOR_ID = ?, PUBLISHER_ID = ?, GENRE_FULLNAME = ?, " +
                 "TITLE = ?, IMG = ?, ISBN = ?, LOCATION = ?, SUMMARY = ?, PUBLICATION_DATE = ? " +
                 "WHERE BOOK_ID = ?";
-        System.out.println(book.getAuthor().getAuthorName());
-        System.out.println(book.getPublisher().getPublisherName());
 
         return jdbcTemplate.update(sql, authorId, publisherId, book.getGenreFullname(), book.getTitle(), book.getImg(), book.getIsbn(),
                 book.getLocation(), book.getSummary(), new Date(book.getPublicationDate().getTime()),

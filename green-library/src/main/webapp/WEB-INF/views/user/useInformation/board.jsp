@@ -126,7 +126,6 @@
 //     }
 
 //     function submitForm(action, id) {
-//     	console.log(id);
 //         const csrfToken = document.querySelector('input[name="_csrf"]').value;
 
 //         const formData = new FormData();

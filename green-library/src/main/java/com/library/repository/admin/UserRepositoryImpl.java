@@ -5,7 +5,6 @@ import com.library.dto.admin._normal.SuspensionDTO;
 import com.library.dto.admin._normal.UserDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -197,6 +196,5 @@ public class UserRepositoryImpl implements UserRepository {
 //        String sql2 = "UPDATE SUSPENSIONS SET END_DATE = SYSDATE WHERE USER_ID = ?";
         String sql2 = "DELETE FROM SUSPENSIONS WHERE USER_ID = ? AND SUSPENSION_ID = ?";
         jdbcTemplate.update(sql2, userId, suspenId);
-        System.out.println("complete");
     }
 }

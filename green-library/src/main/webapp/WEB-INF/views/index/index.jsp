@@ -174,7 +174,6 @@
 				<c:set var="annoList" value="${fn:length(announce)}"/>
 	<script>
 	let a = "${annoList}";
-	console.log(a);
 	</script>
 				<c:choose>
 					<c:when test="${annoList > 7}">
