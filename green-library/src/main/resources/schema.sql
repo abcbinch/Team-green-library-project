@@ -43,7 +43,7 @@ CREATE TABLE books
     img              VARCHAR2(255),
     isbn             VARCHAR2(20),
     location         VARCHAR2(50),
-    availability     CHAR(1)    DEFAULT '1' CHECK (availability IN ('0', '1')), --0 : 대여가능, 1 : 대여불가능
+    availability     CHAR(1)    DEFAULT '0' CHECK (availability IN ('0', '1')), --0 : 대여가능, 1 : 대여불가능
     summary          VARCHAR2(4000),
     publication_date DATE,
     borrow_count     NUMBER(10) DEFAULT 0,

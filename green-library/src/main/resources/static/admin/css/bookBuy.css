@@ -107,7 +107,7 @@ button:focus {
 }
 
 .totalContainer .outputBoard .results .btnWrap input {
-    color: var(--button-default-color);
+    color: #2c3e50;
     border: 1px solid #2c3e50;
     width: 80px;
     height: 36px;
