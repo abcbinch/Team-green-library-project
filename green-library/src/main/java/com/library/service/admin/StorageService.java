@@ -37,12 +37,10 @@ public class StorageService {
         // Copy the file to the first location
         Path filePath = uploadPath.resolve(fileName);
         Files.write(filePath, fileContent);
-        System.out.println(filePath);
 
         // Copy the file to the second location
         Path filePath2 = uploadPath2.resolve(fileName);
         Files.write(filePath2, fileContent);
-        System.out.println(filePath2);
 
         return fileName;
     }

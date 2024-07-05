@@ -99,7 +99,6 @@
                 // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
             },
             success: function (response) {
-                console.log(response.img)
                 if (response) {
                     $('#bookIdx').text(response.bookId);
                     $('#bookTitle').val(response.title);
