@@ -97,7 +97,6 @@
             beforeSend : function (xhr){
                 // xhr.setRequestHeader("Accept-Charset","UTF-8");
                 // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
-                console.log(encodeURIComponent(xhr))
             },
             success: function (response) {
                 console.log(response.img)
@@ -117,7 +116,7 @@
                     $('#bookLocation').val(response.location);
                     $('#bookSummary').val(response.summary);
                     if (response.img) {
-                        $('#preview').attr('src', 'static/documents/' + response.img);
+                        $('#preview').attr('src', '/documents/' + response.img);
                     }
                     $('.deleteBtn').val('수정').attr('onclick', 'updateBook(' + response.bookId + ')');
                 }

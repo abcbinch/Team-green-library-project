@@ -19,7 +19,6 @@ public class StorageService {
     @Value("${file.upload-dir2}")
     private String uploadDir2;
 
-
     public String store(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
         Path uploadPath = Paths.get(uploadDir);
@@ -32,13 +31,19 @@ public class StorageService {
             Files.createDirectories(uploadPath2);
         }
 
+        // Read the file content into a byte array
+        byte[] fileContent = file.getBytes();
+
+        // Copy the file to the first location
         Path filePath = uploadPath.resolve(fileName);
-        Files.copy(file.getInputStream(), filePath);
+        Files.write(filePath, fileContent);
         System.out.println(filePath);
+
+        // Copy the file to the second location
         Path filePath2 = uploadPath2.resolve(fileName);
-        Files.copy(file.getInputStream(), filePath2);
+        Files.write(filePath2, fileContent);
         System.out.println(filePath2);
+
         return fileName;
     }
-
 }
