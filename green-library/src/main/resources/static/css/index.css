@@ -188,6 +188,7 @@ select:focus{
 .bookSwipe .newbook li,
 .bookSwipe2 .popbook li{
 	display: inline-block;
+	vertical-align: top;
 	padding-left: 24px;
 	padding-right: 24px;
 	padding-top: 20px;
