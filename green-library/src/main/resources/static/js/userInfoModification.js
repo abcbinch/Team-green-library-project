@@ -5,7 +5,7 @@ const email = document.getElementById('email');
 const mailspace = document.getElementById('email2');
 const eselect = document.getElementById('emailSel');
 
-const pswdRegexp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#^*_]).{8,20}$/;
+const pswdRegexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#^*_])[A-Za-z\d!@#^*_]{8,20}$/;
 
 form.addEventListener('submit', function(e) {
 	concatInput();
@@ -26,7 +26,7 @@ function modifyCheck() {
 		return false;
 	}
 	if (!pswdRegexp.test(pswd.value)) {
-		alert("비밀번호는 숫자, 영문 대소문자, 특수문자 !, @, #, ^, *, _ 중 3가지 이상 조합이어야 합니다.");
+		alert("비밀번호는 숫자, 영문 대소문자, 특수문자 !, @, #, ^, *, _ 를 모두 포함한 조합이어야 합니다.");
 		pswd.focus();
 		return false;
 	}
@@ -65,12 +65,6 @@ function concatInput() {
 	let fullPhone = document.getElementById("fullPhone");
 
 	fullPhone.value = brief[0].value + brief[1].value + brief[2].value;
-	
-	let str = birthdate.value;
-	if (!str.includes("-")) {
-        let formattedStr = str.slice(0, 4) + "-" + str.slice(4, 6) + "-" + str.slice(6, 8);
-        birthdate.value = formattedStr;
-	}
 }
 function goBack() {
     if (confirm("회원정보 수정을 취소하시겠습니까?")) {

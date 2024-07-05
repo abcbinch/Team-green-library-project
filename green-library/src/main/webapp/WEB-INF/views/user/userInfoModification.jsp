@@ -26,7 +26,7 @@
 	<br>
 	<br>
 	<main>
-		<form action="userInfoModification" method="post" id="form">
+		<form action="userInfoModification" method="post" id="form"> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="container">
 				<table style="border-collapse: collapse;">
@@ -85,8 +85,8 @@
 						<div class="comment">이메일은 회원정보 찾기에 이용됩니다. [<span style="color:red;">정확한 주소를 입력해주세요.</span>]</div></td>
 					</tr>
 					<tr>
-						<td colspan="2" style="border: none; text-align: center;"><input
-							type="submit" value="확인">
+						<td colspan="2" style="border: none; text-align: center;">
+							<input type="submit" value="확인">
 							<input type="button" value="뒤로" onclick="goBack()">
 						</td>
 					</tr>
