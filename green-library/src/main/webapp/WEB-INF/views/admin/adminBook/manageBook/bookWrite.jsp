@@ -51,15 +51,21 @@
                 <td><input type="text" name="bookLocation" id="bookLocation"></td>
             </tr>
             <tr>
-                <th>이미지</th>
+                <th>
+                    <div>
+                        <p>이미지</p>
+                        <p class="caution">업로드 시, 10여분 정도의 시간이 소요됩니다</p>
+                    </div>
+                </th>
                 <td id="fileRow">
                     <div class="fileDiv">
                         <input type="file" name="fileInput" id="fileInput" onchange="readURL(this)">
-                        <img id="preview" class="previewImg"/>
+                        <img id="preview" class="previewImg" />
                     </div>
                 </td>
-
-                <th>내용<span>*</span></th>
+                <th>
+                    <div>내용<span>*</span></div>
+                </th>
                 <td><textarea name="bookSummary" id="bookSummary"></textarea></td>
             </tr>
         </table>
@@ -78,6 +84,11 @@
             fetchBookDetails(bookId);
         }
     });
+
+    function goToList() {
+        window.location.href = '/admin/Book';
+    }
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -94,10 +105,6 @@
         $.ajax({
             url: '/admin/Book/getBookById/' + bookId,
             type: 'GET',
-            beforeSend : function (xhr){
-                // xhr.setRequestHeader("Accept-Charset","UTF-8");
-                // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
-            },
             success: function (response) {
                 if (response) {
                     $('#bookIdx').text(response.bookId);
@@ -127,22 +134,17 @@
         });
     }
 
-
-    function goToList() {
-        window.location.href = '/admin/Book';
-    }
-
     function isValidDate(dateString) {
-        // YYYY-MM-DD 형식의 정규표현식
         const datePattern = /^\d{4}-\d{2}-\d{2}$/;
         return datePattern.test(dateString);
     }
+
     function createBook() {
         const title = $('#bookTitle').val().trim();
         const group = $('#bookGroup').val().trim();
         const authorName = $('#bookWriter').val().trim();
         const publisherName = $('#bookPublisher').val().trim();
-        const publicationDate = $('#publicationDate').val().trim(); // 문자열로 처리
+        const publicationDate = $('#publicationDate').val().trim();
         const isbn = $('#bookISBN').val().trim();
         const location = $('#bookLocation').val().trim();
         const summary = $('#bookSummary').val().trim();
@@ -166,9 +168,9 @@
         formData.append('location', location);
         formData.append('summary', summary);
 
-        const fileInput = $('#fileInput')[0].files[0];
-        if (fileInput) {
-            formData.append('image', fileInput);
+        const fileInput = $('#fileInput')[0];
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
         }
 
         $.ajax({
@@ -177,15 +179,14 @@
             data: formData,
             processData: false,
             contentType: false,
-            beforeSend: function (xhr) {
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
             },
-            success: function (data) {
-                alert('도서 등록이 완료되었습니다.');
+            success: function(response) {
+                alert('도서가 성공적으로 등록되었습니다.');
                 window.location.href = '/admin/Book';
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error("오류 발생: " + error);
                 alert('도서 등록에 실패했습니다. 다시 시도해주세요.');
             }

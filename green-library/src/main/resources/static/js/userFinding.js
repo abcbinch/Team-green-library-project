@@ -39,6 +39,7 @@ function ID() {
 		
 		table.removeChild(tr);
 		let form = document.getElementById("form");
+		form.action = "userFindingId";
 	}
 }
 function PW() {
@@ -67,6 +68,7 @@ function PW() {
 		tr.innerHTML = "<td class='text'><div>아이디</div></td><td class='input'><input type='text' name='user_id' id='userid'></td>"
 		table.appendChild(tr);
 		let form = document.getElementById("form");
+		form.action = "userFindingPw";
 	}
 }
 
