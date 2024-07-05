@@ -24,37 +24,37 @@ INSERT INTO publishers (publisher_id, publisher_name) VALUES (10, 'Springer Natu
 
 -- 유저
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id1', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름1', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('ironsoo999', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '김철수', 'ironsoo999@naver.com', '010-3563-2610', '1994-11-21', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id2', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('eeee0', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이영희', 'eeee0@gmail.com', '010-3251-4210', '2000-03-05', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id3', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('park101', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '박대기', 'park101@hanmail.net', '010-3570-3467', '1997-07-07', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id4', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('gizza123', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이기자', 'gizza123@daum.net', '010-3738-2353', '1998-01-24', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id5', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('donggg11', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '마동기', 'donggg11@naver.com', '010-5136-4583', '1995-09-11', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id6', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름6', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('joooo09', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '주원장', 'joooo09@naver.com', '010-4685-5680', '1990-08-14', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id7', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('sanghoon010', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '한상훈', 'sanghoon010@gmail.com', '010-1422-2350', '1996-09-09', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id8', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('ar121am', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '유아름', 'ar121am@nate.com', '010-3780-5400', '1991-06-26', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id9', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('arJJam01', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '유아람', 'arJJam01@gmail.com', '010-7464-3205', '1993-07-21', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id10', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('dodook44', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '기더덕', 'dodook44@nate.com', '010-4705-3056', '1999-10-04', 5, '1');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id11', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('nam9oong', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '남궁조원', 'nam9oong@gmail.com', '010-4628-4026', '1994-05-15', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id12', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('99pilsng', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '구필승', '99pilsng@nate.com', '010-8606-4608', '1990-04-07', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id13', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('9o9ilDong', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '고길동', '9o9ilDong@hanmail.net', '010-6840-1015', '1996-04-07', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id14', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('soon1529', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '노형순', 'soon1529@gmail.com', '010-4640-4312', '1990-03-01', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('id15', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('gita1212', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '배기타', 'gita1212@nate.com', '010-4501-5454', '1998-11-23', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
-VALUES('gigi1234', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이름2', 'e@gmail.com', '000-0000-0000', '1990-01-01', 0, '0');
+VALUES('gigi1234', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '홍길순', 'gigi1234@gmail.com', '010-0405-4250', '1993-04-05', 0, '0');
 -- 유저 비밀번호(pass1)해싱한값
 
 
