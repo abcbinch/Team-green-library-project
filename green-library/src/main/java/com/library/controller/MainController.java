@@ -110,16 +110,21 @@ public class MainController {
 
 	@PostMapping("/userFindingId")
 	public String userFindingId(@ModelAttribute("user") @Valid UserFindingIdDTO userDTO, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			for (ObjectError error : result.getAllErrors()) {
-				logger.error("Validation error: {}", error.getDefaultMessage());
+		try {
+			if (result.hasErrors()) {
+				for (ObjectError error : result.getAllErrors()) {
+					logger.error("Validation error: {}", error.getDefaultMessage());
+				}
+				model.addAttribute("message", "유효하지 않은 입력입니다.");
+				return "public/userFinding";
 			}
+			String userId = userService.findUserId(userDTO);
+			model.addAttribute("userId", userId);
+			return "public/userFinding";
+		} catch (DatabaseException e) {
 			model.addAttribute("message", "유효하지 않은 입력입니다.");
 			return "public/userFinding";
 		}
-		String userId = userService.findUserId(userDTO);
-		model.addAttribute("userId", userId);
-		return "public/userFinding";
 	}
 	
 	@PostMapping("/userFindingPw")

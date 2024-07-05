@@ -188,7 +188,7 @@
 						</c:forEach>
 					</c:when>
 					<c:when test="${annoList <= 7}">
-						<c:forEach var="num" begin="0" end="${annoList-1}">
+						<c:forEach var="num" begin="0" end="${(annoList > 0) ? (annoList - 1) : 0}">
 						<table>
 							<tr onclick="location.href='notificationDetail?announcementId=${announce[num].announcementId}'">
 					        	<td>${announce[num].writerId}</td>
