@@ -61,21 +61,15 @@ public class UserController {
 	
 	@PostMapping("/userPassCheck")
 	public String userPassCheckPerform(RedirectAttributes redirectAttributes, @RequestParam(name = "auth", defaultValue = "abc") String userId,
-			@RequestParam(name = "user_pass", defaultValue = "error") String password) {
+			@RequestParam(name = "user_pass", defaultValue = "error") String password, Model model) {
 		if(password.equals("error")) 
 			return "redirect:/user/userInfo";
 		boolean check = userService.checkUserPass(userId, password);
 		if(!check) {
-			redirectAttributes.addFlashAttribute("message","정보가 일치하지 않습니다.");
+			redirectAttributes.addFlashAttribute("message","비밀번호가 일치하지 않습니다.");
 			return "redirect:/user/userInfo";
 		}
 			
-		return "redirect:/user/userInfoModification";
-	}
-
-	@GetMapping("/userInfoModification")
-	public String userInfoModification(Model model, @RequestParam(name = "auth", defaultValue = "abc") String userId) {
-
 		UserInfoDTO userDTO = userService.getUserInfo(userId);
 		model.addAttribute("userInfo", userDTO);
 		return "user/userInfoModification";
@@ -83,23 +77,30 @@ public class UserController {
 
 	@PostMapping("/userInfoModification")
 	public String userInfoModificationPerform(
-			@ModelAttribute("userInfo") @Valid UserInfoModificationDTO userInfoModificationDTO,
-			@RequestParam(name = "auth", defaultValue = "abc") String userId, BindingResult result, Model model) {
+
+			@ModelAttribute("userInfo") @Valid UserInfoModificationDTO userInfoModificationDTO, BindingResult result,
+			@RequestParam(name = "auth", defaultValue = "abc") String userId, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				logger.error("Validation error: {}", error.getDefaultMessage());
 			}
-			model.addAttribute("message", "유효하지 않은 입력입니다.");
-			return "user/userInfoModification";
+			redirectAttributes.addFlashAttribute("message", "유효하지 않은 입력입니다.");
+			return "redirect:/user/userInfo";
 		}
 
 		userService.update(userInfoModificationDTO, userId);
-		return "redirect:/user/userInfo";
-	}
-
+		return "redirect:/user/userInfo"; }
+	 
 	@PostMapping("/userDelete")
-	public String userDelete(@RequestParam(name = "auth", defaultValue = "abc") String userId,
+	public String userDelete(@RequestParam(name = "auth", defaultValue = "abc") String userId, @RequestParam(name = "user_pass", defaultValue = "error") String password,
 			RedirectAttributes redirectAttributes, HttpSession session) {
+		if(password.equals("error")) 
+			return "redirect:/user/userInfo";
+		boolean check = userService.checkUserPass(userId, password);
+		if(!check) {
+			redirectAttributes.addFlashAttribute("message","비밀번호가 일치하지 않습니다.");
+			return "redirect:/user/userInfo";
+		}
 		userService.deleteUser(userId);
 		session.invalidate();
 		redirectAttributes.addFlashAttribute("message", "userDelete");

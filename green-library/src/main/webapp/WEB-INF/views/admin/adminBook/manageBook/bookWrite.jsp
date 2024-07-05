@@ -94,6 +94,10 @@
         $.ajax({
             url: '/admin/Book/getBookById/' + bookId,
             type: 'GET',
+            beforeSend : function (xhr){
+                // xhr.setRequestHeader("Accept-Charset","UTF-8");
+                // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+            },
             success: function (response) {
                 if (response) {
                     $('#bookIdx').text(response.bookId);
@@ -110,8 +114,8 @@
                     $('#bookISBN').val(response.isbn);
                     $('#bookLocation').val(response.location);
                     $('#bookSummary').val(response.summary);
-                    if (response.imagePath) {
-                        $('#fileRow').append('<a href="/resources/static/documents/"' + response.imagePath + '">' + response.imagePath + '</a>');
+                    if (response.img) {
+                        $('#preview').attr('src', '/documents/' + response.img);
                     }
                     $('.deleteBtn').val('수정').attr('onclick', 'updateBook(' + response.bookId + ')');
                 }
@@ -155,8 +159,8 @@
         const formData = new FormData();
         formData.append('title', title);
         formData.append('genreFullname', group);
-        formData.append('authorName', authorName); // 저자 이름으로 넣기
-        formData.append('publisherName', publisherName); // 출판사 이름으로 넣기
+        formData.append('authorName', authorName);
+        formData.append('publisherName', publisherName);
         formData.append('publicationDate', publicationDate);
         formData.append('isbn', isbn);
         formData.append('location', location);
@@ -211,8 +215,8 @@
         formData.append('bookId', bookId);
         formData.append('title', title);
         formData.append('genreFullname', group);
-        formData.append('authorName', authorName); // 저자 이름으로 넣기
-        formData.append('publisherName', publisherName); // 출판사 이름으로 넣기
+        formData.append('authorName', authorName);
+        formData.append('publisherName', publisherName);
         formData.append('publicationDate', publicationDate);
         formData.append('isbn', isbn);
         formData.append('location', location);
