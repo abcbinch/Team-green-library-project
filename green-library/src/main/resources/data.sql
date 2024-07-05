@@ -24,6 +24,8 @@ INSERT INTO publishers (publisher_id, publisher_name) VALUES (10, 'Springer Natu
 
 -- 유저
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
+VALUES('user', '$2b$12$w7kr.xSuASfi81T17KMUieCJJU1z4G.xnSAevi0weaS8Iu20Di1cm', '김남수', 'ironsoo999@naver.com', '010-3563-2610', '1994-11-21', 0, '0');
+INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
 VALUES('ironsoo999', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '김철수', 'ironsoo999@naver.com', '010-3563-2610', '1994-11-21', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
 VALUES('eeee0', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '이영희', 'eeee0@gmail.com', '010-3251-4210', '2000-03-05', 0, '0');
