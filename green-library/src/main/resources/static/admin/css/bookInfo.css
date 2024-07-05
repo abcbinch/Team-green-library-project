@@ -71,11 +71,29 @@
 }
 
 .viewContainer table tr:last-child th {
-    height: 300px;
+    position: relative;
+    height: 350px;
 }
 
 .viewContainer table tr:last-child td {
+    position: relative;
     border-bottom: 1px solid #2c3e50;
+    box-sizing: border-box;
+}
+
+.viewContainer table tr:last-child td p {
+    position: absolute;
+    top: 10px;
+}
+
+.viewContainer table tr:last-child td img {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    border: 1px solid;
+    padding: 10px;
+    top: 60px;
+    left: 10px;
 }
 
 /* 이전글, 다음글 */

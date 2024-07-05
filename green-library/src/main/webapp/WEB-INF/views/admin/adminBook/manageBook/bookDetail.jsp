@@ -56,7 +56,10 @@
             </tr>
             <tr>
                 <th>이미지</th>
-                <td>${book.img}</td>
+                <td>
+                    <p>${book.img}</p>
+                    <img id="preview" class="previewImg" src="/documents/${book.img}"/>
+                </td>
                 <th>내용</th>
                 <td>${book.summary}</td>
             </tr>
@@ -80,6 +83,9 @@
         const bookId = ${book.bookId};
         prevPage(bookId);
         nextPage(bookId);
+        <%--if (${book.img}) {--%>
+        <%--    $('#preview').attr('src', '/upload/' + ${book.img});--%>
+        <%--}--%>
     });
 
     function prevPage(bookId) {
