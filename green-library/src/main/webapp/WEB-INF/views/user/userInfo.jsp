@@ -116,7 +116,7 @@
 							</tr>
 							<tr>
 								<td><c:choose>
-										<c:when test="${count.rent_count <= 5}">
+										<c:when test="${count.rent_count < 5}">
 						            대출 가능
 							        </c:when>
 										<c:otherwise>

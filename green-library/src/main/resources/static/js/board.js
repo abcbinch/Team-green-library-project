@@ -64,6 +64,9 @@ function renderTable() {
                 const key = dataKeys[currentCondition][j];
                 const td = document.createElement('td');
                 td.innerText = currentData[i][key];
+				if (td.innerText.length >= 32) {
+					td.innerText = td.innerText.substring(0, 31) + '...';
+				}
                 tr.appendChild(td);
             }
 
@@ -79,7 +82,8 @@ function renderTable() {
                 const returnDate = new Date(currentData[i]["returnDate"]);
                 const diffTime = Math.abs(returnDate - rentDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                if (diffDays > 14) {
+                const returnCheck = currentData[i]["status"];
+                if (diffDays > 14 || returnCheck == "연체") {
                     actionTd.innerHTML = "<input type='button' class='btn' value='불가능' disabled='true'>";
                 } else {
                     actionTd.innerHTML = '<input type="button" class="btn" value="연장" onclick="window.open(\'bookLoanExtension\', \'_blank\', \'noopener,noreferrer\');">';

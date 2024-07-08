@@ -75,3 +75,13 @@
 	left: 0px;
 	transition: left 300ms ease-in-out;
 }
+
+.navBar,
+.putinBtn {
+    display: none;
+}
+
+.navBar.show,
+.putinBtn.show {
+    display: block;
+}
