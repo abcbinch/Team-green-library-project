@@ -25,7 +25,6 @@ function Close() {
     updateLocalStorage(true);
 }
 
-// 로컬 스토리지를 업데이트하는 함수
 function updateLocalStorage(isClosed) {
     let navArrayed = Array.from(navBarList.classList);
     let btnArrayed = Array.from(putInBtn.classList);
@@ -34,7 +33,6 @@ function updateLocalStorage(isClosed) {
     localStorage.setItem("isClosed", isClosed);
 }
 
-// 버튼 클릭 이벤트 핸들러
 putInBtn.onclick = () => {
     if (!navBarList.classList.contains('putinLeft')) {
         Openup();
@@ -43,7 +41,6 @@ putInBtn.onclick = () => {
     }
 }
 
-// 페이지 로드 시 로컬 스토리지에서 상태를 복원하는 함수
 document.addEventListener("DOMContentLoaded", () => {
     let storedNavClass = localStorage.getItem("navClass");
     let storedBtnClass = localStorage.getItem("btnClass");
@@ -53,13 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
         let navArrayed = JSON.parse(storedNavClass);
         let btnArrayed = JSON.parse(storedBtnClass);
 
-        // navBarList에 클래스 적용
         navArrayed.forEach(cls => navBarList.classList.add(cls));
 
-        // putInBtn에 클래스 적용
         btnArrayed.forEach(cls => putInBtn.classList.add(cls));
 
-        // 초기 상태를 보여줌
         navBarList.classList.add('show');
         putInBtn.classList.add('show');
     }
