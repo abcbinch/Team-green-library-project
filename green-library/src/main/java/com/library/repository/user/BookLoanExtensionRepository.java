@@ -22,7 +22,7 @@ public class BookLoanExtensionRepository {
 				+ "From rents r "
 				+ "JOIN books b On b.book_id=r.book_id "	
 				+ "JOIN authors a ON b.author_id = a.author_id "
-				+ "WHERE r.returned = 0 AND user_id = ?";
+				+ "WHERE r.returned = 0 AND user_id = ? AND r.return_date >= SYSDATE";
 				
 		return jdbcTemplate.query(sql, new RowMapper<BookLoanExtensionDto>(){
 			@Override
