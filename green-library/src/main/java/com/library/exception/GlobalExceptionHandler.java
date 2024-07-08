@@ -32,8 +32,12 @@ public class GlobalExceptionHandler {
 
 	// 데이터베이스 커스텀 예외
 	@ExceptionHandler(DatabaseException.class)
-	public void handleDatabaseException(DatabaseException ex) {
+	public ModelAndView handleDatabaseException(DatabaseException ex) {
 		logger.error("Database error: {}", ex.getMessage());
+		ModelAndView modelAndView = new ModelAndView("error/500");
+		modelAndView.addObject("message", "오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+		modelAndView.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+		return modelAndView;
 	}
 	
 	// 유저 로그인 실패시 발생하는 예외

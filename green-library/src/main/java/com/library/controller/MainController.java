@@ -283,4 +283,9 @@ public class MainController {
 	public String oftenAsk() {
 		return "public/oftenAsk";
 	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error/500";
+	}
 }

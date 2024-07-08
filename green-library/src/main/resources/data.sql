@@ -23,6 +23,7 @@ INSERT INTO publishers (publisher_id, publisher_name) VALUES (9, 'Cengage Learni
 INSERT INTO publishers (publisher_id, publisher_name) VALUES (10, 'Springer Nature');
 
 -- 유저
+
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
 VALUES('ironsoo999', '$2b$12$aVAu2OU4I0efQn8fPgwGreoJAguc3JGT5wGeAyVo7GIY2Bw0LA7gO', '김철수', 'ironsoo999@naver.com', '010-3563-2610', '1994-11-21', 0, '0');
 INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
@@ -74,13 +75,13 @@ COMMIT;
 
 -- 책
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
-VALUES (1, 1, 1, '800', '823.91해', 'Harry Potter and the Sorcerer''s Stone', 'ex1.png', '9780439708180', 'A1-01', '0', 'A young wizard''s journey begins.', TO_DATE('1997-06-26', 'YYYY-MM-DD'), 120);
+VALUES (1, 1, 1, '800', '823.91해', 'Harry Potter and the Sorcerer''s Stone', 'ex1.png', '9780439708180', 'A1-01', '1', 'A young wizard''s journey begins.', TO_DATE('1997-06-26', 'YYYY-MM-DD'), 120);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
 VALUES (2, 2, 2, '800', '823.91마', 'A Game of Thrones', 'ex2.png', '9780553103540', 'A1-02', '0', 'Noble families vie for control of the Iron Throne.', TO_DATE('1996-08-06', 'YYYY-MM-DD'), 150);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
-VALUES (3, 3, 3, '800', '823.91톨', 'The Fellowship of the Ring', 'ex3.png', '9780261102354', 'A1-03', '1', 'A hobbit''s journey to destroy a powerful ring.', TO_DATE('1954-07-29', 'YYYY-MM-DD'), 200);
+VALUES (3, 3, 3, '800', '823.91톨', 'The Fellowship of the Ring', 'ex3.png', '9780261102354', 'A1-03', '0', 'A hobbit''s journey to destroy a powerful ring.', TO_DATE('1954-07-29', 'YYYY-MM-DD'), 200);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
 VALUES (4, 4, 4, '300', '363.25크', 'Murder on the Orient Express', 'ex4.png', '9780062693662', 'A1-04', '0', 'A detective investigates a murder on a train.', TO_DATE('1934-01-01', 'YYYY-MM-DD'), 100);
@@ -146,7 +147,7 @@ INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, t
 VALUES (24, 4, 4, '400', '428.6크', 'Death on the Nile', 'BasementB1.png', '9780062073556', 'A1-24', '0', 'Hercule Poirot investigates a murder on a Nile cruise.', TO_DATE('1937-11-01', 'YYYY-MM-DD'), 100);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
-VALUES (25, 5, 5, '500', '510.3킹', 'Carrie', 'bookCategory.jpg', '9780307743664', 'A1-25', '1', 'A high school girl discovers her telekinetic powers.', TO_DATE('1974-04-05', 'YYYY-MM-DD'), 180);
+VALUES (25, 5, 5, '500', '510.3킹', 'Carrie', 'bookCategory.jpg', '9780307743664', 'A1-25', '0', 'A high school girl discovers her telekinetic powers.', TO_DATE('1974-04-05', 'YYYY-MM-DD'), 180);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
 VALUES (26, 6, 6, '500', '510.3아', 'The Gods Themselves', 'bookExtension.png', '9780553288100', 'A1-26', '0', 'A novel about the dangers and possibilities of interdimensional communication.', TO_DATE('1972-03-01', 'YYYY-MM-DD'), 160);
@@ -161,7 +162,7 @@ INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, t
 VALUES (29, 9, 9, '700', '741.5헤', 'A Farewell to Arms', 'bookGreen.png', '9780684801469', 'A1-29', '0', 'A story of love and loss during World War I.', TO_DATE('1929-09-27', 'YYYY-MM-DD'), 110);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
-VALUES (30, 10, 10, '700', '741.5피', 'This Side of Paradise', 'bookReturn.png', '9780684801803', 'A1-30', '1', 'The story of Amory Blaine''s journey from adolescence to adulthood.', TO_DATE('1920-03-26', 'YYYY-MM-DD'), 170);
+VALUES (30, 10, 10, '700', '741.5피', 'This Side of Paradise', 'bookReturn.png', '9780684801803', 'A1-30', '0', 'The story of Amory Blaine''s journey from adolescence to adulthood.', TO_DATE('1920-03-26', 'YYYY-MM-DD'), 170);
 
 INSERT INTO books (book_id, author_id, publisher_id, genre_id, genre_fullname, title, img, isbn, location, availability, summary, publication_date, borrow_count)
 VALUES (31, 1, 1, '300', '363.25해', 'Harry Potter and the Goblet of Fire', 'bus.png', '9780439139601', 'A2-01', '0', 'Harry Potter participates in a dangerous magical tournament.', TO_DATE('2000-07-08', 'YYYY-MM-DD'), 210);
@@ -331,49 +332,49 @@ INSERT INTO announcements(announcement_id, announce_title, writer_id, write_date
 VALUES(announce_idx.NEXTVAL, '21번 페이징용', 'admin1', SYSDATE, 'asdf.hwp', '첫 공지사항 example 작성해봅니다', 0);
 
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '문의 처음으로 드립니다', '사이트좀 제대로 만들어주라', 1, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date, inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '이게 20번째', '사이트좀 제대로 만들어주라', 0, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '이게 20번째', '사이트좀 제대로 만들어주라', 0, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date, inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '21', '연습연습', 0, 'id1');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '21', '연습연습', 0, 'eeee0');
 INSERT INTO inquiries(inquiry_id, inquiry_date, inquiry_title, contents, responseTF, user_id)
-VALUES(inquiry_idx.NEXTVAL, sysdate, '22', '응답유무 확인용', 0, 'id2');
+VALUES(inquiry_idx.NEXTVAL, sysdate, '22', '응답유무 확인용', 0, '99pilsng');
 
 COMMIT;
 
@@ -391,16 +392,14 @@ INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_c
 VALUES(response_idx.NEXTVAL, 21, SYSDATE, '21페이징용', 'admin1');
 
 INSERT INTO suspensions(suspension_id, start_date, end_date, reason, user_id)
-VALUES(suspend_idx.NEXTVAL, '2024-06-11', '2024-06-25', '그냥 테스트로', 'id1');
+VALUES(suspend_idx.NEXTVAL, '2024-06-11', '2024-06-25', '그냥 테스트로', 'eeee0');
 
 COMMIT;
 
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
-VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 2, 'id1', 0);
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 2, 'eeee0', 0);
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
-VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 4, 'gigi1234', 0); 
-INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
-VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 5, 'gigi1234', 0); 
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 4, 'gigi1234', 0);
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
 VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 6, 'gigi1234', 0); 
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
@@ -409,5 +408,61 @@ VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 7, 'gigi1234', 1);
 
 INSERT INTO wishlists(wishlist_id, wish_title, wish_author, wish_publisher, wish_publication, wish_price, wish_isbn, wish_date, complete, user_id) 
 VALUES (wishlist_idx.NEXTVAL, '버터111호', '대뾰', '트릭컬', TO_DATE('2020-01-01', 'YYYY-MM-DD'), 20000, '12312412', SYSDATE, 'W', 'gigi1234');
+
+
+-- 더미용 user user
+INSERT INTO users(user_id, user_pass, name, email, phone, birth, overdue_count, suspended)
+VALUES('user', '$2b$12$w7kr.xSuASfi81T17KMUieCJJU1z4G.xnSAevi0weaS8Iu20Di1cm', '김남수', 'ironsoo999@naver.com', '010-3563-2610', '1994-11-21', 0, '0');
+
+--더미 문의
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, TO_DATE('2024-07-05', 'YYYY-MM-DD'), '비밀번호 찾기가 잘 안돼요.', '왜일까요?', 1, 'user');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, TO_DATE('2024-07-06', 'YYYY-MM-DD'), '책이 너무 적어요.', '제목이 곧 내용이에요.', 0, 'user');
+INSERT INTO inquiries(inquiry_id, inquiry_date ,inquiry_title, contents, responseTF, user_id)
+VALUES(inquiry_idx.NEXTVAL, TO_DATE('2024-07-06', 'YYYY-MM-DD'), '책이 너무 많아요.', '왜일까요?', 0, 'user');
+
+INSERT INTO inquiry_responses(response_id, inquiry_id, response_date, response_content, admin_id)
+VALUES(response_idx.NEXTVAL, 23, TO_DATE('2024-07-05', 'YYYY-MM-DD'), '불편을 끼쳐 죄송합니다', 'admin1');
+
+INSERT INTO wishlists(wishlist_id, wish_title, wish_author, wish_publisher, wish_publication, wish_price, wish_isbn, wish_date, complete, user_id) 
+VALUES (wishlist_idx.NEXTVAL, '오징어', '버터', '구이', TO_DATE('2020-01-01', 'YYYY-MM-DD'), 120000, '15616513215', SYSDATE, 'W', 'user');
+INSERT INTO wishlists(wishlist_id, wish_title, wish_author, wish_publisher, wish_publication, wish_price, wish_isbn, wish_date, complete, user_id) 
+VALUES (wishlist_idx.NEXTVAL, '버터', '오징어', '구이', TO_DATE('2020-01-01', 'YYYY-MM-DD'), 12000, '13501359125124', SYSDATE, 'W', 'user');
+INSERT INTO wishlists(wishlist_id, wish_title, wish_author, wish_publisher, wish_publication, wish_price, wish_isbn, wish_date, complete, user_id) 
+VALUES (wishlist_idx.NEXTVAL, '구워먹어라', '오징어', '버터', TO_DATE('2020-01-01', 'YYYY-MM-DD'), 14000, '1107053360980', SYSDATE, 'N', 'user');
+
+INSERT INTO reservations(reservation_id, user_id, book_id, reservation_date) 
+VALUES (reservation_idx.NEXTVAL, 'user', 3, TO_DATE('2024-07-06', 'YYYY-MM-DD'));
+INSERT INTO reservations(reservation_id, user_id, book_id, reservation_date) 
+VALUES (reservation_idx.NEXTVAL, 'user', 25, TO_DATE('2024-07-06', 'YYYY-MM-DD'));
+INSERT INTO reservations(reservation_id, user_id, book_id, reservation_date) 
+VALUES (reservation_idx.NEXTVAL, 'user', 30, TO_DATE('2024-07-06', 'YYYY-MM-DD'));
+INSERT INTO reservations(reservation_id, user_id, book_id, reservation_date) 
+VALUES (reservation_idx.NEXTVAL, 'user', 33, TO_DATE('2024-07-06', 'YYYY-MM-DD'));
+
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 1);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 6);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 7);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 67);
+
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, TO_DATE('2024-06-01', 'YYYY-MM-DD'), TO_DATE('2024-06-15', 'YYYY-MM-DD'), 10, 'user', 1);
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 62, 'user', 0);
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 63, 'user', 0);
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 64, 'user', 0);
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 65, 'user', 0);
+INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
+VALUES(rents_idx.NEXTVAL, TO_DATE('2024-06-02', 'YYYY-MM-DD'), TO_DATE('2024-06-16', 'YYYY-MM-DD'), 5, 'user', 1);
+
+
 
 COMMIT;

@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     let response = JSON.parse(xhr.responseText);
-                    if (response.exists) {
+                    if (response) {
                         document.getElementById('duplicateIdError').textContent = '아이디가 이미 존재합니다.';
                         document.getElementById('duplicateIdSuccess').textContent = '';
                         alert("아이디가 이미 존재합니다.");
