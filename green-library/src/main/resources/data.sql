@@ -463,6 +463,8 @@ VALUES(rents_idx.NEXTVAL, SYSDATE, SYSDATE+INTERVAL '14' DAY, 65, 'user', 0);
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
 VALUES(rents_idx.NEXTVAL, TO_DATE('2024-06-02', 'YYYY-MM-DD'), TO_DATE('2024-06-16', 'YYYY-MM-DD'), 5, 'user', 1);
 
+insert into rents (rent_num, rent_history, return_date, book_id, user_id, returned) 
+values(rents_idx.NEXTVAL,  TO_DATE('2024-05-01','YYYY-MM-DD'),TO_DATE('2024-05-15','YYYY-MM-DD'), 53, 'user', 0);
 
 
 COMMIT;
