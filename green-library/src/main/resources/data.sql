@@ -449,6 +449,30 @@ INSERT INTO interested_books(interest_id, user_id, book_id)
 VALUES (interest_idx.NEXTVAL, 'user', 7);
 INSERT INTO interested_books(interest_id, user_id, book_id) 
 VALUES (interest_idx.NEXTVAL, 'user', 67);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 21);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 31);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 41);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 52);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 15);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 12);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 14);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 16);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 11);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 32);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 33);
+INSERT INTO interested_books(interest_id, user_id, book_id) 
+VALUES (interest_idx.NEXTVAL, 'user', 34);
 
 INSERT INTO rents(rent_num, rent_history, return_date, book_id, user_id, returned) 
 VALUES(rents_idx.NEXTVAL, TO_DATE('2024-06-01', 'YYYY-MM-DD'), TO_DATE('2024-06-15', 'YYYY-MM-DD'), 10, 'user', 1);

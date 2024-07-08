@@ -64,6 +64,9 @@ function renderTable() {
                 const key = dataKeys[currentCondition][j];
                 const td = document.createElement('td');
                 td.innerText = currentData[i][key];
+				if (td.innerText.length >= 32) {
+					td.innerText = td.innerText.substring(0, 31) + '...';
+				}
                 tr.appendChild(td);
             }
 
