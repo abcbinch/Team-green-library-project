@@ -114,13 +114,14 @@ public class AnnounceController {
     @PostMapping("/updateAnnounce")
     public String uploadComplete(@RequestParam("announceTitle") String announceTitle,
                                  @RequestParam("announceContent") String announceContent,
+                                 @RequestParam("announceId") int announceId,
                                  @RequestParam(value = "file", name = "file", required = false) MultipartFile file,
                                  HttpServletRequest request) {
         String adminId = request.getParameter("adminId");
         if (file == null || file.isEmpty()) {
-            announceService.updateAnnounceWithoutFile(announceTitle, adminId, announceContent, "null");
+            announceService.updateAnnounceWithoutFile(announceId, announceTitle, adminId, announceContent, "null");
         } else {
-            announceService.updateAnnounce(announceTitle, adminId, announceContent, file);
+            announceService.updateAnnounce(announceId, announceTitle, adminId, announceContent, file);
         }
         return "redirect:/admin/Announcement";
     }

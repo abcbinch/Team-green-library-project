@@ -24,8 +24,8 @@ import java.util.List;
      void createAnnounceWithoutFile(String announceTitle, String adminId,String announceContent);
     void createAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file);
     // 공지 수정
-    void updateAnnounceWithoutFile(String announceTitle, String adminId, String announceContent, String aNull);
-     void updateAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file);
+    void updateAnnounceWithoutFile(int announceId, String announceTitle, String adminId, String announceContent, String aNull);
+     void updateAnnounce(int announceId, String announceTitle, String adminId, String announceContent, MultipartFile file);
 
     // 공지 삭제
      void deleteAnnounce(List<String> ids);
