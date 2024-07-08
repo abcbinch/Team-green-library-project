@@ -61,7 +61,10 @@ h1{
 	height: 30px;
 	border: 1px solid #DAD5C9;
 }
-
+input[type=text],
+select:focus{
+	outline: 0;
+}
 
 
 .second_container{
