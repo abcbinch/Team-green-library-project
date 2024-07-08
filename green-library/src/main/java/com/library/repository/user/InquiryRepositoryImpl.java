@@ -75,7 +75,7 @@ public class InquiryRepositoryImpl implements InquiryRepository {
                      "JOIN " +
                      "    books b ON r.book_id = b.book_id " +
                      "WHERE " +
-                     "    r.user_id = ? " +
+                     "    r.user_id = ? and r.returned = 0 " +
                      "ORDER BY " +
                      "    r.rent_num";
 
