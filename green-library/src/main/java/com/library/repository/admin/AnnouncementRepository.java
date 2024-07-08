@@ -25,8 +25,8 @@ public interface AnnouncementRepository {
     void createAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file);
     // 공지사항 수정
 
-    void updateAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file);
-    void updateAnnounceWithoutFile(String announceTitle, String adminId, String announceContent, String aNull);
+    void updateAnnounce(int announceId, String announceTitle, String adminId, String announceContent, MultipartFile file);
+    void updateAnnounceWithoutFile(int announceId, String announceTitle, String adminId, String announceContent, String aNull);
 
     // 공지사항 삭제
     void deleteAnnounce(List<String> announceId);

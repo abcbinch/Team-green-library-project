@@ -83,14 +83,14 @@ public class AnnounceServiceImpl implements AnnounceService {
     // 공지 수정
 @Override
 @Transactional
-public void updateAnnounceWithoutFile(String announceTitle, String adminId, String announceContent, String aNull) {
-announcementRepository.updateAnnounceWithoutFile(announceTitle, adminId, announceContent, aNull);
+public void updateAnnounceWithoutFile(int announceId, String announceTitle, String adminId, String announceContent, String aNull) {
+announcementRepository.updateAnnounceWithoutFile(announceId, announceTitle, adminId, announceContent, aNull);
 }
 
     @Override
     @Transactional
-    public void updateAnnounce(String announceTitle, String adminId, String announceContent, MultipartFile file) {
-        announcementRepository.updateAnnounce(announceTitle, adminId, announceContent, file);
+    public void updateAnnounce(int announceId, String announceTitle, String adminId, String announceContent, MultipartFile file) {
+        announcementRepository.updateAnnounce(announceId, announceTitle, adminId, announceContent, file);
     }
 
     // 공지 삭제
