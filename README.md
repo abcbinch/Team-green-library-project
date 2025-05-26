@@ -1,6 +1,12 @@
 # 📗 green-library 도서관 웹사이트
 spring boot project
 
+## 소요 기간
+### 2024.06 ~ 2024.07 (4주)
+
+## 제작 목적
+### 도서관의 자료를 확인하고 대출/반납/예약을 할 수 있는 웹사이트입니다.
+
 ## 💻 제작자
 ### 팀장 : 박일규
 #### 조원 : 윤솔, 이혜민, 유영현
@@ -28,6 +34,13 @@ database : <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-ba
 <br>
 configuration : <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 <br>
+
+## 담당 파트
+### 웹사이트의 전체 UX/UI 디자인
+### 스크롤 인터랙션(스크롤 업 버튼, 아코디언 상단 고정) 기능 제작
+### 아코디언 기능 제작
+### 슬라이드 기능 제작
+### 서브 메뉴 바 제작
 
 ## 📋 필수 조건
 
